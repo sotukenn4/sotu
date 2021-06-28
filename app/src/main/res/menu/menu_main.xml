@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.myapplication.MainActivity">
+    <item
+        android:id="@+id/SecondFragment"
+        android:orderInCategory="100"
+        android:title="@string/next"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/scheduleEditFragment"
+        android:title="スケジュール追加" />
+    <item
+        android:id="@+id/tenki"
+        android:title="天気確認" />
+</menu>

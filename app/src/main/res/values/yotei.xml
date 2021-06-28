@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="yotei">
+        <item></item>
+        <item>面接</item>
+        <item>旅行</item>
+        <item>学校</item>
+        <item>病院</item>
+        <item>バイト</item>
+    </string-array>
+</resources>

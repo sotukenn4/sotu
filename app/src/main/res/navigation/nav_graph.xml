@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.myapplication.FirstFragment"
+        android:label="@string/first"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_to_scheduleEditFragment"
+            app:destination="@id/scheduleEditFragment"
+            app:exitAnim="@anim/fragment_close_enter" />
+        <action
+            android:id="@+id/action_FirstFragment_to_firstFragment2"
+            app:destination="@id/firstFragment2" />
+        <action
+            android:id="@+id/action_FirstFragment_to_tenki"
+            app:destination="@id/tenki" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.myapplication.SecondFragment"
+        android:label="@string/caleder"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_to_scheduleEditFragment"
+            app:destination="@id/scheduleEditFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_firstFragment2"
+            app:destination="@id/firstFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleEditFragment"
+        android:name="com.example.myapplication.ScheduleEditFragment"
+        android:label="@string/schedule_edit_text"
+        tools:layout="@layout/fragment_schedule_edit" >
+        <argument
+            android:name="scheduleId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+    <activity
+        android:id="@+id/firstFragment2"
+        android:name="com.example.myapplication.FirstFragment2"
+        android:label="FirstFragment2" />
+    <activity
+        android:id="@+id/tenki"
+        android:name="com.example.myapplication.tenki"
+        android:label="tenki" />
+</navigation>
