@@ -22,32 +22,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(findViewById(R.id.toolbar))
+        //ナビゲーションを使えるようにする
         val naviController=findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
+        //MainActivityにあるFabボタンの押した時の処理
         binding.fab.setOnClickListener { view ->
             naviController.navigate(R.id.action_to_scheduleEditFragment)
         }
-        /*binding.tenki.setOnClickListener { view ->
-            /*val intent=Intent(this,tenki::class.java)
-            startActivity(intent)*/
-            naviController.navigate(R.id.action_FirstFragment_to_tenki2)
-        }*/
-
-
-
-
-
-
-
     }
-
-
-
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
+    //Fabボタン表示・非表示
     fun setFabVisible(visibility: Int){
         binding.fab.visibility=visibility
     }

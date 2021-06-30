@@ -20,7 +20,6 @@ import java.util.*
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment() {
-    //val fluitArrayList: ArrayList<String> = arrayListOf("りんご", "みかん", "バナナ")
     private  var _binding: FragmentSecondBinding?=null
     private  val binding get()=_binding!!
     private lateinit var realm: Realm
@@ -28,17 +27,12 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
-
-
-
-
     }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding= FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,7 +42,6 @@ class SecondFragment : Fragment() {
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
-
         (activity as? MainActivity)?.setFabVisible(View.VISIBLE)
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
@@ -63,7 +56,6 @@ class SecondFragment : Fragment() {
                 .setOnDateChangeListener{ view, year, month, dayOfMonth->
                     findSchedule(year, month, dayOfMonth)
                 }
-
     }
     private fun findSchedule(
             year: Int,
@@ -83,18 +75,13 @@ class SecondFragment : Fragment() {
                             add(Calendar.MILLISECOND, -1)
                         }.time
                 ).findAll().sort("date")
-
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
     }
-
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
     }
-
-
 }

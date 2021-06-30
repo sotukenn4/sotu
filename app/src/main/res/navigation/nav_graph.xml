@@ -19,9 +19,6 @@
             app:destination="@id/scheduleEditFragment"
             app:exitAnim="@anim/fragment_close_enter" />
         <action
-            android:id="@+id/action_FirstFragment_to_firstFragment2"
-            app:destination="@id/firstFragment2" />
-        <action
             android:id="@+id/action_FirstFragment_to_tenki"
             app:destination="@id/tenki" />
     </fragment>
@@ -37,9 +34,6 @@
         <action
             android:id="@+id/action_to_scheduleEditFragment"
             app:destination="@id/scheduleEditFragment" />
-        <action
-            android:id="@+id/action_SecondFragment_to_firstFragment2"
-            app:destination="@id/firstFragment2" />
     </fragment>
     <fragment
         android:id="@+id/scheduleEditFragment"
@@ -51,10 +45,6 @@
             app:argType="long"
             android:defaultValue="-1L" />
     </fragment>
-    <activity
-        android:id="@+id/firstFragment2"
-        android:name="com.example.myapplication.FirstFragment2"
-        android:label="FirstFragment2" />
     <activity
         android:id="@+id/tenki"
         android:name="com.example.myapplication.tenki"
