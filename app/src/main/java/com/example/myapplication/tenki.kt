@@ -30,6 +30,7 @@ class tenki : AppCompatActivity() {
         private const val DEBUG_TAG="AsyncSample"
         private const val WEATHERINFO_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja"
         private const val APP_ID="83311ce95b6808b861ddd5e178b11b87"
+
     }
     private var _list: MutableList<MutableMap<String, String>> =mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
