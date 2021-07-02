@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -37,7 +38,7 @@ class tenki : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tenki)
 
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         _list=createList()
         val lvCityList=findViewById<ListView>(R.id.lvCityList)
         val from= arrayOf("name")
