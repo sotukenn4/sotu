@@ -24,23 +24,20 @@ import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-private  lateinit var binding: ActivityMainBinding
+
+
 /**
  * A simple [Fragment] subclass.
  * Use the [ScheduleEditFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ScheduleEditFragment: Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var _binding: FragmentScheduleEditBinding?=null
     private val binding get()=_binding!!
     private lateinit var realm: Realm
     private  val args: ScheduleEditFragmentArgs by navArgs()
-    val fluitArrayList: ArrayList<String> = arrayListOf("りんご", "みかん", "バナナ")
-    var inputdata = arrayOfNulls<String>(4)
-    var spinner: Spinner? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +57,9 @@ class ScheduleEditFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if(args.scheduleId !=-1L) {
             val schedule = realm.where<Schedule>()
-                    .equalTo("id", args.scheduleId).findFirst()
+                .equalTo("id", args.scheduleId).findFirst()
             binding.dateEdit.setText(DateFormat.format("yyyy/MM/dd", schedule?.date))
             binding.timeEdit.setText(DateFormat.format("HH:mm", schedule?.date))
             binding.titleEdit.setText(schedule?.title)
@@ -72,116 +68,101 @@ class ScheduleEditFragment: Fragment() {
         }else{
             binding.delete.visibility=View.INVISIBLE
         }
-       (activity as? MainActivity)?.setFabVisible(View.INVISIBLE)
+        (activity as? MainActivity)?.setFabVisible(View.INVISIBLE)
         binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？",
-                "保存", {
-            saveSchedule(it)
+            "保存", {
+                saveSchedule(it)
 
-        },
-                "キャンセル", {
-            Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
+            },
+            "キャンセル", {
+                Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
-        })
-        dialog.show(parentFragmentManager, "save_dialog")
-        }
-
+            })
+            dialog.show(parentFragmentManager, "save_dialog")}
         binding.spinner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
+            object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
                     id: Long
-            ) {
+                ) {
 
-                val spinner = parent as? Spinner
-                val item = spinner?.selectedItem as? String
+                    val spinner = parent as? Spinner
+                    val item = spinner?.selectedItem as? String
 
-                item?.let {
-                    if (it.isNotEmpty()) binding.titleEdit.setText(item)
+                    item?.let {
+                        if (it.isNotEmpty()) binding.titleEdit.setText(item)
 
 
+                    }
                 }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-
-
-        binding.delete.setOnClickListener{
-            val dialog=ConfirmDialog("削除しますか？",
-                    "削除", { deleteSchedule(it) },
-                    "キャンセル", {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }}
+        binding.delete.setOnClickListener{val dialog=ConfirmDialog("削除しますか？",
+            "削除", { deleteSchedule(it) },
+            "キャンセル", {
                 Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
-                        .show()
+                    .show()
             })
             dialog.show(parentFragmentManager, "delete_dialog")
         }
-       binding.datebutton.setOnClickListener{
+        binding.datebutton.setOnClickListener{
             DateDialog{ date->
                 binding.dateEdit.setText(date)
 
-            }.show(parentFragmentManager, "date_dialog")
-        }
+            }.show(parentFragmentManager, "date_dialog")}
         binding.timeButton.setOnClickListener{
             TimeDialog{ time->
                 binding.timeEdit.setText(time)
             }.show(parentFragmentManager, "time_dialog")
         }
 
-
     }
-    private fun saveSchedule(view: View){
+    private fun saveSchedule(view:View){
         when (args.scheduleId){
             -1L -> {
-                realm.executeTransaction { db: Realm ->
-                    val maxId = db.where<Schedule>().max("id")
-                    val nextId = (maxId?.toLong() ?: 0L) + 1L
-                    val schedule = db.createObject<Schedule>(nextId)
-                    val date = ("${binding.dateEdit.text}" + "${binding.timeEdit.text}").toDate()
-                    if (date != null) schedule.date = date
-                    schedule.title = binding.titleEdit.text.toString()
-                    schedule.detil = binding.detailEdit.text.toString()
-
-                }
-                Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-                        .setAction("戻る") { findNavController().popBackStack() }
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
-            }
-            else->{
-                realm.executeTransaction { db: Realm ->
-                    val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
-                    val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
-                    if(date!=null) schedule?.date=date
-                    schedule?.title=binding.titleEdit.text.toString()
-                    schedule?.detil=binding.detailEdit.text.toString()
-                }
-                Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
-                    .setAction("戻る"){findNavController().popBackStack()}
-                    .setActionTextColor(Color.YELLOW)
-                    .show()
-            }
+        realm.executeTransaction{db:Realm->
+            val maxId=db.where<Schedule>().max("id")
+            val nextId=(maxId?.toLong() ?:0L)+1L
+            val schedule=db.createObject<Schedule>(nextId)
+            val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
+            if (date != null) schedule.date = date
+            schedule.title = binding.titleEdit.text.toString()
+            schedule.detil = binding.detailEdit.text.toString()
         }
+        Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
+            .setAction("戻る") { findNavController().popBackStack() }
+            .setActionTextColor(Color.YELLOW)
+            .show()
 
-
-    }
-    
+    } else->{
+            realm.executeTransaction { db: Realm ->
+                val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
+                val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
+                if(date!=null) schedule?.date=date
+                schedule?.title=binding.titleEdit.text.toString()
+                schedule?.detil=binding.detailEdit.text.toString()
+            }
+            Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
+                .setAction("戻る"){findNavController().popBackStack()}
+                .setActionTextColor(Color.YELLOW)
+                .show()
+        }}}
     private fun deleteSchedule(view: View){
         realm.executeTransaction{ db: Realm->
             db.where<Schedule>().equalTo("id", args.scheduleId)
-                    ?.findFirst()
-                    ?.deleteFromRealm()
+                ?.findFirst()
+                ?.deleteFromRealm()
 
         }
         Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-                .setActionTextColor(Color.YELLOW)
-                .show()
+            .setActionTextColor(Color.YELLOW)
+            .show()
         findNavController()
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
@@ -200,4 +181,5 @@ class ScheduleEditFragment: Fragment() {
             return null
         }
     }
+
 }
