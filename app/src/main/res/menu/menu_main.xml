@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.myapplication.MainActivity">
     <item
+        android:id="@+id/FirstFragment"
+        android:icon="@drawable/itiran"
+        android:title="一覧表示" />
+    <item
+        android:id="@+id/scheduleEditFragment"
+        android:icon="@drawable/ic_add"
+        android:title="予定追加" />
+    <item
         android:id="@+id/SecondFragment"
         android:icon="@drawable/carender"
         android:orderInCategory="100"
         android:title="カレンダー表示"
         app:showAsAction="never" />
     <item
-        android:id="@+id/scheduleEditFragment"
-        android:icon="@drawable/ic_add"
-        android:title="予定追加" />
-    <item
         android:id="@+id/tenki"
         android:icon="@drawable/tenki"
         android:title="天気確認" />
-    <item
-        android:id="@+id/FirstFragment"
-        android:icon="@drawable/itiran"
-        android:title="一覧表示" />
 </menu>
