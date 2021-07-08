@@ -38,7 +38,7 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as? MainActivity)?.setFabVisible(View.VISIBLE)
+
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
             timeInMillis=binding.calendarView.date

@@ -28,16 +28,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-        //MainActivityにあるFabボタンの押した時の処理
-        binding.fab.setOnClickListener { view ->
-            naviController.navigate(R.id.action_to_scheduleEditFragment)
-        }
+
     }
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
-    //Fabボタン表示・非表示
-    fun setFabVisible(visibility: Int){
-        binding.fab.visibility=visibility
-    }
+
 
 
 }

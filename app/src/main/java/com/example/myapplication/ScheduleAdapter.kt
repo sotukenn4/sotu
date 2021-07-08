@@ -2,7 +2,6 @@ package com.example.myapplication
 
 import android.text.format.DateFormat
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -14,6 +13,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data,true) {
     private var listener: ((Long?)->Unit)?=null
     fun setOnItemClickListener(listener:(Long?)->Unit){
+        this.listener=listener
+    }
+    fun setOnLongClickListener(listener:(Long?)->Unit){
         this.listener=listener
     }
     init {
@@ -41,5 +43,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     override fun getItemId(position: Int): Long {
         return getItem(position)?.id ?:0
     }
+
+
 
 }
