@@ -1,6 +1,9 @@
 package com.example.myapplication
 
 import android.R
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,8 +29,8 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
     private var _binding: FragmentFirstBinding?=null
     private  val binding get()=_binding!!
     private  lateinit var realm: Realm
-    private  val args: ScheduleEditFragmentArgs by navArgs()
-
+    private  val args: FirstFragmentArgs by navArgs()
+    val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
@@ -55,24 +58,38 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         val adapter=ScheduleAdapter(schedules)
         binding.list.adapter=adapter
 
-        adapter.setOnItemClickListener { id->
+
+    /*adapter.setOnItemClickListener {
+                id->
+                id?.let {
+                    val action =
+                        FirstFragmentDirections.actionToScheduleEditFragment(it)
+                    findNavController().navigate(action)
+                }
+
+    }*/
+
+
+        adapter.setOnLongClickListener {
+           /* val dialogFragment=ListDialogFragment()
+            dialogFragment.show(parentFragmentManager,"List")*/
+                id ->
             id?.let {
-                val action=
-                    FirstFragmentDirections.actionToScheduleEditFragment(it)
-                findNavController().navigate(action)
-            }
-        }
-        adapter.setOnLongClickListener { id->
-            id?.let {
-                val dialog=ConfirmDialog("削除しますか？",
-                    "削除", {deleteSchedule(view)},
-                    "キャンセル", {
-                        Snackbar.make(view, "キャンセルしました", Snackbar.LENGTH_SHORT)
-                            .show()
-                    })
+                val dialog = ConfirmDialog(
+                    "変更しますか？",
+                    "削除", { deleteSchedule(view,it)
+                        adapter.notifyDataSetChanged()},
+                    "更新", {
+                        val action=
+                            FirstFragmentDirections.actionToScheduleEditFragment(it)
+                        findNavController().navigate(action)
+                    }
+                )
                 dialog.show(parentFragmentManager, "delete_dialog")
             }
         }
+
+
 
 
 
@@ -87,16 +104,20 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         super.onDestroy()
         realm.close()
     }
-    private fun deleteSchedule(view: View){
+    private fun deleteSchedule(view: View,it:Long){
+
         realm.executeTransaction{
-
-
+        db:Realm->db.where<Schedule>().equalTo("id",it)
+            ?.findFirst()
+            ?.deleteFromRealm()
         }
         Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
             .setActionTextColor(Color.YELLOW)
             .show()
-        findNavController()
+
+
     }
+
 }
 
 

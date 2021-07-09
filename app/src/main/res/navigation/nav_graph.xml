@@ -21,6 +21,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_tenki"
             app:destination="@id/tenki" />
+        <argument
+            android:name="scheduleId"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"

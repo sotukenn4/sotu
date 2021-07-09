@@ -9,14 +9,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.FragmentScheduleEditBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
+import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +25,7 @@ import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
 
 /**
@@ -39,19 +41,26 @@ class ScheduleEditFragment: Fragment() {
     private  val args: ScheduleEditFragmentArgs by navArgs()
 
 
+
+    val names = arrayOf("佐藤", "鈴木", "井上")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        realm= Realm.getDefaultInstance()
+        realm = Realm.getDefaultInstance()
 
 
 
     }
+
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentScheduleEditBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -77,7 +86,8 @@ class ScheduleEditFragment: Fragment() {
             "キャンセル", {
                 Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
-            })
+            }
+        )
             dialog.show(parentFragmentManager, "save_dialog")}
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
@@ -95,6 +105,7 @@ class ScheduleEditFragment: Fragment() {
                         if (it.isNotEmpty()) binding.titleEdit.setText(item)
 
 
+
                     }
                 }
 
@@ -106,7 +117,8 @@ class ScheduleEditFragment: Fragment() {
             "キャンセル", {
                 Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
-            })
+            }
+        )
             dialog.show(parentFragmentManager, "delete_dialog")
         }
         binding.datebutton.setOnClickListener{
