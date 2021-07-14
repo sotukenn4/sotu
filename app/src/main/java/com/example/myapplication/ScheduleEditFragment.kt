@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.R
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
@@ -7,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.databinding.FragmentScheduleEditBinding
@@ -60,7 +61,18 @@ class ScheduleEditFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentScheduleEditBinding.inflate(inflater, container, false)
+        val values = arrayOf(
+            "",
+           "旅行",
+            "面接",
+            "バイト",
+            "病院",
+            "学校"
+        )
 
+        val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
+        adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
+        binding.spinner.adapter = adapter
         return binding.root
     }
 

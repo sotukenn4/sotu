@@ -112,8 +112,9 @@
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:entries="@array/spi"
 
+
+        android:entries="@array/spi"
         app:layout_constraintBottom_toBottomOf="@+id/titleEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleEdit"
