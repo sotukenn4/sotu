@@ -14,7 +14,7 @@
         android:id="@+id/SecondFragment"
         android:icon="@drawable/carender"
         android:orderInCategory="100"
-        android:title="カレンダー表示"
+        android:title="カレンダー"
         app:showAsAction="never" />
     <item
         android:id="@+id/tenki"

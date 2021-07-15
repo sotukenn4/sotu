@@ -57,22 +57,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         val schedules=realm.where<Schedule>().findAll()
         val adapter=ScheduleAdapter(schedules)
         binding.list.adapter=adapter
-
-
-    /*adapter.setOnItemClickListener {
-                id->
-                id?.let {
-                    val action =
-                        FirstFragmentDirections.actionToScheduleEditFragment(it)
-                    findNavController().navigate(action)
-                }
-
-    }*/
-
-
         adapter.setOnLongClickListener {
-           /* val dialogFragment=ListDialogFragment()
-            dialogFragment.show(parentFragmentManager,"List")*/
                 id ->
             id?.let {
                 val dialog = ConfirmDialog(

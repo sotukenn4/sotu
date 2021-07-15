@@ -8,7 +8,7 @@
     tools:context=".Custum">
 
     <EditText
-        android:id="@+id/titleEdit2"
+        android:id="@+id/spinnertext"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -33,8 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="追加"
-        app:layout_constraintBottom_toBottomOf="@+id/titleEdit2"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnertext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titleEdit2"
-        app:layout_constraintTop_toTopOf="@+id/titleEdit2" />
+        app:layout_constraintStart_toEndOf="@+id/spinnertext"
+        app:layout_constraintTop_toTopOf="@+id/spinnertext" />
 </androidx.constraintlayout.widget.ConstraintLayout>
