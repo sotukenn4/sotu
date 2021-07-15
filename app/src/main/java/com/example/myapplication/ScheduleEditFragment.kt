@@ -3,18 +3,15 @@ package com.example.myapplication
 //import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import android.R
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
-import org.json.JSONArray
+import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,6 +42,7 @@ class ScheduleEditFragment: Fragment() {
     private val binding get()=_binding!!
     private lateinit var realm: Realm
     private  val args: ScheduleEditFragmentArgs by navArgs()
+    //よく使う行事配列
     var values = arrayOf(
             "",
             "旅行",
@@ -53,21 +51,17 @@ class ScheduleEditFragment: Fragment() {
             "病院",
             "学校"
     )
-var i=0
-    var array = JSONArray()
-
-    val names = arrayOf("佐藤", "鈴木", "井上")
-
+    //spinnerの数カウント
+    var i=0
+    //画面開かれたとき
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm = Realm.getDefaultInstance()
 
 
 
+
     }
-
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -77,13 +71,12 @@ var i=0
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //このViewに来た時、更新ボタンを押してきたら
         if(args.scheduleId !=-1L) {
             val schedule = realm.where<Schedule>()
                 .equalTo("id", args.scheduleId).findFirst()
@@ -107,6 +100,8 @@ var i=0
         }
         )
             dialog.show(parentFragmentManager, "save_dialog")}
+
+        //spinnerの処理
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
@@ -115,36 +110,33 @@ var i=0
                         position: Int,
                         id: Long
                 ) {
-
                     val spinner = parent as? Spinner
                     val item = spinner?.selectedItem as? String
-
+                    //選択されたアイテムをタイトルテキストにコピー
                     item?.let {
                         if (it.isNotEmpty()) binding.titleEdit.setText(item)
-
-
-
                     }
                 }
-
+                //何も選択されなかったとき。特に処理はないのでメソッドの中は空でよし
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }}
-
+        //日付選択ボタンが押されたときにカレンダーダイアログ表示
         binding.datebutton.setOnClickListener{
             DateDialog{ date->
                 binding.dateEdit.setText(date)
 
             }.show(parentFragmentManager, "date_dialog")}
+        //時間選択ボタンが押されたときに時間ダイアログ表示
         binding.timeButton.setOnClickListener{
             TimeDialog{ time->
                 binding.timeEdit.setText(time)
             }.show(parentFragmentManager, "time_dialog")
         }
-
     }
     private fun saveSchedule(view: View){
         when (args.scheduleId){
+            //-1Lのとき、つまり新規のとき
             -1L -> {
                 realm.executeTransaction { db: Realm ->
                     val maxId = db.where<Schedule>().max("id")
@@ -155,25 +147,31 @@ var i=0
                     schedule.title = binding.titleEdit.text.toString()
                     schedule.detil = binding.detailEdit.text.toString()
                 }
-                for (str in values) {
-                    if (!(binding.titleEdit.text.toString().equals(str))) {
-                        i++
-                        if (i >= values.size) {
-                            values += binding.titleEdit.text.toString()
-                            val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
-                            adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
-                            binding.spinner.adapter = adapter
-                            i = 0
-                        }
 
+                //タイトルが空でなくspinnerに一つも同じのがなければspinnerの項目に追加
+                if (!(binding.titleEdit.text.toString().equals(""))) {
+                    for (str in values) {
+                        if (!(binding.titleEdit.text.toString().equals(str))) {
+                            i++
+                            if (i >= values.size) {
+                                values += binding.titleEdit.text.toString()
+                                val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
+                                adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
+                                binding.spinner.adapter = adapter
+                                i = 0
+                            }
+
+                        }
                     }
                 }
 
+                //黒いバー表示（追加）
                 Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
                         .setAction("戻る") { findNavController().popBackStack() }
                         .setActionTextColor(Color.YELLOW)
                         .show()
 
+                //新規でなく更新のとき
             } else->{
             realm.executeTransaction { db: Realm ->
                 val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
@@ -182,23 +180,12 @@ var i=0
                 schedule?.title=binding.titleEdit.text.toString()
                 schedule?.detil=binding.detailEdit.text.toString()
             }
+            //黒いバー（更新）
             Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                 .setAction("戻る"){findNavController().popBackStack()}
                 .setActionTextColor(Color.YELLOW)
                 .show()
         }}}
-    private fun deleteSchedule(view: View){
-        realm.executeTransaction{ db: Realm->
-            db.where<Schedule>().equalTo("id", args.scheduleId)
-                ?.findFirst()
-                ?.deleteFromRealm()
-
-        }
-        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-            .setActionTextColor(Color.YELLOW)
-            .show()
-        findNavController()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

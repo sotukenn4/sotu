@@ -109,6 +109,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/titleEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleEdit"
-        app:layout_constraintTop_toBottomOf="@+id/timeEdit" />
+        app:layout_constraintTop_toTopOf="@+id/titleEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
