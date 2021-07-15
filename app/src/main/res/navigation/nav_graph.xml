@@ -18,13 +18,22 @@
             android:id="@+id/action_to_scheduleEditFragment"
             app:destination="@id/scheduleEditFragment"
             app:exitAnim="@anim/fragment_close_enter" />
-        <action
-            android:id="@+id/action_FirstFragment_to_tenki"
-            app:destination="@id/tenki" />
         <argument
             android:name="scheduleId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_FirstFragment_to_tamesi2"
+            app:destination="@id/tenki" />
+        <action
+            android:id="@+id/action_FirstFragment_to_tenki"
+            app:destination="@id/tenki" />
+        <action
+            android:id="@+id/action_FirstFragment_to_tenki2"
+            app:destination="@id/tenki" />
+        <action
+            android:id="@+id/action_FirstFragment_to_tamesi"
+            app:destination="@id/tenki" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -51,9 +60,17 @@
         <action
             android:id="@+id/action_scheduleEditFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_scheduleEditFragment_to_custum"
+            app:destination="@id/custum" />
     </fragment>
     <activity
         android:id="@+id/tenki"
         android:name="com.example.myapplication.tenki"
-        android:label="tenki" />
+        android:label="@string/tenki" />
+    <fragment
+        android:id="@+id/custum"
+        android:name="com.example.myapplication.Custum"
+        android:label="@string/Option"
+        tools:layout="@layout/fragment_custum" />
 </navigation>

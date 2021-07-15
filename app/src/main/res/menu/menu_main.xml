@@ -20,4 +20,8 @@
         android:id="@+id/tenki"
         android:icon="@drawable/tenki"
         android:title="天気確認" />
+    <item
+        android:id="@+id/custum"
+        android:icon="@drawable/option"
+        android:title="オプション" />
 </menu>

@@ -1,9 +1,14 @@
 package com.example.myapplication
 
+//import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import android.R
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.fragment_schedule_edit.*
+import org.json.JSONArray
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,8 +45,16 @@ class ScheduleEditFragment: Fragment() {
     private val binding get()=_binding!!
     private lateinit var realm: Realm
     private  val args: ScheduleEditFragmentArgs by navArgs()
-
-
+    var values = arrayOf(
+            "",
+            "旅行",
+            "面接",
+            "バイト",
+            "病院",
+            "学校"
+    )
+var i=0
+    var array = JSONArray()
 
     val names = arrayOf("佐藤", "鈴木", "井上")
 
@@ -61,18 +74,11 @@ class ScheduleEditFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentScheduleEditBinding.inflate(inflater, container, false)
-        val values = arrayOf(
-            "",
-           "旅行",
-            "面接",
-            "バイト",
-            "病院",
-            "学校"
-        )
-
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
+
+
         return binding.root
     }
 
@@ -85,29 +91,29 @@ class ScheduleEditFragment: Fragment() {
             binding.timeEdit.setText(DateFormat.format("HH:mm", schedule?.date))
             binding.titleEdit.setText(schedule?.title)
             binding.detailEdit.setText(schedule?.detil)
-            binding.delete.visibility = View.VISIBLE
+
         }else{
-            binding.delete.visibility=View.INVISIBLE
+
         }
 
         binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？",
-            "保存", {
-                saveSchedule(it)
+                "保存", {
+            saveSchedule(it)
 
-            },
-            "キャンセル", {
-                Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
+        },
+                "キャンセル", {
+            Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
-            }
+        }
         )
             dialog.show(parentFragmentManager, "save_dialog")}
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
                 ) {
 
                     val spinner = parent as? Spinner
@@ -124,15 +130,7 @@ class ScheduleEditFragment: Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }}
-        binding.delete.setOnClickListener{val dialog=ConfirmDialog("削除しますか？",
-            "削除", { deleteSchedule(it) },
-            "キャンセル", {
-                Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
-                    .show()
-            }
-        )
-            dialog.show(parentFragmentManager, "delete_dialog")
-        }
+
         binding.datebutton.setOnClickListener{
             DateDialog{ date->
                 binding.dateEdit.setText(date)
@@ -145,24 +143,38 @@ class ScheduleEditFragment: Fragment() {
         }
 
     }
-    private fun saveSchedule(view:View){
+    private fun saveSchedule(view: View){
         when (args.scheduleId){
             -1L -> {
-        realm.executeTransaction{db:Realm->
-            val maxId=db.where<Schedule>().max("id")
-            val nextId=(maxId?.toLong() ?:0L)+1L
-            val schedule=db.createObject<Schedule>(nextId)
-            val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
-            if (date != null) schedule.date = date
-            schedule.title = binding.titleEdit.text.toString()
-            schedule.detil = binding.detailEdit.text.toString()
-        }
-        Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-            .setAction("戻る") { findNavController().popBackStack() }
-            .setActionTextColor(Color.YELLOW)
-            .show()
+                realm.executeTransaction { db: Realm ->
+                    val maxId = db.where<Schedule>().max("id")
+                    val nextId = (maxId?.toLong() ?: 0L) + 1L
+                    val schedule = db.createObject<Schedule>(nextId)
+                    val date = "${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
+                    if (date != null) schedule.date = date
+                    schedule.title = binding.titleEdit.text.toString()
+                    schedule.detil = binding.detailEdit.text.toString()
+                }
+                for (str in values) {
+                    if (!(binding.titleEdit.text.toString().equals(str))) {
+                        i++
+                        if (i >= values.size) {
+                            values += binding.titleEdit.text.toString()
+                            val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
+                            adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
+                            binding.spinner.adapter = adapter
+                            i = 0
+                        }
 
-    } else->{
+                    }
+                }
+
+                Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
+                        .setAction("戻る") { findNavController().popBackStack() }
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+
+            } else->{
             realm.executeTransaction { db: Realm ->
                 val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
                 val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
@@ -205,5 +217,7 @@ class ScheduleEditFragment: Fragment() {
             return null
         }
     }
+
+
 
 }

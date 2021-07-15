@@ -1,22 +1,20 @@
 package com.example.myapplication
 
+//import kotlinx.android.synthetic.main.fragment_tamesi.*
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ListView
 import android.widget.SimpleAdapter
-import android.widget.TextView
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
+import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentTamesiBinding
-import kotlinx.android.synthetic.main.fragment_tamesi.*
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStream
@@ -26,10 +24,9 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.util.concurrent.Executors
 
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -38,7 +35,7 @@ private const val ARG_PARAM2 = "param2"
  */
 
 class tamesi : Fragment() {
-    /*private var _binding:FragmentTamesiBinding?=null
+    private var _binding:FragmentTamesiBinding?=null
     private  val binding get()=_binding!!
     companion object{
         private const val DEBUG_TAG="AsyncSample"
@@ -52,16 +49,16 @@ class tamesi : Fragment() {
         val from= arrayOf("name")
         val to = intArrayOf(android.R.id.text1)
         val adapter= SimpleAdapter(this.context, _list, android.R.layout.simple_list_item_1, from, to)
-        lvCityList.adapter=adapter
-        lvCityList.onItemClickListener=ListItemClickListener()
-
+        binding.lvCityList.adapter=adapter
+        binding.lvCityList.onItemClickListener=ListItemClickListener()
+        val looper = Looper.getMainLooper()
     }
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        _binding= FragmentTamesiBinding.inflate(inflater,container,false)
+        _binding= FragmentTamesiBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -78,10 +75,13 @@ class tamesi : Fragment() {
 
     }
     private fun receiveWeatherInfo(urlFull: String){
-        val handler= HandlerCompat.createAsync(mainLooper)
+
+        val handler= HandlerCompat.createAsync(Looper.getMainLooper())
         val backgroundReceiver=WeatherInfoBackgroundReceiver(handler, urlFull)
         val executeService= Executors.newSingleThreadExecutor()
         executeService.submit(backgroundReceiver)
+
+
     }
     private inner class WeatherInfoBackgroundReceiver(handler: Handler, url: String): Runnable {
         private val  _handler=handler
@@ -135,15 +135,13 @@ class tamesi : Fragment() {
             val weather=weatherJSON.getString("description")
             val telop="${cityName}の天気"
             val desc="現在は${weather}です。\n緯度は${latitude}度で軽度は${longitude}です。"
-            tvWeatherTelop.text=telop
-            tvWeatherDesc.text=desc
+            binding.tvWeatherTelop.text=telop
+            binding.tvWeatherDesc.text=desc
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
-    }
+
+
     private inner class ListItemClickListener: AdapterView.OnItemClickListener{
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             val item=_list.get(position)
@@ -156,6 +154,6 @@ class tamesi : Fragment() {
     }
 
 
-*/
+
 }
 ///////////////このクラスは使わない
