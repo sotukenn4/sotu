@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.myapplication.databinding.FragmentCustumBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,38 +21,58 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Custum : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentCustumBinding?=null
+    private val binding get()=_binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
+    }
+    private fun getArray(PrefKey: String): Array<String> {
+        val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
+        val stringItem = prefs2.getString(PrefKey, "d")
+        return if (stringItem != null && stringItem.length != 0) {
+            stringItem.split(",").toTypedArray()
+        } else emptyArray()
+    }
+    private fun saveArray(array: Array<String>, PrefKey: String) {
+        val buffer = StringBuffer()
+        var stringItem: String? = null
+        for (item in array) {
+            buffer.append("$item,")
+        }
+        if (buffer != null) {
+            val buf = buffer.toString()
+            stringItem = buf.substring(0, buf.length - 1)
+            val prefs1: SharedPreferences = requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
+            val editor = prefs1.edit()
+            editor.putString(PrefKey, stringItem).commit()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_custum, container, false)
+        _binding= FragmentCustumBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Custum.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                Custum().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var values = getArray("StringItem")
+        binding.spinneradd.setOnClickListener{
+            values+=binding.spinnertext.text.toString()
+            binding.spinnertext.setText("")
+            saveArray(values,"StringItem");
+        }
+        binding.spinnerdelete.setOnClickListener{
+
+        }
     }
+
 }
+
+
+
+
