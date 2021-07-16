@@ -51,9 +51,6 @@ class ScheduleEditFragment: Fragment() {
         "病院",
         "学校"
     )
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm = Realm.getDefaultInstance()

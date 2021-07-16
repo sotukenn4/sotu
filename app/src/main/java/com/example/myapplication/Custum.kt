@@ -2,12 +2,15 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentCustumBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,7 +26,14 @@ private const val ARG_PARAM2 = "param2"
 class Custum : Fragment() {
     private var _binding: FragmentCustumBinding?=null
     private val binding get()=_binding!!
-
+    var values = arrayOf(
+        "",
+        "旅行",
+        "面接",
+        "バイト",
+        "病院",
+        "学校"
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,15 +71,30 @@ class Custum : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var values = getArray("StringItem")
+        var value2= arrayOf(" ")
         binding.spinneradd.setOnClickListener{
             values+=binding.spinnertext.text.toString()
             binding.spinnertext.setText("")
             saveArray(values,"StringItem");
+            Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
+                .setActionTextColor(Color.YELLOW)
+                .show()
         }
         binding.spinnerdelete.setOnClickListener{
-
+           for ( i in 1 .. values.size-1){
+               if(values[i].equals(binding.spinnertext2.text.toString())){
+               }else{
+                   value2+=values[i].toString()
+               }
+           }
+            values=value2
+            saveArray(values,"StringItem")
+            Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
+                .setActionTextColor(Color.YELLOW)
+                .show()
         }
     }
+
 
 }
 

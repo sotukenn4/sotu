@@ -34,12 +34,12 @@
         android:id="@+id/spinnertext2"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="追加したい行事名"
+        android:hint="削除したい行事名"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/spinnerOption"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerOption" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerOption2" />
 
     <TextView
         android:id="@+id/spinnerOption"
