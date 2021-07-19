@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-
     }
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.R
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -7,6 +8,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentCustumBinding
@@ -23,9 +27,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Custum.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+//オプション画面のプログラム
 class Custum : Fragment() {
+    //bindingの定義。これはどこでも使う。
     private var _binding: FragmentCustumBinding?=null
     private val binding get()=_binding!!
+    //配列
     var values = arrayOf(
         "",
         "旅行",
@@ -36,10 +44,9 @@ class Custum : Fragment() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
     }
+
+    //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
         val stringItem = prefs2.getString(PrefKey, "")
@@ -47,6 +54,7 @@ class Custum : Fragment() {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
     }
+    //データの保存メソッド
     private fun saveArray(array: Array<String>, PrefKey: String) {
         val buffer = StringBuffer()
         var stringItem: String? = null
@@ -70,70 +78,98 @@ class Custum : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //保存データを取り出し、valuesに格納
         var values = getArray("StringItem")
-        var value2= arrayOf(" ")
-        binding.spinneradd.setOnClickListener{
-            if(binding.spinnertext.text.toString().equals("")){
+        //予備の配列。0番目に空白
+        var value2 = arrayOf(" ")
+        //追加ボタンが押された時のメソッド
+        binding.spinneradd.setOnClickListener {
+            //追加するのが、空白で何も書かれていない場合は追加しない
+            if (binding.spinnertext.text.toString().equals("")) {
                 Snackbar.make(view, "追加したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(Color.YELLOW)
                         .show()
-            }else{
-                var check=0
-                for ( i in 1 .. values.size-1){
-                    if(values[i].equals(binding.spinnertext.text.toString())){
-                        check=1
-                    }else{
-
+            } else {
+                //check変数。0の時は重複なし。1の時は重複してる
+                var check = 0
+                //保存されているデータと照らし合わせて追加するデータがすでにないか確認する
+                for (i in 1..values.size - 1) {
+                    if (values[i].equals(binding.spinnertext.text.toString())) {
+                        //重複しているためcheckを1にする
+                        check = 1
+                    } else {
+                        //特に処理はない
                     }
                 }
-                if(check==1){
-                    val dialog=ConfirmDialog("既に入力された項目はありますが追加しますか？",
+                //重複があったとき、警告を表示する
+                if (check == 1) {
+                    val dialog = ConfirmDialog("既に入力された項目はありますが追加しますか？",
                             "はい", {
-                        values+=binding.spinnertext.text.toString()
+                        //はいが押されたときのメソッド
+                        values += binding.spinnertext.text.toString()
+                        //テキストの文字は空白に戻す
                         binding.spinnertext.setText("")
-                        saveArray(values,"StringItem");
+                        //追加されたデータを保存する
+                        saveArray(values, "StringItem");
+                        //画面下に黒いラベル表示
                         Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
                                 .setActionTextColor(Color.YELLOW)
                                 .show()
                     },
                             "いいえ", {
-
+                        //いいえが押されたときのメソッド。特になし
                     }
                     )
+                    //ダイアログ表示
                     dialog.show(parentFragmentManager, "save_dialog")
-                }else{
-                    values+=binding.spinnertext.text.toString()
+                //重複がないとき
+                } else {
+                    //重複がなかったときはそのままデータを追加する
+                    values += binding.spinnertext.text.toString()
+                    //テキストの文字は空白に戻す
                     binding.spinnertext.setText("")
-                    saveArray(values,"StringItem");
+                    //追加されたデータを保存する
+                    saveArray(values, "StringItem");
+                    //画面下に黒いラベル表示
                     Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
                             .setActionTextColor(Color.YELLOW)
                             .show()
                 }
             }
-
-
         }
-        binding.spinnerdelete.setOnClickListener{
-            if(binding.spinnertext2.text.toString().equals("")){
+        //削除ボタンが押された時の処理
+        binding.spinnerdelete.setOnClickListener {
+            //削除するのが、空白で何も書かれていない場合は処理しない
+            if (binding.spinnertext2.text.toString().equals("")) {
+                //画面下に黒いラベル表示
                 Snackbar.make(view, "削除したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(Color.YELLOW)
                         .show()
-            }else{
-                for ( i in 1 .. values.size-1){
-                    if(values[i].equals(binding.spinnertext2.text.toString())){
-                    }else{
-                        value2+=values[i].toString()
+            } else {
+                //削除するデータをのぞいたデータを予備の配列value2に格納する
+                for (i in 1..values.size - 1) {
+                    if (values[i].equals(binding.spinnertext2.text.toString())) {
+                        //削除データは格納しない
+                    } else {
+                        //予備の配列に格納
+                        value2 += values[i].toString()
                     }
                 }
+                //テキストの文字は空白に戻す
                 binding.spinnertext2.setText("")
-                values=value2
-                saveArray(values,"StringItem")
+                //予備の配列のデータを格納
+                values = value2
+                //データを保存する
+                saveArray(values, "StringItem")
+                //画面下に黒いラベル表示
                 Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(Color.YELLOW)
                         .show()
             }
 
         }
+
+
     }
 
 

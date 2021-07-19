@@ -38,11 +38,14 @@ import java.util.*
  * create an instance of this fragment.
  */
 class ScheduleEditFragment: Fragment() {
-
+    //bindingの定義。これはどこでも使う。
     private var _binding: FragmentScheduleEditBinding?=null
     private val binding get()=_binding!!
+    //realm（保存のデータベース？みたいなもの）
     private lateinit var realm: Realm
+    //これはよくわからん。
     private  val args: ScheduleEditFragmentArgs by navArgs()
+    //配列定義
     var values = arrayOf(
         "",
         "旅行",
@@ -55,13 +58,10 @@ class ScheduleEditFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm = Realm.getDefaultInstance()
-
+        //保存されている新しいデータにする
         values= getArray("StringItem")
-
-
-
     }
-
+    //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
         val stringItem = prefs2.getString(PrefKey, "")
@@ -76,18 +76,20 @@ class ScheduleEditFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentScheduleEditBinding.inflate(inflater, container, false)
-
-
+        //保存されている新しいデータにする
         values= getArray("StringItem")
+        //spinnerに配列valuesの値をいれる。3行セット
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
+
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //更新ボタンが押されてこの画面に来た時
         if(args.scheduleId !=-1L) {
             val schedule = realm.where<Schedule>()
                 .equalTo("id", args.scheduleId).findFirst()
@@ -97,21 +99,24 @@ class ScheduleEditFragment: Fragment() {
             binding.detailEdit.setText(schedule?.detil)
 
         }else{
-
+            //新規追加は特になし
         }
-
+//保存ボタンが押された時のメソッド
         binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？",
             "保存", {
+            //保存が押された時
                 saveSchedule(it)
-                //saveArray(values,"StringItem");
             },
+                //キャンセルが押されたとき
             "キャンセル", {
+            //画面下に黒いラベル表示
                 Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
             }
         )
             dialog.show(parentFragmentManager, "save_dialog")
         }
+        //spinnerが押された時の処理
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
@@ -124,14 +129,16 @@ class ScheduleEditFragment: Fragment() {
                     val item = spinner?.selectedItem as? String
                     item?.let {
                         if(it.equals(values[0])){
-
+                            //spinnerの一番上の空白が選択された場合は何もしない
                         }else{
+                            //空白以外のアイテムが選択されたときに左のテキストにセットする
                             if (it.isNotEmpty()) binding.titleEdit.setText(item)
                         }
                     }
                 }
-
+                //何も押されなかった時の処理
                 override fun onNothingSelected(parent: AdapterView<*>?) {
+                    //特になし
                     TODO("Not yet implemented")
                 }}
 
