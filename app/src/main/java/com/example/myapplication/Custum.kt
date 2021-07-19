@@ -42,7 +42,7 @@ class Custum : Fragment() {
     }
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-        val stringItem = prefs2.getString(PrefKey, "d")
+        val stringItem = prefs2.getString(PrefKey, "")
         return if (stringItem != null && stringItem.length != 0) {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
@@ -73,27 +73,69 @@ class Custum : Fragment() {
         var values = getArray("StringItem")
         var value2= arrayOf(" ")
         binding.spinneradd.setOnClickListener{
-            values+=binding.spinnertext.text.toString()
-            binding.spinnertext.setText("")
-            saveArray(values,"StringItem");
-            Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
-                .setActionTextColor(Color.YELLOW)
-                .show()
+            if(binding.spinnertext.text.toString().equals("")){
+                Snackbar.make(view, "追加したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+            }else{
+                var check=0
+                for ( i in 1 .. values.size-1){
+                    if(values[i].equals(binding.spinnertext.text.toString())){
+                        check=1
+                    }else{
+
+                    }
+                }
+                if(check==1){
+                    val dialog=ConfirmDialog("既に入力された項目はありますが追加しますか？",
+                            "はい", {
+                        values+=binding.spinnertext.text.toString()
+                        binding.spinnertext.setText("")
+                        saveArray(values,"StringItem");
+                        Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
+                                .setActionTextColor(Color.YELLOW)
+                                .show()
+                    },
+                            "いいえ", {
+
+                    }
+                    )
+                    dialog.show(parentFragmentManager, "save_dialog")
+                }else{
+                    values+=binding.spinnertext.text.toString()
+                    binding.spinnertext.setText("")
+                    saveArray(values,"StringItem");
+                    Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
+                            .setActionTextColor(Color.YELLOW)
+                            .show()
+                }
+            }
+
+
         }
         binding.spinnerdelete.setOnClickListener{
-           for ( i in 1 .. values.size-1){
-               if(values[i].equals(binding.spinnertext2.text.toString())){
-               }else{
-                   value2+=values[i].toString()
-               }
-           }
-            values=value2
-            saveArray(values,"StringItem")
-            Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
-                .setActionTextColor(Color.YELLOW)
-                .show()
+            if(binding.spinnertext2.text.toString().equals("")){
+                Snackbar.make(view, "削除したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+            }else{
+                for ( i in 1 .. values.size-1){
+                    if(values[i].equals(binding.spinnertext2.text.toString())){
+                    }else{
+                        value2+=values[i].toString()
+                    }
+                }
+                binding.spinnertext2.setText("")
+                values=value2
+                saveArray(values,"StringItem")
+                Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+            }
+
         }
     }
+
 
 
 }

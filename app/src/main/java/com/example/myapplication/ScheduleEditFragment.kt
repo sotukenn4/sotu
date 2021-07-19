@@ -51,6 +51,7 @@ class ScheduleEditFragment: Fragment() {
         "病院",
         "学校"
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm = Realm.getDefaultInstance()
@@ -63,7 +64,7 @@ class ScheduleEditFragment: Fragment() {
 
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-        val stringItem = prefs2.getString(PrefKey, "d")
+        val stringItem = prefs2.getString(PrefKey, "")
         return if (stringItem != null && stringItem.length != 0) {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
@@ -83,20 +84,7 @@ class ScheduleEditFragment: Fragment() {
         binding.spinner.adapter = adapter
         return binding.root
     }
-    private fun saveArray(array: Array<String>, PrefKey: String) {
-        val buffer = StringBuffer()
-        var stringItem: String? = null
-        for (item in array) {
-            buffer.append("$item,")
-        }
-        if (buffer != null) {
-            val buf = buffer.toString()
-            stringItem = buf.substring(0, buf.length - 1)
-            val prefs1: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-            val editor = prefs1.edit()
-            editor.putString(PrefKey, stringItem).commit()
-        }
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -115,14 +103,15 @@ class ScheduleEditFragment: Fragment() {
         binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？",
             "保存", {
                 saveSchedule(it)
-                saveArray(values,"StringItem");
+                //saveArray(values,"StringItem");
             },
             "キャンセル", {
                 Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
                     .show()
             }
         )
-            dialog.show(parentFragmentManager, "save_dialog")}
+            dialog.show(parentFragmentManager, "save_dialog")
+        }
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
@@ -131,15 +120,14 @@ class ScheduleEditFragment: Fragment() {
                     position: Int,
                     id: Long
                 ) {
-
                     val spinner = parent as? Spinner
                     val item = spinner?.selectedItem as? String
-
                     item?.let {
-                        if (it.isNotEmpty()) binding.titleEdit.setText(item)
+                        if(it.equals(values[0])){
 
-
-
+                        }else{
+                            if (it.isNotEmpty()) binding.titleEdit.setText(item)
+                        }
                     }
                 }
 
@@ -171,7 +159,7 @@ class ScheduleEditFragment: Fragment() {
             schedule.title = binding.titleEdit.text.toString()
             schedule.detil = binding.detailEdit.text.toString()
         }
-                saveArray(values,"StringItem")
+                //saveArray(values,"StringItem")
         Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
             .setAction("戻る") { findNavController().popBackStack() }
             .setActionTextColor(Color.YELLOW)
