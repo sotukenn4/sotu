@@ -1,18 +1,16 @@
 package com.example.myapplication
 
-import android.R
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentCustumBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -86,9 +84,7 @@ class Custum : Fragment() {
         binding.spinneradd.setOnClickListener {
             //追加するのが、空白で何も書かれていない場合は追加しない
             if (binding.spinnertext.text.toString().equals("")) {
-                Snackbar.make(view, "追加したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
+                binding.spinnertext.setError("行事名を入力してください")
             } else {
                 //check変数。0の時は重複なし。1の時は重複してる
                 var check = 0
@@ -141,10 +137,7 @@ class Custum : Fragment() {
         binding.spinnerdelete.setOnClickListener {
             //削除するのが、空白で何も書かれていない場合は処理しない
             if (binding.spinnertext2.text.toString().equals("")) {
-                //画面下に黒いラベル表示
-                Snackbar.make(view, "削除したい行事の入力をしてください", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
+                binding.spinnertext2.setError("行事名を入力してください")
             } else {
                 //削除するデータをのぞいたデータを予備の配列value2に格納する
                 for (i in 1..values.size - 1) {
@@ -165,12 +158,14 @@ class Custum : Fragment() {
                 Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(Color.YELLOW)
                         .show()
+
             }
 
         }
 
 
     }
+
 
 
 
