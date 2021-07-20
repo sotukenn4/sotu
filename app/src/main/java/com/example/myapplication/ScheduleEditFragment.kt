@@ -141,50 +141,68 @@ class ScheduleEditFragment: Fragment() {
                     //特になし
                     TODO("Not yet implemented")
                 }}
-
+        //カレンダーボタン押されたらカレンダー表示する
         binding.datebutton.setOnClickListener{
             DateDialog{ date->
                 binding.dateEdit.setText(date)
 
             }.show(parentFragmentManager, "date_dialog")}
+        //時間ボタン
         binding.timeButton.setOnClickListener{
             TimeDialog{ time->
                 binding.timeEdit.setText(time)
             }.show(parentFragmentManager, "time_dialog")
         }
-
     }
+    //保存ボタンが押されたときの処理
     private fun saveSchedule(view:View){
         when (args.scheduleId){
+            //idが-1L、つまり新規で作成されてるなら
             -1L -> {
         realm.executeTransaction{db:Realm->
+            //新しいidを作り変数に格納
             val maxId=db.where<Schedule>().max("id")
+            //idを更新しておく？一個上の処理で作ったidの次のidを次回から使えるようにするため
             val nextId=(maxId?.toLong() ?:0L)+1L
+            //nextIdを保存しておく
             val schedule=db.createObject<Schedule>(nextId)
+            //データ日付格納
             val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
+            //日付保存
             if (date != null) schedule.date = date
+            //タイトルを保存
             schedule.title = binding.titleEdit.text.toString()
+            //詳細を保存
             schedule.detil = binding.detailEdit.text.toString()
         }
-                //saveArray(values,"StringItem")
+                //saveArray(values,"StringItem")　多分これいらん
+                //画面下に黒いラベル表示
         Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
             .setAction("戻る") { findNavController().popBackStack() }
             .setActionTextColor(Color.YELLOW)
             .show()
-
+                //idが-1L以外だった時。つまり更新目的で来た時
     } else->{
+            //realm呼び出し
             realm.executeTransaction { db: Realm ->
+                //すでにあるidをいれる。更新だから
                 val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
+                //データ日付格納
                 val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
+                //日付保存
                 if(date!=null) schedule?.date=date
+                //タイトルを保存
                 schedule?.title=binding.titleEdit.text.toString()
+                //詳細を保存
                 schedule?.detil=binding.detailEdit.text.toString()
             }
+            //画面下に黒いラベル表示
             Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                 .setAction("戻る"){findNavController().popBackStack()}
                 .setActionTextColor(Color.YELLOW)
                 .show()
         }}}
+    //データ削除メソッド。この画面では削除はしないので、多分これもいらんわ。
     private fun deleteSchedule(view: View){
         realm.executeTransaction{ db: Realm->
             db.where<Schedule>().equalTo("id", args.scheduleId)
@@ -197,15 +215,16 @@ class ScheduleEditFragment: Fragment() {
             .show()
         findNavController()
     }
+    //onDestroyViewとonDestoryはセットで書いておいて。意味はわからんけど
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
     }
-
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
     }
+    //日付取得
     private fun String.toDate(pattern: String = "yyyy/MM/ddHH:mm"): Date?{
         return try{
             SimpleDateFormat(pattern).parse(this)

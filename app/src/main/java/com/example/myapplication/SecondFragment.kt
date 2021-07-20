@@ -23,6 +23,7 @@ class SecondFragment : Fragment() {
     private  var _binding: FragmentSecondBinding?=null
     private  val binding get()=_binding!!
     private lateinit var realm: Realm
+    //配列。たぶんこれいらん
     val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +40,6 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
             timeInMillis=binding.calendarView.date
@@ -58,6 +57,7 @@ class SecondFragment : Fragment() {
         val schedules=realm.where<Schedule>().findAll()
         val adapter=ScheduleAdapter(schedules)
         binding.list.adapter=adapter
+        //データがタッチされたら
         adapter.setOnLongClickListener {
             id ->
             id?.let {

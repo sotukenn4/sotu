@@ -13,6 +13,7 @@ import java.lang.IllegalStateException
 
 
 class ListDialogFragment: DialogFragment() {
+    //配列定義。これいらんと思うけど残しておくわ。エラーでるの怖いしｗｗ。消して何もエラーでなかったら誰か消しておいて。俺やるのだるいでｗ
     val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog=activity?.let {

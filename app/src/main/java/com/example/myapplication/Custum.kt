@@ -54,7 +54,7 @@ class Custum : Fragment() {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
     }
-    //データの保存メソッド
+    //データの保存メソッド。すまん中身がなにしてるか、説明できるほど理解してない。
     private fun saveArray(array: Array<String>, PrefKey: String) {
         val buffer = StringBuffer()
         var stringItem: String? = null
@@ -69,7 +69,7 @@ class Custum : Fragment() {
             editor.putString(PrefKey, stringItem).commit()
         }
     }
-
+//Viewが作られたときに呼びだされる
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding= FragmentCustumBinding.inflate(inflater,container,false)
@@ -149,7 +149,7 @@ class Custum : Fragment() {
                 //削除するデータをのぞいたデータを予備の配列value2に格納する
                 for (i in 1..values.size - 1) {
                     if (values[i].equals(binding.spinnertext2.text.toString())) {
-                        //削除データは格納しない
+                        //削除データは格納しないから何も書かない
                     } else {
                         //予備の配列に格納
                         value2 += values[i].toString()
