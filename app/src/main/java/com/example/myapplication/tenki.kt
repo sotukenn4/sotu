@@ -133,7 +133,7 @@ class tenki : AppCompatActivity() {
     private inner class ListItemClickListener: AdapterView.OnItemClickListener{
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             val item=_list.get(position)
-            val q =item.get("q")
+            val q =item.get("q")//
             q?.let {
                 val urlFull="${tenki.WEATHERINFO_URL}&q=$q&appid=${tenki.APP_ID}"
                 receiveWeatherInfo(urlFull)
