@@ -1,15 +1,14 @@
 package com.example.myapplication
 
+import android.R.attr.button
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentCustumBinding
 import com.google.android.material.snackbar.Snackbar
@@ -40,9 +39,13 @@ class Custum : Fragment() {
         "病院",
         "学校"
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
+
+
 
     //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
@@ -71,11 +74,17 @@ class Custum : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding= FragmentCustumBinding.inflate(inflater,container,false)
+    binding.button2.setOnClickListener(View.OnClickListener {
+        val intent = Intent(context, SampleActivity::class.java)
+        startActivity(intent)
+    })
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //保存データを取り出し、valuesに格納
         var values = getArray("StringItem")
         //予備の配列。0番目に空白
@@ -133,6 +142,8 @@ class Custum : Fragment() {
                 }
             }
         }
+
+
         //削除ボタンが押された時の処理
         binding.spinnerdelete.setOnClickListener {
             //削除するのが、空白で何も書かれていない場合は処理しない

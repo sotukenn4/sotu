@@ -24,11 +24,13 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.util.concurrent.Executors
 
-//////天気くらす
+//////天気クラス
 class tenki : AppCompatActivity() {
     companion object{
         const val DEBUG_TAG="AsyncSample"
+        //URL
         const val WEATHERINFO_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja"
+        //アクセスキー
         const val APP_ID="83311ce95b6808b861ddd5e178b11b87"
 
     }
