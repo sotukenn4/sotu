@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentSecondBinding
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.where
 import java.util.*
@@ -21,7 +23,8 @@ class SecondFragment : Fragment() {
     private  var _binding: FragmentSecondBinding?=null
     private  val binding get()=_binding!!
     private lateinit var realm: Realm
-
+    //配列。たぶんこれいらん
+    val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
@@ -37,8 +40,6 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as? MainActivity)?.setFabVisible(View.VISIBLE)
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
             timeInMillis=binding.calendarView.date
@@ -52,6 +53,27 @@ class SecondFragment : Fragment() {
                 .setOnDateChangeListener{ view, year, month, dayOfMonth->
                     findSchedule(year, month, dayOfMonth)
                 }
+        binding.list.layoutManager= LinearLayoutManager(context)
+        val schedules=realm.where<Schedule>().findAll()
+        val adapter=ScheduleAdapter(schedules)
+        binding.list.adapter=adapter
+        //データがタッチされたら
+        adapter.setOnLongClickListener {
+            id ->
+            id?.let {
+                val dialog = ConfirmDialog(
+                        "変更しますか？",
+                        "削除", { deleteSchedule(view,it)
+                    adapter.notifyDataSetChanged()},
+                        "更新", {
+                    val action=
+                            FirstFragmentDirections.actionToScheduleEditFragment(it)
+                    findNavController().navigate(action)
+                }
+                )
+                dialog.show(parentFragmentManager, "delete_dialog")
+            }
+        }
     }
     private fun findSchedule(
             year: Int,
@@ -87,5 +109,18 @@ class SecondFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
+    }
+    private fun deleteSchedule(view: View,it:Long){
+
+        realm.executeTransaction{
+            db:Realm->db.where<Schedule>().equalTo("id",it)
+                ?.findFirst()
+                ?.deleteFromRealm()
+        }
+        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
+                .setActionTextColor(Color.YELLOW)
+                .show()
+
+
     }
 }

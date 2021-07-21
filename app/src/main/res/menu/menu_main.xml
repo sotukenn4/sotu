@@ -14,10 +14,14 @@
         android:id="@+id/SecondFragment"
         android:icon="@drawable/carender"
         android:orderInCategory="100"
-        android:title="カレンダー表示"
+        android:title="カレンダー"
         app:showAsAction="never" />
     <item
         android:id="@+id/tenki"
         android:icon="@drawable/tenki"
         android:title="天気確認" />
+    <item
+        android:id="@+id/custum"
+        android:icon="@drawable/option"
+        android:title="オプション" />
 </menu>

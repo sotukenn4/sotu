@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="yotei">
+    <string-array name="spi">
         <item></item>
         <item>面接</item>
         <item>旅行</item>
