@@ -72,5 +72,14 @@
         android:id="@+id/custum"
         android:name="com.example.myapplication.Custum"
         android:label="@string/Option"
-        tools:layout="@layout/fragment_custum" />
+        tools:layout="@layout/fragment_custum" >
+        <action
+            android:id="@+id/action_custum_to_sampleActivity"
+            app:destination="@id/sampleActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/sampleActivity"
+        android:name="com.example.myapplication.SampleActivity"
+        android:label="activity_sample"
+        tools:layout="@layout/activity_sample" />
 </navigation>
