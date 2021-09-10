@@ -1,29 +1,29 @@
 package com.example.myapplication
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.databinding.FragmentCustumBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_first.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var binding2: FragmentCustumBinding
 
-    private lateinit var viewModel: ConstraintLayout
-    private var inputMethodManager: InputMethodManager? = null
 
-    private var _list: MutableList<MutableMap<String,String>> =mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.toolbar))
         //ナビゲーションを使えるようにする
@@ -34,7 +34,12 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        val res: Int = intent.getIntExtra("EXTRA_DATA",0)
+        binding.textView3.text=res.toString()
+        binding.imageView.setImageResource(R.drawable.hanabi)
+    }
 
 }
 

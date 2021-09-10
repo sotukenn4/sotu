@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.R.attr.button
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,17 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentCustumBinding
 import com.google.android.material.snackbar.Snackbar
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Custum.newInstance] factory method to
- * create an instance of this fragment.
- */
 
 //オプション画面のプログラム
 class Custum : Fragment() {
@@ -39,14 +27,12 @@ class Custum : Fragment() {
         "病院",
         "学校"
     )
-
+    val EXTRA_DATA = "com.example.myapplication"
+    val mThumbIds = intArrayOf( com.example.myapplication.R.drawable.hanabi,com.example.myapplication.R.drawable.asuka)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
-
-
     //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
@@ -74,17 +60,17 @@ class Custum : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding= FragmentCustumBinding.inflate(inflater,container,false)
+    /*
     binding.button2.setOnClickListener(View.OnClickListener {
         val intent = Intent(context, SampleActivity::class.java)
+        intent.putExtra("EXTRA_DATA",100);
         startActivity(intent)
     })
+*/
         return binding.root
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //保存データを取り出し、valuesに格納
         var values = getArray("StringItem")
         //予備の配列。0番目に空白
@@ -102,13 +88,17 @@ class Custum : Fragment() {
                     if (values[i].equals(binding.spinnertext.text.toString())) {
                         //重複しているためcheckを1にする
                         check = 1
+                        //画面下に黒いラベル表示
+                        Snackbar.make(view, "すでに入力された行事はあります", Snackbar.LENGTH_SHORT)
+                            .setActionTextColor(Color.YELLOW)
+                            .show()
                     } else {
                         //特に処理はない
                     }
                 }
                 //重複があったとき、警告を表示する
                 if (check == 1) {
-                    val dialog = ConfirmDialog("既に入力された項目はありますが追加しますか？",
+                    /*val dialog = ConfirmDialog("既に入力された項目はありますが追加しますか？",
                             "はい", {
                         //はいが押されたときのメソッド
                         values += binding.spinnertext.text.toString()
@@ -127,6 +117,7 @@ class Custum : Fragment() {
                     )
                     //ダイアログ表示
                     dialog.show(parentFragmentManager, "save_dialog")
+                     */
                 //重複がないとき
                 } else {
                     //重複がなかったときはそのままデータを追加する
@@ -142,8 +133,6 @@ class Custum : Fragment() {
                 }
             }
         }
-
-
         //削除ボタンが押された時の処理
         binding.spinnerdelete.setOnClickListener {
             //削除するのが、空白で何も書かれていない場合は処理しない
@@ -176,10 +165,6 @@ class Custum : Fragment() {
 
 
     }
-
-
-
-
 }
 
 

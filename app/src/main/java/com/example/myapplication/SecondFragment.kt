@@ -23,8 +23,6 @@ class SecondFragment : Fragment() {
     private  var _binding: FragmentSecondBinding?=null
     private  val binding get()=_binding!!
     private lateinit var realm: Realm
-    //配列。たぶんこれいらん
-    val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()

@@ -26,7 +26,6 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
     private var _binding: FragmentFirstBinding?=null
     private  val binding get()=_binding!!
     private  lateinit var realm: Realm
-    private  val args: FirstFragmentArgs by navArgs()
     //配列
     val strList = arrayOf("更新","削除","キャンセル")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +43,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         super.onViewCreated(view, savedInstanceState)
         //ここから4行でリストにデータをセットして表示する
         binding.list.layoutManager= LinearLayoutManager(context)
+        //ralm、adapterの設定
         val schedules=realm.where<Schedule>().findAll()
         val adapter=ScheduleAdapter(schedules)
         binding.list.adapter=adapter

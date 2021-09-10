@@ -1,45 +1,82 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ImageAdapter{
-    private Context mContext;
-    public ImageAdapter(Context c) {
-        mContext = c;
+import com.example.myapplication.databinding.ActivityMainBinding;
+
+
+public class ImageAdapter extends BaseAdapter {
+
+    private LayoutInflater inflater;
+    private int layoutID;
+    private String[] namelist;
+    private String[] emaillist;
+    private Bitmap[] photolist;
+
+    static class ViewHolder {
+        TextView text;
+        TextView email;
+        ImageView img;
     }
 
-    public int getCount() {
-        return mThumbIds.length;
-    }
+    ImageAdapter(Context context, int itemLayoutId,
+                String[] names, String[] emails, int[] photos ){
 
-    public Object getItem(int position) {
-        return null;
-    }
+        inflater = LayoutInflater.from(context);
+        layoutID = itemLayoutId;
 
-    public long getItemId(int position) {
-        return 0;
-    }
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {  // インスタンスが生成されていない場合、作成
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
+        namelist = names;
+        emaillist = emails;
+        // bitmapの配列
+        photolist = new Bitmap[photos.length];
+        // drawableのIDからbitmapに変換
+        for( int i = 0; i< photos.length; i++){
+            photolist[i] = BitmapFactory.decodeResource(context.getResources(), photos[i]);
         }
 
-        imageView.setImageResource(mThumbIds[position]);
-        return imageView;
     }
-    private Integer[] mThumbIds = {
-            R.drawable.carender, R.drawable.itiran,
-            R.drawable.option, R.drawable.tenki,
 
-    };
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        ViewHolder holder;
+
+        if (convertView == null) {
+            convertView = inflater.inflate(layoutID, null);
+            holder = new ViewHolder();
+            holder.img = convertView.findViewById(R.id.img_item);
+            holder.text = convertView.findViewById(R.id.text_view);
+            holder.email = convertView.findViewById(R.id.text_mail);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.img.setImageBitmap(photolist[position]);
+        holder.text.setText(namelist[position]);
+
+        return convertView;
+    }
+
+    @Override
+    public int getCount() {
+        return namelist.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 }
