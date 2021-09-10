@@ -120,7 +120,7 @@ class tenki : AppCompatActivity() {//
             val degree=degreeJSONArray.getString("temp")
 
             val change = chandeg(degree)
-
+//
             val telop="現在の ${cityName} の天気"
             val desc="現在は ${weather} です。"
             val deg = "気温は ${change} 度です。"
