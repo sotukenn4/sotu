@@ -1,5 +1,8 @@
 package com.example.myapplication
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -31,8 +34,16 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
 
     }
+//天気Activityから戻った時に一覧画面に戻る
+    override fun onRestart() {
+        super.onRestart()
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 
 

@@ -36,7 +36,7 @@ class tenki : AppCompatActivity() {//
         setContentView(R.layout.activity_tenki)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.RED))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
         _list=createList()
         val lvCityList=findViewById<ListView>(R.id.lvCityList)
         val from= arrayOf("name")
