@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -46,7 +48,14 @@ class tenki : AppCompatActivity() {//
         lvCityList.onItemClickListener=ListItemClickListener()
 
     }
-
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+        return false
+    }
     private fun createList(): MutableList<MutableMap<String, String>> {
         var list:MutableList<MutableMap<String, String>> = mutableListOf()
         var city= mutableMapOf("name" to "愛知", "q" to "Aichi")

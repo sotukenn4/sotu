@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="#44a"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".SampleActivity"
+    android:gravity="center">
 
-    <ListView
-        android:id="@+id/listView"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="4dp"
+    <ImageView
+        android:id="@+id/storage_iv"
+        android:layout_width="401dp"
+        android:layout_height="506dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/storage_btn"
+        android:text="ストレージ"/>
+
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="完了" />
 
-</RelativeLayout>
+</LinearLayout>

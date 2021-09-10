@@ -4,10 +4,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -37,12 +39,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 //天気Activityから戻った時に一覧画面に戻る
-    override fun onRestart() {
+    /*override fun onRestart() {
         super.onRestart()
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
+    }*/
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+        val res = intent?.getStringExtra("E")
+        if (res != null) {
+            binding.imageView3.setImageURI(res.toUri())
+        }
     }
-
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 
 

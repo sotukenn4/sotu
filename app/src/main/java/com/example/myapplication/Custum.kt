@@ -8,16 +8,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.example.myapplication.databinding.ActivityMainBinding.inflate
 import com.example.myapplication.databinding.FragmentCustumBinding
+import com.example.myapplication.databinding.ListItemsBinding.inflate
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 //オプション画面のプログラム
 class Custum : Fragment() {
+    val EXTRA_MESSAGE
+            = "YourPackageName.MESSAGE"
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentCustumBinding?=null
     private val binding get()=_binding!!
+    private var _binding2: MainActivity?=null
+    private val binding2 get()=_binding2!!
     //配列
     var values = arrayOf(
         "",
@@ -67,8 +75,16 @@ class Custum : Fragment() {
         startActivity(intent)
     })
 */
+    binding.button.setOnClickListener(View.OnClickListener {
+        val intent = Intent(context, SampleActivity::class.java)
+        val requestCode = 1000
+        intent.putExtra(EXTRA_MESSAGE,"a");
+        startActivityForResult(intent, requestCode)
+    })
         return binding.root
     }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //保存データを取り出し、valuesに格納

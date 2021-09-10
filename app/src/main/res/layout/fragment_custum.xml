@@ -69,6 +69,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="削除" />
+
+            <TextView
+                android:id="@+id/spinnerOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="背景画像変更"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="変更" />
+
         </LinearLayout>
     </ScrollView>
 
