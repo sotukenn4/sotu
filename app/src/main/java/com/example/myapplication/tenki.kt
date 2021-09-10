@@ -135,6 +135,7 @@ class tenki : AppCompatActivity() {//
         }
     }
 
+    //
     private fun chandeg(degree: String ): String  {
         val x = degree
         val y = Math.round((x.toDouble()) * 10.0) / 10.0
