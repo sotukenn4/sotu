@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ConstraintLayout
     private var inputMethodManager: InputMethodManager? = null
-
     private var _list: MutableList<MutableMap<String,String>> =mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

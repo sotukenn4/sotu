@@ -7,107 +7,69 @@
     android:layout_height="match_parent"
     tools:context=".Custum">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginEnd="141dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/azisai"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/spinnerOption2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="よく使う行事削除"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnertext" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/spinnerOption3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="背景画像変更"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnertext2" />
+            <TextView
+                android:id="@+id/spinnerOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="よく使う行事追加"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/spinnertext"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="追加したい行事名"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/spinnerOption"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerOption" />
+            <EditText
+                android:id="@+id/spinnertext"
+                android:layout_width="240dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="追加したい行事名"
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/spinnertext2"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="削除したい行事名"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/spinnerOption"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerOption2" />
+            <Button
+                android:id="@+id/spinneradd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="追加" />
 
-    <TextView
-        android:id="@+id/spinnerOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="よく使う行事追加"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/spinnerOption2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="よく使う行事削除"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/spinneradd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="追加"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnertext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toEndOf="@+id/spinnertext"
-        app:layout_constraintTop_toTopOf="@+id/spinnertext"
-        app:layout_constraintVertical_bias="1.0" />
+            <EditText
+                android:id="@+id/spinnertext2"
+                android:layout_width="240dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="削除したい行事名"
+                android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/spinnerdelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="削除"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnertext2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toEndOf="@+id/spinnertext2"
-        app:layout_constraintTop_toTopOf="@+id/spinnertext2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="画像選択"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerOption3" />
+            <Button
+                android:id="@+id/spinnerdelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="削除" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
