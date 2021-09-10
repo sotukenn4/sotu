@@ -10,8 +10,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_first.*
+//import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.fragment_first.*
 
 
 class MainActivity : AppCompatActivity() {

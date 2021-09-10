@@ -102,7 +102,7 @@ class tamesi : Fragment() {
                     stream.close()
                 }
                 catch (ex: SocketTimeoutException){
-                    Log.w(tenki.DEBUG_TAG, "通信タイムアウト", ex)
+                  //  Log.w(tenki.DEBUG_TAG, "通信タイムアウト", ex)
                 }
                 it.disconnect()
             }
@@ -147,7 +147,7 @@ class tamesi : Fragment() {
             val item=_list.get(position)
             val q =item.get("q")
             q?.let {
-                val urlFull="${tenki.WEATHERINFO_URL}&q=$q&appid=${tenki.APP_ID}"
+                val urlFull="${WEATHERINFO_URL}&q=$q&appid=${APP_ID}"
                 receiveWeatherInfo(urlFull)
             }
         }

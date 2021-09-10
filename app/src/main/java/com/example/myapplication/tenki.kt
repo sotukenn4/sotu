@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -13,10 +12,6 @@ import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStream
@@ -29,7 +24,7 @@ import java.util.concurrent.Executors
 class tenki : AppCompatActivity() {//
     companion object{
         private const val DEBUG_TAG="AsyncSample"
-        private const val WEATHERINFO_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja"
+        private const val WEATHERINFO_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja&units=metric"
         private const val APP_ID="83311ce95b6808b861ddd5e178b11b87"
 
     }
@@ -53,14 +48,15 @@ class tenki : AppCompatActivity() {//
         var list:MutableList<MutableMap<String, String>> = mutableListOf()
         var city= mutableMapOf("name" to "愛知", "q" to "Aichi")
         list.add(city)
-        city= mutableMapOf("name" to "大阪", "q" to "Osaka")
+        city= mutableMapOf("name" to "三重", "q" to "Mie")
         list.add(city)
         city= mutableMapOf("name" to "岐阜", "q" to "Gifu")
         list.add(city)
+        city= mutableMapOf("name" to "名古屋", "q" to "Nagoya")
+        list.add(city)
         return list
-
-
     }
+
     private fun receiveWeatherInfo(urlFull: String){
         val handler= HandlerCompat.createAsync(mainLooper)
         val backgroundReceiver=WeatherInfoBackgroundReceiver(handler, urlFull)
@@ -117,13 +113,29 @@ class tenki : AppCompatActivity() {//
             val weatherJSONArray=rootJSON.getJSONArray("weather")
             val weatherJSON=weatherJSONArray.getJSONObject(0)
             val weather=weatherJSON.getString("description")
-            val telop="${cityName}の天気"
-            val desc="現在は${weather}です。\n緯度は${latitude}度で軽度は${longitude}です。"
+            val degreeJSONArray=rootJSON.getJSONObject("main")
+            val degree=degreeJSONArray.getString("temp")
+
+            val change = chandeg(degree)
+
+            val telop="現在の ${cityName} の天気"
+            val desc="現在は ${weather} です。"
+            val deg = "気温は ${change} 度です。"
+            // \n緯度は${latitude}度で軽度は${longitude}です。"
             val tvWeatherTelop=findViewById<TextView>(R.id.tvWeatherTelop)
             val tvWeatherDesc=findViewById<TextView>(R.id.tvWeatherDesc)
-            tvWeatherTelop.text=telop
-            tvWeatherDesc.text=desc
+
+            val tvWeatherDegree=findViewById<TextView>(R.id.tvWeatherdegree)
+            tvWeatherTelop.text = telop
+            tvWeatherDesc.text = desc
+            tvWeatherDegree.text = deg
         }
+    }
+
+    private fun chandeg(degree: String ): String  {
+        val x = degree
+        val y = Math.round((x.toDouble()) * 10.0) / 10.0
+        return y.toString()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:orientation="vertical">
 
         <TextView
@@ -55,7 +55,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="56dp" />
 
         <TextView
             android:id="@+id/tvWeatherdegree"
@@ -63,13 +63,14 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             android:textColor="#6a6a6a"
-            android:textSize="35dp" />
+            android:textSize="40dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_weight="0.01"
         android:orientation="horizontal">
 
         <TextView
@@ -96,16 +97,38 @@
             android:background="@drawable/layout_box_1"
             android:text="予報"
             />
+
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lvCityList"
-        android:layout_width="258dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.2"
-        android:alpha="0.8"
-        android:background="@drawable/layout_box_1"
-        android:padding="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/lvCityList"
+            android:layout_width="211dp"
+            android:layout_height="151dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.2"
+            android:alpha="0.5"
+            android:background="@drawable/layout_box_1"
+            android:padding="20dp">
+
+        </ListView>
+
+        <Space
+            android:layout_width="56dp"
+            android:layout_height="159dp"
+            android:layout_weight="0.2" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_add" />
+    </LinearLayout>
 
 </LinearLayout>
