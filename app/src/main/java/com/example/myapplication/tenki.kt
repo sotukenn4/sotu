@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -34,6 +36,7 @@ class tenki : AppCompatActivity() {//
         setContentView(R.layout.activity_tenki)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.RED))
         _list=createList()
         val lvCityList=findViewById<ListView>(R.id.lvCityList)
         val from= arrayOf("name")
