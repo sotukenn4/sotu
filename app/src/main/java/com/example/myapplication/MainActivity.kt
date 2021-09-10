@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent);
         val res: Int = intent.getIntExtra("EXTRA_DATA",0)
-        binding.textView3.text=res.toString()
         binding.imageView.setImageResource(R.drawable.hanabi)
     }
 
