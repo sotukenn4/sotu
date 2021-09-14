@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMainBinding.inflate
 import com.example.myapplication.databinding.FragmentCustumBinding
 import com.example.myapplication.databinding.ListItemsBinding.inflate
@@ -75,6 +77,7 @@ class Custum : Fragment() {
         startActivity(intent)
     })
 */
+
     binding.button.setOnClickListener(View.OnClickListener {
         val intent = Intent(context, SampleActivity::class.java)
         val requestCode = 1000

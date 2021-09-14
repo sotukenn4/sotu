@@ -23,6 +23,8 @@ class SampleActivity : AppCompatActivity() {
     private lateinit var storage_iv: ImageView
     private lateinit var storage_btn: Button
     private lateinit var binding: ActivityMainBinding
+    private var prog=1
+    private lateinit var Syasin:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
@@ -34,6 +36,33 @@ class SampleActivity : AppCompatActivity() {
         storage_btn.setOnClickListener {
             openGalleryForImage()
         }
+        button2.setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("E", Syasin);
+            intent.putExtra("progress", prog);
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+        seekBar2.progress = 10
+        seekBar2.max = 10
+        seekBar2.min = 0
+        seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            // 値が変更された時に呼ばれる
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                prog=progress
+            }
+
+            // つまみがタッチされた時に呼ばれる
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            // つまみが離された時に呼ばれる
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+        })
     }
 
     //ギャラリーを開くためのメソッド
@@ -54,10 +83,8 @@ class SampleActivity : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE){
                     //選択された写真にImageViewを変更
                     storage_iv.setImageURI(data?.data) // handle chosen image
-                    val intent = Intent()
-                    intent.putExtra("E", (data?.data).toString());
-                    setResult(RESULT_OK, intent)
-                    finish()
+                    Syasin=(data?.data).toString()
+
                 }
             }
         }

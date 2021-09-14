@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.inputmethod.InputMethodManager
@@ -15,6 +16,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+
 //import kotlinx.android.synthetic.main.activity_main.*
 //import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -47,9 +50,13 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
         val res = intent?.getStringExtra("E")
+        val progress1= (intent?.getIntExtra("progress",1))?.toDouble()
         if (res != null) {
             binding.imageView3.setImageURI(res.toUri())
         }
+    if (progress1!= null) {
+        binding.imageView3.setAlpha(progress1.toFloat())
+    }
     }
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 
