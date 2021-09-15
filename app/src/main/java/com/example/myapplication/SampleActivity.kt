@@ -23,7 +23,7 @@ class SampleActivity : AppCompatActivity() {
     private lateinit var storage_iv: ImageView
     private lateinit var storage_btn: Button
     private lateinit var binding: ActivityMainBinding
-    private var prog=1
+    private var prog=10
     private lateinit var Syasin:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
