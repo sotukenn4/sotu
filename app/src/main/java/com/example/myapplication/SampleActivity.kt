@@ -24,7 +24,7 @@ class SampleActivity : AppCompatActivity() {
     private lateinit var storage_btn: Button
     private lateinit var binding: ActivityMainBinding
     private var prog=10
-    private lateinit var Syasin:String
+    private var Syasin: String? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)

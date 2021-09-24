@@ -56,6 +56,11 @@ class tenki : AppCompatActivity() {//
         }
         return false
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+       finish()
+    }
     private fun createList(): MutableList<MutableMap<String, String>> {
         var list:MutableList<MutableMap<String, String>> = mutableListOf()
         var city= mutableMapOf("name" to "愛知", "q" to "Aichi")

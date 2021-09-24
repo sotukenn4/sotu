@@ -61,4 +61,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
+    <ImageView
+        android:id="@+id/weather"
+        android:layout_width="78dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/weather" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
