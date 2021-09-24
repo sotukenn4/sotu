@@ -2,12 +2,9 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Matrix
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
@@ -16,7 +13,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
@@ -63,39 +59,60 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
     }*/
+
+
 //Activityを離れて戻ってきた時に最初に行う処理
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
-    //ImageGroundに背景変更画面で保存した画像データを格納。データ型：String型
+    //ImageGroundに背景変更画面で保存した画像データを格納。何も格納されていなければnullを格納。データ型：String型
         val ImageGround = intent?.getStringExtra("E")
-    //Toumeidoに背景変更画面で保存した透明度を格納。データ型：Int型
+    //Toumeidoに背景変更画面で保存した透明度を格納。とくに指定がなければMAX10にする。データ型：Int型
         val Toumeido= (intent?.getIntExtra("progress",10))
     //透明度変更処理
-    if (Toumeido!= null) {
-        if(Toumeido==0) {
-            binding.imageView3.setAlpha(0)
-        }else  if(Toumeido==1) {binding.imageView3.setAlpha(25)
-        }else  if(Toumeido==2) {binding.imageView3.setAlpha(52)
-        }else  if(Toumeido==3) {binding.imageView3.setAlpha(77)
-        }else  if(Toumeido==4) {binding.imageView3.setAlpha(102)
-        }else  if(Toumeido==5) {binding.imageView3.setAlpha(127)
-        }else  if(Toumeido==6) {binding.imageView3.setAlpha(152)
-        }else  if(Toumeido==7) {binding.imageView3.setAlpha(177)
-        }else  if(Toumeido==8) {binding.imageView3.setAlpha(202)
-        }else  if(Toumeido==9) {binding.imageView3.setAlpha(227)
-        }else  if(Toumeido==10) {binding.imageView3.setAlpha(255)
-        }
-    }
+   ToumeidoChange(Toumeido)
     //背景画像変更処理。引数:ImageGround
         HaikeiChange(ImageGround)
     }
+
+
     //これなんだったけ？わすれたで暇なときに見るわ
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
+
+
     //背景画面変更メソッド
     fun HaikeiChange(imageBack: String?) {
         if (imageBack != null||imageBack!="null") {
             if (imageBack != null) {
                 binding.imageView3.setImageURI(imageBack.toUri())
+            }
+        }
+    }
+    //透明度変更メソッド
+    fun ToumeidoChange(toumei: Int?){
+        if (toumei!= null) {
+            //透明度０
+            if(toumei==0) {
+                binding.imageView3.setAlpha(0)
+                //透明度１
+            }else  if(toumei==1) {binding.imageView3.setAlpha(25)
+                //透明度２
+            }else  if(toumei==2) {binding.imageView3.setAlpha(52)
+                //透明度３
+            }else  if(toumei==3) {binding.imageView3.setAlpha(77)
+                //透明度４
+            }else  if(toumei==4) {binding.imageView3.setAlpha(102)
+                //透明度５
+            }else  if(toumei==5) {binding.imageView3.setAlpha(127)
+                //透明度６
+            }else  if(toumei==6) {binding.imageView3.setAlpha(152)
+                //透明度７
+            }else  if(toumei==7) {binding.imageView3.setAlpha(177)
+                //透明度８
+            }else  if(toumei==8) {binding.imageView3.setAlpha(202)
+                //透明度９
+            }else  if(toumei==9) {binding.imageView3.setAlpha(227)
+                //透明度１０
+            }else  if(toumei==10) {binding.imageView3.setAlpha(255)
             }
         }
     }

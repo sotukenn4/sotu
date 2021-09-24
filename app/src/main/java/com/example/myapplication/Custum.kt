@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,15 +9,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
-import androidx.core.net.toUri
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.databinding.ActivityMainBinding.inflate
 import com.example.myapplication.databinding.FragmentCustumBinding
-import com.example.myapplication.databinding.ListItemsBinding.inflate
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 //オプション画面のプログラム
@@ -28,25 +25,15 @@ class Custum : Fragment() {
     private val binding get()=_binding!!
     private var _binding2: MainActivity?=null
     private val binding2 get()=_binding2!!
-    //配列
-    var values = arrayOf(
-        "",
-        "旅行",
-        "面接",
-        "バイト",
-        "病院",
-        "学校"
-    )
-    val EXTRA_DATA = "com.example.myapplication"
-    val mThumbIds = intArrayOf( com.example.myapplication.R.drawable.hanabi,com.example.myapplication.R.drawable.asuka)
+    private var word:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
     //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
-        val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-        val stringItem = prefs2.getString(PrefKey, "")
+        val GetKey: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
+        val stringItem = GetKey.getString(PrefKey, "")
         return if (stringItem != null && stringItem.length != 0) {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
@@ -61,8 +48,8 @@ class Custum : Fragment() {
         if (buffer != null) {
             val buf = buffer.toString()
             stringItem = buf.substring(0, buf.length - 1)
-            val prefs1: SharedPreferences = requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-            val editor = prefs1.edit()
+            val SaveKey: SharedPreferences = requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
+            val editor = SaveKey.edit()
             editor.putString(PrefKey, stringItem).commit()
         }
     }
@@ -70,6 +57,20 @@ class Custum : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding= FragmentCustumBinding.inflate(inflater,container,false)
+    // OnItemSelectedListenerの実装
+    binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+        // 項目が選択された時に呼ばれる
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+           word = parent?.selectedItem as String
+
+        }
+
+        // 基本的には呼ばれないが、何らかの理由で選択されることなく項目が閉じられたら呼ばれる
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+
+        }
+    }
     /*
     binding.button2.setOnClickListener(View.OnClickListener {
         val intent = Intent(context, SampleActivity::class.java)
@@ -87,13 +88,24 @@ class Custum : Fragment() {
         return binding.root
     }
 
-
+fun spinnerset(data: Array<String>){
+    //spinnerに配列valuesの値をいれる。3行セット
+    val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, data)
+    adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
+    binding.spinner2.adapter = adapter
+}
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //保存データを取り出し、valuesに格納
-        var values = getArray("StringItem")
+        var data = getArray("StringItem")
         //予備の配列。0番目に空白
-        var value2 = arrayOf(" ")
+        var YobiHairetu = arrayOf(" ")
+       /* //spinnerに配列valuesの値をいれる。3行セット
+        val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, data)
+        adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
+        binding.spinner2.adapter = adapter*/
+        spinnerset(data)
+
         //追加ボタンが押された時のメソッド
         binding.spinneradd.setOnClickListener {
             //追加するのが、空白で何も書かれていない場合は追加しない
@@ -103,8 +115,8 @@ class Custum : Fragment() {
                 //check変数。0の時は重複なし。1の時は重複してる
                 var check = 0
                 //保存されているデータと照らし合わせて追加するデータがすでにないか確認する
-                for (i in 1..values.size - 1) {
-                    if (values[i].equals(binding.spinnertext.text.toString())) {
+                for (i in 1..data.size - 1) {
+                    if (data[i].equals(binding.spinnertext.text.toString())) {
                         //重複しているためcheckを1にする
                         check = 1
                         //画面下に黒いラベル表示
@@ -140,43 +152,45 @@ class Custum : Fragment() {
                 //重複がないとき
                 } else {
                     //重複がなかったときはそのままデータを追加する
-                    values += binding.spinnertext.text.toString()
+                    data += binding.spinnertext.text.toString()
                     //テキストの文字は空白に戻す
                     binding.spinnertext.setText("")
                     //追加されたデータを保存する
-                    saveArray(values, "StringItem");
+                    saveArray(data, "StringItem");
                     //画面下に黒いラベル表示
                     Snackbar.make(view, "指定の項目を追加しました", Snackbar.LENGTH_SHORT)
                             .setActionTextColor(Color.YELLOW)
                             .show()
+                    //spinner更新
+                    spinnerset(data)
                 }
             }
         }
         //削除ボタンが押された時の処理
         binding.spinnerdelete.setOnClickListener {
             //削除するのが、空白で何も書かれていない場合は処理しない
-            if (binding.spinnertext2.text.toString().equals("")) {
-                binding.spinnertext2.setError("行事名を入力してください")
+            if (word.equals(" ")||word==null) {
+                //binding.spinnerOption2.setError("行事名を入力してください")
             } else {
                 //削除するデータをのぞいたデータを予備の配列value2に格納する
-                for (i in 1..values.size - 1) {
-                    if (values[i].equals(binding.spinnertext2.text.toString())) {
+                for (i in 1..data.size - 1) {
+                    if (data[i].equals(word)) {
                         //削除データは格納しないから何も書かない
                     } else {
                         //予備の配列に格納
-                        value2 += values[i].toString()
+                        YobiHairetu += data[i].toString()
                     }
                 }
-                //テキストの文字は空白に戻す
-                binding.spinnertext2.setText("")
                 //予備の配列のデータを格納
-                values = value2
+                data = YobiHairetu
                 //データを保存する
-                saveArray(values, "StringItem")
+                saveArray(data, "StringItem")
                 //画面下に黒いラベル表示
                 Snackbar.make(view, "指定の項目の削除完了しました", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(Color.YELLOW)
                         .show()
+                //spinner更新
+                spinnerset(YobiHairetu)
 
             }
 

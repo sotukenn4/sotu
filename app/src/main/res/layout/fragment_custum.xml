@@ -30,6 +30,7 @@
                 android:layout_marginTop="16dp"
                 android:text="よく使う行事追加"
                 android:textColor="@color/black"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -46,6 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="追加" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/spinnerOption2"
@@ -55,22 +60,24 @@
                 android:layout_marginTop="32dp"
                 android:text="よく使う行事削除"
                 android:textColor="@color/black"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/spinnertext2"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="削除したい行事名"
-                android:inputType="textPersonName" />
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="254dp"
+                android:layout_height="49dp"
+                android:spinnerMode="dialog" />
 
             <Button
                 android:id="@+id/spinnerdelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="削除" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/spinnerOption3"
@@ -80,6 +87,7 @@
                 android:layout_marginTop="32dp"
                 android:text="背景画像変更・透明度"
                 android:textColor="@color/black"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <Button
@@ -87,6 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="変更" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
         </LinearLayout>
     </ScrollView>
