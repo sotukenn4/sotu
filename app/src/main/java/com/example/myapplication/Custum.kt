@@ -45,17 +45,15 @@ class Custum : Fragment() {
         for (item in array) {
             buffer.append("$item,")
         }
-        if (buffer != null) {
-            val buf = buffer.toString()
-            stringItem = buf.substring(0, buf.length - 1)
-            val SaveKey: SharedPreferences = requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
-            val editor = SaveKey.edit()
-            editor.putString(PrefKey, stringItem).commit()
-        }
+        val buf = buffer.toString()
+        stringItem = buf.substring(0, buf.length - 1)
+        val SaveKey: SharedPreferences = requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
+        val editor = SaveKey.edit()
+        editor.putString(PrefKey, stringItem).apply()
     }
 //Viewが作られたときに呼びだされる
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         _binding= FragmentCustumBinding.inflate(inflater,container,false)
     // OnItemSelectedListenerの実装
     binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

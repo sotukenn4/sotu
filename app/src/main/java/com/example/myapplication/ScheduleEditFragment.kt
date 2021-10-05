@@ -16,6 +16,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.databinding.ActivityMainBinding.inflate
 import com.example.myapplication.databinding.FragmentScheduleEditBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
@@ -82,7 +83,6 @@ class ScheduleEditFragment: Fragment() {
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
-
         return binding.root
     }
 

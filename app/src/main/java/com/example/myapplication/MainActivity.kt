@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     //予備の配列。0番目に空白
     var value2 = arrayOf(" ")
     var timer: Timer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -47,7 +49,11 @@ class MainActivity : AppCompatActivity() {
         /*binding.weather.setOnClickListener {
             val intent = Intent(applicationContext, tenki::class.java)
             startActivity(intent)
-        }*/
+        }*/// getSharedPreferencesメソッドでSharedPreferencesオブジェクトを取得
+
+
+        // getString()を呼び出して保存されている文字列を読み込む
+
 
     }
     //天気Activityから戻った時に一覧画面に戻る＊＊これをしないとtenki画面から戻ったときに下のツールバーがバグる。

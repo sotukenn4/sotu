@@ -4,10 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.provider.ContactsContract.Intents.Insert.DATA
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,6 +27,7 @@ class SampleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var prog=10
     private var Syasin: String? =null
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
