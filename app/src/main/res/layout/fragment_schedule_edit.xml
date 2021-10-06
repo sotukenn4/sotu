@@ -10,11 +10,12 @@
 
     <EditText
         android:id="@+id/titleEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/title_text"
         android:inputType="textPersonName"
@@ -25,10 +26,11 @@
 
     <EditText
         android:id="@+id/dateEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/date_text2"
         android:inputType="date"
@@ -38,10 +40,11 @@
 
     <EditText
         android:id="@+id/timeEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/time_text2"
         android:inputType="time"
@@ -50,56 +53,57 @@
 
     <EditText
         android:id="@+id/detailEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="377dp"
+        android:layout_height="216dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/frame_style"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/detail_text"
         android:inputType="textMultiLine"
         android:maxLines="8"
         android:minLines="2"
+        app:layout_constraintBottom_toTopOf="@+id/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEdit"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/datebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/日付選択"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/carender"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dateEdit"
-        app:layout_constraintTop_toTopOf="@+id/dateEdit" />
+        app:layout_constraintTop_toTopOf="@+id/dateEdit"/>
 
     <Button
         android:id="@+id/timeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/time"
         android:text="@string/時間選択"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/timeEdit"
-        app:layout_constraintTop_toTopOf="@+id/timeEdit"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/timeEdit" />
 
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="88dp"
         android:text="@string/保存"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailEdit"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner"
