@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.myapplication.databinding.ActivityMainBinding.inflate
 import com.example.myapplication.databinding.FragmentScheduleEditBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
@@ -102,10 +100,11 @@ class ScheduleEditFragment: Fragment() {
             //新規追加は特になし
         }
 //保存ボタンが押された時のメソッド
-        binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？",
+        binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？(日時が正しく入力されていないと現在の日時で保存されます)",
             "保存", {
-            //保存が押された時
+                //保存が押された時
                 saveSchedule(it)
+
             },
                 //キャンセルが押されたとき
             "キャンセル", {
