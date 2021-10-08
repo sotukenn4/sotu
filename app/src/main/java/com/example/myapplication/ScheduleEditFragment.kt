@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.R
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -102,6 +103,7 @@ class ScheduleEditFragment: Fragment() {
 //保存ボタンが押された時のメソッド
         binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？(日時が正しく入力されていないと現在の日時で保存されます)",
             "保存", {
+
                 //保存が押された時
                 saveSchedule(it)
 
@@ -155,52 +157,57 @@ class ScheduleEditFragment: Fragment() {
     }
     //保存ボタンが押されたときの処理
     private fun saveSchedule(view:View){
-        when (args.scheduleId){
-            //idが-1L、つまり新規で作成されてるなら
-            -1L -> {
-        realm.executeTransaction{db:Realm->
-            //新しいidを作り変数に格納
-            val maxId=db.where<Schedule>().max("id")
-            //idを更新しておく？一個上の処理で作ったidの次のidを次回から使えるようにするため
-            val nextId=(maxId?.toLong() ?:0L)+1L
-            //nextIdを保存しておく
-            val schedule=db.createObject<Schedule>(nextId)
-            //データ日付格納
-            val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
-            //日付保存
-            if (date != null) schedule.date = date
-            //タイトルを保存
-            schedule.title = binding.titleEdit.text.toString()
-            //詳細を保存
-            schedule.detil = binding.detailEdit.text.toString()
-        }
-                //saveArray(values,"StringItem")　多分これいらん
+        if(("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()!=null){
+            when (args.scheduleId){
+                //idが-1L、つまり新規で作成されてるなら
+                -1L -> {
+                    realm.executeTransaction{db:Realm->
+                        //新しいidを作り変数に格納
+                        val maxId=db.where<Schedule>().max("id")
+                        //idを更新しておく？一個上の処理で作ったidの次のidを次回から使えるようにするため
+                        val nextId=(maxId?.toLong() ?:0L)+1L
+                        //nextIdを保存しておく
+                        val schedule=db.createObject<Schedule>(nextId)
+                        //データ日付格納
+                        val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
+                        //日付保存
+                        if (date != null) schedule.date = date
+                        //タイトルを保存
+                        schedule.title = binding.titleEdit.text.toString()
+                        //詳細を保存
+                        schedule.detil = binding.detailEdit.text.toString()
+                    }
+                    //saveArray(values,"StringItem")　多分これいらん
+                    //画面下に黒いラベル表示
+                    Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
+                        .setAction("戻る") { findNavController().popBackStack() }
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+                    //idが-1L以外だった時。つまり更新目的で来た時
+                } else->{
+                //realm呼び出し
+                realm.executeTransaction { db: Realm ->
+                    //すでにあるidをいれる。更新だから
+                    val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
+                    //データ日付格納
+                    val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
+                    //日付保存
+                    if(date!=null) schedule?.date=date
+                    //タイトルを保存
+                    schedule?.title=binding.titleEdit.text.toString()
+                    //詳細を保存
+                    schedule?.detil=binding.detailEdit.text.toString()
+                }
                 //画面下に黒いラベル表示
-        Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-            .setAction("戻る") { findNavController().popBackStack() }
-            .setActionTextColor(Color.YELLOW)
-            .show()
-                //idが-1L以外だった時。つまり更新目的で来た時
-    } else->{
-            //realm呼び出し
-            realm.executeTransaction { db: Realm ->
-                //すでにあるidをいれる。更新だから
-                val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
-                //データ日付格納
-                val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
-                //日付保存
-                if(date!=null) schedule?.date=date
-                //タイトルを保存
-                schedule?.title=binding.titleEdit.text.toString()
-                //詳細を保存
-                schedule?.detil=binding.detailEdit.text.toString()
+                Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
+                    .setAction("戻る"){findNavController().popBackStack()}
+                    .setActionTextColor(Color.YELLOW)
+                    .show()
             }
-            //画面下に黒いラベル表示
-            Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
-                .setAction("戻る"){findNavController().popBackStack()}
-                .setActionTextColor(Color.YELLOW)
-                .show()
-        }}}
+            }
+        }
+
+    }
     //データ削除メソッド。この画面では削除はしないので、多分これもいらんわ。
     private fun deleteSchedule(view: View){
         realm.executeTransaction{ db: Realm->
@@ -230,6 +237,11 @@ class ScheduleEditFragment: Fragment() {
         }catch (e: IllegalArgumentException){
             return  null
         }catch (e: ParseException){
+            val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
+            builder.setTitle("エラー")
+            builder.setMessage("日付または時間の入力形式が違います。")
+            builder.setPositiveButton("確認", null)
+            builder.create().show()
             return null
         }
     }

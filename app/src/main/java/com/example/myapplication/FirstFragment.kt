@@ -1,21 +1,14 @@
 package com.example.myapplication
 
 import android.R
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentFirstBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
@@ -94,6 +87,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
             .setActionTextColor(Color.YELLOW)
             .show()
     }
+
 }
 
 

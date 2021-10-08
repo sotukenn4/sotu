@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data,true) {
     private var listener: ((Long?)->Unit)?=null
+    //現在の日付を取得する。下2行
+    val date= getCurrentDateTime()
+    val dateInString= date.toString("yyyy/MM/dd")
+
     fun setOnItemClickListener(listener:(Long?)->Unit){
         this.listener=listener
     }
@@ -33,7 +40,16 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
 
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
         val schedule:Schedule?=getItem(position)
+        //時間を省いたyyyy/MM/ddだけを格納
+        val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
+        //日付＋時間のデータを格納
         holder.date.text= DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)
+        //現在の日付と保存されているデータの比較
+        if(Hiduke==dateInString){
+            //現在の日付と保存されている日付が同じならbackgroundを赤にする
+            holder.date.setBackgroundColor(Color.RED)
+            holder.title.setBackgroundColor(Color.RED)
+        }
         holder.title.text=schedule?.title
         holder.itemView.setOnClickListener{
             listener?.invoke(schedule?.id)
@@ -43,7 +59,12 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     override fun getItemId(position: Int): Long {
         return getItem(position)?.id ?:0
     }
-
-
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter= SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
 
 }

@@ -14,6 +14,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -32,7 +34,6 @@ class MainActivity : AppCompatActivity() {
     //予備の配列。0番目に空白
     var value2 = arrayOf(" ")
     var timer: Timer? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+
+
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
     // にtenkiだけが画面変わるから違和感ある）
         /*binding.weather.setOnClickListener {
@@ -122,6 +125,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }
 
