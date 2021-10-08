@@ -18,7 +18,6 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     //現在の日付を取得する。下2行
     val date= getCurrentDateTime()
     val dateInString= date.toString("yyyy/MM/dd")
-
     fun setOnItemClickListener(listener:(Long?)->Unit){
         this.listener=listener
     }
@@ -39,6 +38,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     }
 
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
+        holder.date.setTextSize(20.0F)
+        holder.title.setTextSize(15.0F)
         val schedule:Schedule?=getItem(position)
         //時間を省いたyyyy/MM/ddだけを格納
         val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
@@ -50,7 +51,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
             holder.date.setBackgroundColor(Color.RED)
             holder.title.setBackgroundColor(Color.RED)
         }
-        holder.title.text=schedule?.title
+        holder.title.text=(schedule?.title)+":"+(schedule?.detil)
         holder.itemView.setOnClickListener{
             listener?.invoke(schedule?.id)
         }
