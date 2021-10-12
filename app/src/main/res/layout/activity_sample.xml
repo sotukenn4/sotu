@@ -18,6 +18,7 @@
         android:id="@+id/storage_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/layout_box_3"
         android:text="ストレージ" />
 
     <SeekBar

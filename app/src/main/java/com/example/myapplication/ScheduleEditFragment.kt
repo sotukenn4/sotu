@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.experimental.ExperimentalTypeInference
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -70,7 +72,13 @@ class ScheduleEditFragment: Fragment() {
         } else emptyArray()
     }
 
+    fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
 
+            return true
+        }
+        return false
+    }
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -86,6 +94,7 @@ class ScheduleEditFragment: Fragment() {
     }
 
 
+    @OptIn(ExperimentalTypeInference::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //更新ボタンが押されてこの画面に来た時
@@ -115,8 +124,11 @@ class ScheduleEditFragment: Fragment() {
                     .show()
             }
         )
+
             dialog.show(parentFragmentManager, "save_dialog")
         }
+
+
         //spinnerが押された時の処理
         binding.spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener{
@@ -154,7 +166,9 @@ class ScheduleEditFragment: Fragment() {
                 binding.timeEdit.setText(time)
             }.show(parentFragmentManager, "time_dialog")
         }
+
     }
+
     //保存ボタンが押されたときの処理
     private fun saveSchedule(view:View){
         if(("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()!=null){
@@ -222,6 +236,7 @@ class ScheduleEditFragment: Fragment() {
         findNavController()
     }
     //onDestroyViewとonDestoryはセットで書いておいて。意味はわからんけど
+    //10/08の時点では、これはこの画面離れた時におきる処理
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
@@ -237,6 +252,7 @@ class ScheduleEditFragment: Fragment() {
         }catch (e: IllegalArgumentException){
             return  null
         }catch (e: ParseException){
+            //日付形式が違う場合
             val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
             builder.setTitle("エラー")
             builder.setMessage("日付または時間の入力形式が違います。")

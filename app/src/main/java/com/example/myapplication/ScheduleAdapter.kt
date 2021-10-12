@@ -48,8 +48,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         //現在の日付と保存されているデータの比較
         if(Hiduke==dateInString){
             //現在の日付と保存されている日付が同じならbackgroundを赤にする
-            holder.date.setBackgroundColor(Color.RED)
-            holder.title.setBackgroundColor(Color.RED)
+            holder.date.setBackgroundColor(Color.CYAN)
+            holder.title.setBackgroundColor(Color.CYAN)
         }
         holder.title.text=(schedule?.title)+":"+(schedule?.detil)
         holder.itemView.setOnClickListener{

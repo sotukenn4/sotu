@@ -12,7 +12,7 @@
         android:title="予定追加" />
     <item
         android:id="@+id/SecondFragment"
-        android:icon="@drawable/carender"
+        android:icon="@drawable/carender2"
         android:orderInCategory="100"
         android:title="カレンダー"
         app:showAsAction="never" />

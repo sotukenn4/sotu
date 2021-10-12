@@ -68,36 +68,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
-        android:id="@+id/datebutton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/carender"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toEndOf="@+id/dateEdit"
-        app:layout_constraintTop_toTopOf="@+id/dateEdit"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/timeButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/time"
-        android:text="@string/時間選択"
-        app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toEndOf="@+id/timeEdit"
-        app:layout_constraintTop_toTopOf="@+id/timeEdit"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
+        android:background="@drawable/layout_box_3"
         android:text="@string/保存"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,22 +85,20 @@
         android:id="@+id/spinner"
         android:layout_width="108dp"
         android:layout_height="35dp"
-
-
         android:entries="@array/spi"
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="@+id/titleEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.972"
         app:layout_constraintStart_toEndOf="@+id/titleEdit"
         app:layout_constraintTop_toTopOf="@+id/titleEdit"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="日付"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -174,5 +147,27 @@
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
+
+    <ImageView
+        android:id="@+id/datebutton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/calender1"
+        app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
+        app:layout_constraintStart_toEndOf="@+id/dateEdit"
+        app:layout_constraintTop_toTopOf="@+id/dateEdit"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/timeButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/time1"
+        app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit"
+        app:layout_constraintTop_toTopOf="@+id/timeEdit"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
