@@ -23,7 +23,7 @@ class Custum : Fragment() {
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentCustumBinding?=null
     private val binding get()=_binding!!
-    private var _binding2: MainActivity?=null
+    private var _binding2: MainActivity<Any?>?=null
     private val binding2 get()=_binding2!!
     private var word:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +51,7 @@ class Custum : Fragment() {
         val editor = SaveKey.edit()
         editor.putString(PrefKey, stringItem).apply()
     }
+
 //Viewが作られたときに呼びだされる
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -69,6 +70,7 @@ class Custum : Fragment() {
 
         }
     }
+
     /*
     binding.button2.setOnClickListener(View.OnClickListener {
         val intent = Intent(context, SampleActivity::class.java)
@@ -94,6 +96,7 @@ fun spinnerset(data: Array<String>){
 }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //予備の配列。0番目に空白

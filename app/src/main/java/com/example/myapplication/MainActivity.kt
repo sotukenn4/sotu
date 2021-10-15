@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,17 +25,9 @@ import java.util.*
 //import kotlinx.android.synthetic.main.fragment_first.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity<T> : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: ConstraintLayout
-    private var inputMethodManager: InputMethodManager? = null
-    private var _list: MutableList<MutableMap<String,String>> =mutableListOf()
-    //private  lateinit var realm: Realm
-    //保存データを取り出し、valuesに格納
-    var values = arrayOf(" ")
-    //予備の配列。0番目に空白
-    var value2 = arrayOf(" ")
-    var timer: Timer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -45,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+
+        binding.fab.setOnClickListener { view ->
+            naviController.navigate(R.id.action_to_scheduleEditFragment)
+        }
 
 
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
@@ -59,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
     //天気Activityから戻った時に一覧画面に戻る＊＊これをしないとtenki画面から戻ったときに下のツールバーがバグる。
     //栗本君がFragment成功できればいらない。
     //しかし、これを実行させると背景画面から戻り時に指定した背景が反映されない。対処方は指定した背景画像保存して画面
@@ -83,10 +82,10 @@ class MainActivity : AppCompatActivity() {
         HaikeiChange(ImageGround)
     }
 
-
-    //これなんだったけ？わすれたで暇なときに見るわ
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
-
+    fun setFabVisible(visibility: Int){
+        binding.fab.visibility=visibility
+    }
 
     //背景画面変更メソッド
     fun HaikeiChange(imageBack: String?) {
@@ -125,6 +124,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
 
 }

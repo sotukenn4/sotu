@@ -34,6 +34,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
         //ここから4行でリストにデータをセットして表示する
         binding.list.layoutManager= LinearLayoutManager(context)
         //ralm、adapterの設定

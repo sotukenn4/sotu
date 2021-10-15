@@ -27,7 +27,6 @@ class SecondFragment : Fragment() {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
     }
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -35,9 +34,9 @@ class SecondFragment : Fragment() {
         _binding= FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
             timeInMillis=binding.calendarView.date
@@ -109,7 +108,6 @@ class SecondFragment : Fragment() {
         realm.close()
     }
     private fun deleteSchedule(view: View,it:Long){
-
         realm.executeTransaction{
             db:Realm->db.where<Schedule>().equalTo("id",it)
                 ?.findFirst()
@@ -118,7 +116,5 @@ class SecondFragment : Fragment() {
         Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
                 .setActionTextColor(Color.YELLOW)
                 .show()
-
-
     }
 }

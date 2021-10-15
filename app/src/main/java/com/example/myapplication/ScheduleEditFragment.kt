@@ -1,16 +1,13 @@
 package com.example.myapplication
-
 import android.R
+import android.R.menu
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -59,10 +56,12 @@ class ScheduleEditFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         realm = Realm.getDefaultInstance()
         //保存されている新しいデータにする
         values= getArray("StringItem")
     }
+
     //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
@@ -94,9 +93,10 @@ class ScheduleEditFragment: Fragment() {
     }
 
 
-    @OptIn(ExperimentalTypeInference::class)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //更新ボタンが押されてこの画面に来た時
         if(args.scheduleId !=-1L) {
             val schedule = realm.where<Schedule>()
@@ -158,12 +158,17 @@ class ScheduleEditFragment: Fragment() {
         binding.datebutton.setOnClickListener{
             DateDialog{ date->
                 binding.dateEdit.setText(date)
-
             }.show(parentFragmentManager, "date_dialog")}
-        //時間ボタン
+        //時間ボタン(開始)
         binding.timeButton.setOnClickListener{
             TimeDialog{ time->
                 binding.timeEdit.setText(time)
+            }.show(parentFragmentManager, "time_dialog")
+        }
+        //時間ボタン(終了)
+        binding.timeButton2.setOnClickListener{
+            TimeDialog{ time->
+                binding.timeEdit2.setText(time)
             }.show(parentFragmentManager, "time_dialog")
         }
 
@@ -222,19 +227,8 @@ class ScheduleEditFragment: Fragment() {
         }
 
     }
-    //データ削除メソッド。この画面では削除はしないので、多分これもいらんわ。
-    private fun deleteSchedule(view: View){
-        realm.executeTransaction{ db: Realm->
-            db.where<Schedule>().equalTo("id", args.scheduleId)
-                ?.findFirst()
-                ?.deleteFromRealm()
+   //データ削除メソッド消しました
 
-        }
-        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-            .setActionTextColor(Color.YELLOW)
-            .show()
-        findNavController()
-    }
     //onDestroyViewとonDestoryはセットで書いておいて。意味はわからんけど
     //10/08の時点では、これはこの画面離れた時におきる処理
     override fun onDestroyView() {

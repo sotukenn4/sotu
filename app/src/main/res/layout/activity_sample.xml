@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_box_3"
-        android:text="ストレージ" />
+        android:text="写真選択" />
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:text="完了" />
 

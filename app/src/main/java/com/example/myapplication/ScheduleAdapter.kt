@@ -28,7 +28,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         setHasStableIds(true)
     }
     class ViewHolder(cell: View): RecyclerView.ViewHolder(cell){
+        //日付専用テキスト作成
         val date: TextView =cell.findViewById(android.R.id.text1)
+        //タイトル専用テキスト作成
         val title: TextView =cell.findViewById(android.R.id.text2)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleAdapter.ViewHolder {
@@ -38,8 +40,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     }
 
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
-        holder.date.setTextSize(20.0F)
-        holder.title.setTextSize(15.0F)
+        holder.date.setTextSize(25.0F)
+        holder.title.setTextSize(20.0F)
         val schedule:Schedule?=getItem(position)
         //時間を省いたyyyy/MM/ddだけを格納
         val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)

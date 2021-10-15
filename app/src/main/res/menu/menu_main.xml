@@ -8,17 +8,15 @@
         android:title="一覧表示" />
     <item
         android:id="@+id/scheduleEditFragment"
-        android:icon="@drawable/ic_add"
+        android:icon="@drawable/scheduleadd"
         android:title="予定追加" />
     <item
         android:id="@+id/SecondFragment"
         android:icon="@drawable/carender2"
-        android:orderInCategory="100"
-        android:title="カレンダー"
-        app:showAsAction="never" />
+        android:title="カレンダー" />
     <item
         android:id="@+id/tenki"
-        android:icon="@drawable/tenki"
+        android:icon="@drawable/twnki"
         android:title="天気確認" />
     <item
         android:id="@+id/custum"
