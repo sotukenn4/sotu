@@ -45,8 +45,10 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         val schedule:Schedule?=getItem(position)
         //時間を省いたyyyy/MM/ddだけを格納
         val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
+
         //日付＋時間のデータを格納
-        holder.date.text= DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)
+        holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()+">"+(DateFormat.format("HH:mm",schedule?.date2))
+        //holder.date.setText(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date))
         //現在の日付と保存されているデータの比較
         if(Hiduke==dateInString){
             //現在の日付と保存されている日付が同じならbackgroundを赤にする

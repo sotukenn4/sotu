@@ -103,6 +103,7 @@ class ScheduleEditFragment: Fragment() {
                 .equalTo("id", args.scheduleId).findFirst()
             binding.dateEdit.setText(DateFormat.format("yyyy/MM/dd", schedule?.date))
             binding.timeEdit.setText(DateFormat.format("HH:mm", schedule?.date))
+            binding.timeEdit2.setText(DateFormat.format("HH:mm", schedule?.date2))
             binding.titleEdit.setText(schedule?.title)
             binding.detailEdit.setText(schedule?.detil)
 
@@ -191,6 +192,8 @@ class ScheduleEditFragment: Fragment() {
                         val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
                         //日付保存
                         if (date != null) schedule.date = date
+                        val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
+                        if (date2 != null) schedule.date2 = date2
                         //タイトルを保存
                         schedule.title = binding.titleEdit.text.toString()
                         //詳細を保存
@@ -212,6 +215,8 @@ class ScheduleEditFragment: Fragment() {
                     val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
                     //日付保存
                     if(date!=null) schedule?.date=date
+                    val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
+                    if (date2 != null) schedule?.date2 = date2
                     //タイトルを保存
                     schedule?.title=binding.titleEdit.text.toString()
                     //詳細を保存
@@ -247,11 +252,11 @@ class ScheduleEditFragment: Fragment() {
             return  null
         }catch (e: ParseException){
             //日付形式が違う場合
-            val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
+           /* val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
             builder.setTitle("エラー")
             builder.setMessage("日付または時間の入力形式が違います。")
             builder.setPositiveButton("確認", null)
-            builder.create().show()
+            builder.create().show()*/
             return null
         }
     }
