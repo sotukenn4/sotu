@@ -1,16 +1,16 @@
 package com.example.myapplication
 import android.R
-import android.R.menu
-import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_schedule_edit.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.experimental.ExperimentalTypeInference
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +43,7 @@ class ScheduleEditFragment: Fragment() {
     private lateinit var realm: Realm
     //これはよくわからん。
     private  val args: ScheduleEditFragmentArgs by navArgs()
+    //var check=0
     //配列定義
     var values = arrayOf(
         "",
@@ -54,12 +54,14 @@ class ScheduleEditFragment: Fragment() {
         "学校"
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         realm = Realm.getDefaultInstance()
         //保存されている新しいデータにする
         values= getArray("StringItem")
+
     }
 
     //保存してあるデータの取り出しメソッド
@@ -94,6 +96,7 @@ class ScheduleEditFragment: Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
@@ -103,7 +106,9 @@ class ScheduleEditFragment: Fragment() {
                 .equalTo("id", args.scheduleId).findFirst()
             binding.dateEdit.setText(DateFormat.format("yyyy/MM/dd", schedule?.date))
             binding.timeEdit.setText(DateFormat.format("HH:mm", schedule?.date))
-            binding.timeEdit2.setText(DateFormat.format("HH:mm", schedule?.date2))
+            if(schedule?.timeflg==0){
+                binding.timeEdit2.setText(DateFormat.format("HH:mm", schedule?.date2))
+            }
             binding.titleEdit.setText(schedule?.title)
             binding.detailEdit.setText(schedule?.detil)
 
@@ -176,7 +181,9 @@ class ScheduleEditFragment: Fragment() {
     }
 
     //保存ボタンが押されたときの処理
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveSchedule(view:View){
+        //check=0
         if(("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()!=null){
             when (args.scheduleId){
                 //idが-1L、つまり新規で作成されてるなら
@@ -193,18 +200,28 @@ class ScheduleEditFragment: Fragment() {
                         //日付保存
                         if (date != null) schedule.date = date
                         val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
-                        if (date2 != null) schedule.date2 = date2
+                        if (date2 != null) {
+                            schedule.date2 = date2
+                            schedule?.timeflg=0
+                        }else{
+                            schedule?.timeflg=1
+                        }
                         //タイトルを保存
                         schedule.title = binding.titleEdit.text.toString()
                         //詳細を保存
-                        schedule.detil = binding.detailEdit.text.toString()
+                            schedule.detil = binding.detailEdit.text.toString()
+
+
                     }
                     //saveArray(values,"StringItem")　多分これいらん
-                    //画面下に黒いラベル表示
-                    Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-                        .setAction("戻る") { findNavController().popBackStack() }
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
+                    //if(check==0){
+                        //画面下に黒いラベル表示
+                        Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
+                            .setAction("戻る") { findNavController().popBackStack() }
+                            .setActionTextColor(Color.YELLOW)
+                            .show()
+                   // }
+
                     //idが-1L以外だった時。つまり更新目的で来た時
                 } else->{
                 //realm呼び出し
@@ -216,17 +233,21 @@ class ScheduleEditFragment: Fragment() {
                     //日付保存
                     if(date!=null) schedule?.date=date
                     val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
-                    if (date2 != null) schedule?.date2 = date2
+                    if (date2 != null)
+                        schedule?.date2 = date2
                     //タイトルを保存
                     schedule?.title=binding.titleEdit.text.toString()
                     //詳細を保存
                     schedule?.detil=binding.detailEdit.text.toString()
                 }
-                //画面下に黒いラベル表示
-                Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
-                    .setAction("戻る"){findNavController().popBackStack()}
-                    .setActionTextColor(Color.YELLOW)
-                    .show()
+                //if(check==0){
+                    //画面下に黒いラベル表示
+                    Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
+                        .setAction("戻る"){findNavController().popBackStack()}
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+               // }
+
             }
             }
         }
@@ -244,6 +265,13 @@ class ScheduleEditFragment: Fragment() {
         super.onDestroy()
         realm.close()
     }
+    private fun  differenceDays(date1:Date, date2: Date): Int {
+       var datetime1 =date1.time
+        var datetime2 =date2.time
+        var one_date_time=1000*60*60*24
+        var da=(datetime1-datetime2)/one_date_time
+        return da.toInt()
+    }
     //日付取得
     private fun String.toDate(pattern: String = "yyyy/MM/ddHH:mm"): Date?{
         return try{
@@ -252,13 +280,29 @@ class ScheduleEditFragment: Fragment() {
             return  null
         }catch (e: ParseException){
             //日付形式が違う場合
-           /* val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
+            /*val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
             builder.setTitle("エラー")
             builder.setMessage("日付または時間の入力形式が違います。")
             builder.setPositiveButton("確認", null)
-            builder.create().show()*/
+            builder.create().show()
+            check=1*/
             return null
         }
     }
-
+    private fun String.toDate2(pattern: String = "yyyy/MM/dd"): Date?{
+        return try{
+            SimpleDateFormat(pattern).parse(this)
+        }catch (e: IllegalArgumentException){
+            return  null
+        }catch (e: ParseException){
+            //日付形式が違う場合
+            /*val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
+            builder.setTitle("エラー")
+            builder.setMessage("日付または時間の入力形式が違います。")
+            builder.setPositiveButton("確認", null)
+            builder.create().show()
+            check=1*/
+            return null
+        }
+    }
 }

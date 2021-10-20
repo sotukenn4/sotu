@@ -38,7 +38,7 @@ class MainActivity<T> : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
 
         binding.fab.setOnClickListener { view ->
             naviController.navigate(R.id.action_to_scheduleEditFragment)

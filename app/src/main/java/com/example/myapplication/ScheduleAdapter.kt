@@ -47,7 +47,12 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
 
         //日付＋時間のデータを格納
-        holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()+">"+(DateFormat.format("HH:mm",schedule?.date2))
+        if(schedule?.timeflg==0){
+            holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()+">"+(DateFormat.format("HH:mm",schedule?.date2))
+        }else{
+            holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()
+        }
+
         //holder.date.setText(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date))
         //現在の日付と保存されているデータの比較
         if(Hiduke==dateInString){
@@ -55,7 +60,9 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
             holder.date.setBackgroundColor(Color.CYAN)
             holder.title.setBackgroundColor(Color.CYAN)
         }
-        holder.title.text=(schedule?.title)+":"+(schedule?.detil)
+
+            holder.title.text=(schedule?.title)+"     "+(schedule?.detil)
+
         holder.itemView.setOnClickListener{
             listener?.invoke(schedule?.id)
         }

@@ -11,7 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="schedule_edit_text">スケジュール編集</string>
+    <string name="schedule_edit_text">予定編集</string>
     <string name="date_text">日付</string>
     <string name="time_text">時間</string>
     <string name="title_text">タイトル</string>
@@ -20,7 +20,7 @@
     <string name="時間選択">時間選択</string>
     <string name="保存">保存</string>
     <string name="削除">削除</string>
-    <string name="first">一覧表示</string>
+    <string name="first">予定一覧</string>
     <string name="caleder">カレンダー表示</string>
     <string name="test">てすと</string>
     <string name="previous3">カレンダー表示</string>
@@ -36,4 +36,5 @@
     <string name="spinnerad">祭り、入学式、成人式</string>
     <string name="title">タイトル</string>>
     <string name="description">pictures</string>
+    <string name="endtime">（任意）時間00:00</string>
 </resources>

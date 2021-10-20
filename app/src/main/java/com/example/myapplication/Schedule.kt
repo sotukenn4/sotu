@@ -17,4 +17,7 @@ open class Schedule : RealmObject() {
     var title: String=""
     //詳細
     var detil: String=""
+    //終了時間が入力されていれば0、なければ1
+    var timeflg =0
+
 }
