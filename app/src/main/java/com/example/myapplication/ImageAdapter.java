@@ -15,11 +15,11 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
-    private int layoutID;
-    private String[] namelist;
-    private String[] emaillist;
-    private Bitmap[] photolist;
+    private final LayoutInflater inflater;
+    private final int layoutID;
+    private final String[] namelist;
+    private final String[] emaillist;
+    private final Bitmap[] photolist;
 
     static class ViewHolder {
         TextView text;
