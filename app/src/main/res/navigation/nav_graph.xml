@@ -23,10 +23,10 @@
             app:argType="long"
             android:defaultValue="-1L" />
         <action
-            android:id="@+id/action_FirstFragment_to_tamesi2"
+            android:id="@+id/action_FirstFragment_to_tenki"
             app:destination="@id/tenki" />
         <action
-            android:id="@+id/action_FirstFragment_to_tenki"
+            android:id="@+id/action_FirstFragment_to_tamesi2"
             app:destination="@id/tenki" />
         <action
             android:id="@+id/action_FirstFragment_to_tenki2"
@@ -64,10 +64,14 @@
             android:id="@+id/action_scheduleEditFragment_to_custum"
             app:destination="@id/custum" />
     </fragment>
+
     <activity
         android:id="@+id/tenki"
         android:name="com.example.myapplication.tenki"
-        android:label="@string/tenki" />
+        android:label="@string/tenki"
+        tools:layout="@layout/activity_tenki" />
+
+
     <fragment
         android:id="@+id/custum"
         android:name="com.example.myapplication.Custum"

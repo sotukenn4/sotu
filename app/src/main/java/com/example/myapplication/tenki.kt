@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.fragment.app.Fragment
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_tenki.*
+import kotlinx.android.synthetic.main.activity_tenki.tvWeatherTelop
+import kotlinx.android.synthetic.main.fragment_tamesi.*
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStream
@@ -44,7 +47,7 @@ class tenki : AppCompatActivity() {
       setContentView(R.layout.activity_tenki)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
 
         _list=createList()
         val lvCityList=findViewById<ListView>(R.id.lvCityList)
@@ -291,6 +294,10 @@ class tenki : AppCompatActivity() {
 
     private inner class ListItemClickListener: AdapterView.OnItemClickListener{
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+            textList.visibility = View.INVISIBLE
+            textinv.visibility = View.INVISIBLE
+
             val item=_list.get(position)
             //val q =item.get("q")
             val name = item.get("name")

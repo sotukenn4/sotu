@@ -5,6 +5,7 @@
     android:id="@+id/linearLayoutroot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/DarkGray"
     android:orientation="vertical"
     tools:context=".tenki">
 
@@ -30,11 +31,11 @@
 
     <ImageView
         android:id="@+id/morning"
-        android:contentDescription="朝"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="朝"
         android:padding="5dp"
         android:src="@drawable/morning"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:text="-朝の気温-"
         android:gravity="center"
         android:textSize="25sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/textrain"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morning"
@@ -56,11 +59,11 @@
 
     <ImageView
         android:id="@+id/noon"
-        android:contentDescription="昼"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="昼"
         android:padding="5dp"
         android:src="@drawable/afternoon"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,18 +75,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:text="-昼の気温-"
         android:gravity="center"
         android:textSize="25sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/noon"
         app:layout_constraintTop_toBottomOf="@+id/morningtxt" />
 
     <ImageView
         android:id="@+id/evening"
-        android:contentDescription="夕"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="夕"
         android:padding="5dp"
         android:src="@drawable/evening"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,23 +100,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        android:text="-夕の気温-"
         android:gravity="center"
         android:textSize="25sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/evening"
         app:layout_constraintTop_toBottomOf="@+id/afternoontxt" />
 
     <ImageView
         android:id="@+id/nigth"
-        android:contentDescription="夜"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
+        android:contentDescription="夜"
         android:padding="5dp"
         android:src="@drawable/night"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/evening"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/evening" />
 
 
     <TextView
@@ -120,58 +126,91 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="22dp"
+        android:text="-夜の気温-"
         android:gravity="center"
         android:textSize="25sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/nigth"
         app:layout_constraintTop_toBottomOf="@+id/eveningtxt" />
 
-    <TextView
-        android:id="@+id/tvWeatherDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tableRow"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="314dp"
         android:layout_marginEnd="16dp"
-        android:textAlignment="center"
-        android:textColor="#6a6a6a"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:background="@drawable/layout_box_2"
+        android:alpha="0.8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nigth" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvWeatherdegree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:textAlignment="center"
-        android:textColor="#6a6a6a"
-        android:textSize="33sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWeatherDesc" />
+        <TextView
+            android:id="@+id/tvWeatherDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textinv"
+            android:layout_width="316dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="25dp"
+            android:alpha="0.9"
+            android:gravity="center"
+            android:text="-現在の天気と気温が            表示されます-"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWeatherdegree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvWeatherDesc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="460dp"
         android:layout_marginEnd="269dp"
-        android:background="@drawable/layout_box_3"
+        android:background="@drawable/layout_box_5"
         android:padding="10dp"
         android:text="位置リスト"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWeatherdegree" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/lvCityList"
@@ -181,8 +220,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="235dp"
         android:layout_marginBottom="34dp"
-        android:alpha="0.5"
-        android:background="@drawable/layout_box_1"
+        android:background="@drawable/layout_box_6"
+        android:alpha="0.8"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -209,9 +248,10 @@
         android:layout_height="33dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/layout_box_4"
         android:text="降水確率"
-
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -225,39 +265,27 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:textAlignment="center"
+        android:background="@drawable/layout_box_1"
+
         android:textSize="45sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textrain" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="140dp"
-        android:background="#00DAC5"
-
+    <TextView
+        android:id="@+id/textList"
+        android:layout_width="260dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="462dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="リストから位置を選択してください"
+        android:textAlignment="center"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/lvCityList"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="140dp"
-        android:background="#00DAC5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/lvCityList"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

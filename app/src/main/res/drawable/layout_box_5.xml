@@ -8,8 +8,5 @@
     <!-- 角の丸み -->
     <corners android:radius="6dp" />
 
-    <!-- 枠線 width:線の幅、color:線の色 -->
-    <stroke
-        android:width="5dp"
-        android:color="#57FFC6" />
+
 </shape>

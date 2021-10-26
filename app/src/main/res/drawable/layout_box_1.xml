@@ -2,13 +2,20 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 背景色 -->
-    <solid android:color="#ffffff" />
-
+    <gradient
+        android:startColor="#FFE2A5"
+        android:endColor="#4BF0FF"
+        android:angle="90"/>
+    <padding android:left="7dp"
+        android:top="7dp"
+        android:right="7dp"
+        android:bottom="7dp" />
+    <corners android:radius="8dp" />
     <!-- 角の丸み -->
-    <corners android:radius="6dp" />
+    <corners android:radius="100dp" />
 
     <!-- 枠線 width:線の幅、color:線の色 -->
     <stroke
         android:width="5dp"
-        android:color="#00DAC5" />
+        android:color="#FFC64C" />
 </shape>
