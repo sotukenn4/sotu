@@ -8,6 +8,12 @@
     tools:context=".SampleActivity"
     android:gravity="center">
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="写真を選択してください" />
+
     <ImageView
         android:id="@+id/storage_iv"
         android:layout_width="401dp"
@@ -17,9 +23,16 @@
     <Button
         android:id="@+id/storage_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:background="@drawable/layout_box_3"
-        android:text="写真選択" />
+        android:text="写真選択"
+        app:backgroundTint="@color/teal_200" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="透明度0~10段階" />
 
     <SeekBar
         android:id="@+id/seekBar2"
@@ -31,6 +44,7 @@
         android:id="@+id/button2"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
-        android:text="完了" />
+        android:text="完了"
+        app:backgroundTint="@color/teal_200" />
 
 </LinearLayout>

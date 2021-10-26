@@ -38,7 +38,7 @@ class MainActivity<T> : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+        //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.))
 
         binding.fab.setOnClickListener { view ->
             naviController.navigate(R.id.action_to_scheduleEditFragment)
@@ -95,7 +95,7 @@ class MainActivity<T> : AppCompatActivity() {
             }
         }
     }
-    //透明度変更メソッド
+    //透明度変更メソッド もっといいかきかたあるだろうなぁ
     fun ToumeidoChange(toumei: Int?){
         if (toumei!= null) {
             //透明度０
@@ -122,6 +122,7 @@ class MainActivity<T> : AppCompatActivity() {
                 //透明度１０
             }else  if(toumei==10) {binding.imageView3.setAlpha(255)
             }
+            //書くのめんどくさかった～
         }
     }
 

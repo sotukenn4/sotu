@@ -183,73 +183,89 @@ class ScheduleEditFragment: Fragment() {
     //保存ボタンが押されたときの処理
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveSchedule(view:View){
-        //check=0
+        //日付と時間の形式チェック　toDateメソッド
         if(("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()!=null){
-            when (args.scheduleId){
-                //idが-1L、つまり新規で作成されてるなら
-                -1L -> {
-                    realm.executeTransaction{db:Realm->
-                        //新しいidを作り変数に格納
-                        val maxId=db.where<Schedule>().max("id")
-                        //idを更新しておく？一個上の処理で作ったidの次のidを次回から使えるようにするため
-                        val nextId=(maxId?.toLong() ?:0L)+1L
-                        //nextIdを保存しておく
-                        val schedule=db.createObject<Schedule>(nextId)
-                        //データ日付格納
-                        val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
-                        //日付保存
-                        if (date != null) schedule.date = date
-                        val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
-                        if (date2 != null) {
-                            schedule.date2 = date2
-                            schedule?.timeflg=0
-                        }else{
-                            schedule?.timeflg=1
-                        }
-                        //タイトルを保存
-                        schedule.title = binding.titleEdit.text.toString()
-                        //詳細を保存
+            //タイトルチェック　何も入力されていないとエラー
+            if("${binding.titleEdit.text}"!=""){
+                when (args.scheduleId){
+                    //idが-1L、つまり新規で作成されてるなら
+                    -1L -> {
+                        realm.executeTransaction{db:Realm->
+                            //新しいidを作り変数に格納
+                            val maxId=db.where<Schedule>().max("id")
+                            //idを更新しておく？一個上の処理で作ったidの次のidを次回から使えるようにするため
+                            val nextId=(maxId?.toLong() ?:0L)+1L
+                            //nextIdを保存しておく
+                            val schedule=db.createObject<Schedule>(nextId)
+                            //データ日付格納
+                            val date="${binding.dateEdit.text} ${binding.timeEdit.text}".toDate()
+                            //日付保存
+                            if (date != null) schedule.date = date
+                            val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
+                            if (date2 != null) {
+                                schedule.date2 = date2
+                                schedule?.timeflg=0
+                            }else{
+                                schedule?.timeflg=1
+                            }
+                            //タイトルを保存
+                            schedule.title = binding.titleEdit.text.toString()
+                            //詳細を保存
                             schedule.detil = binding.detailEdit.text.toString()
 
 
-                    }
-                    //saveArray(values,"StringItem")　多分これいらん
-                    //if(check==0){
+                        }
+                        //saveArray(values,"StringItem")　多分これいらん
+                        //if(check==0){
                         //画面下に黒いラベル表示
                         Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
                             .setAction("戻る") { findNavController().popBackStack() }
                             .setActionTextColor(Color.YELLOW)
                             .show()
-                   // }
+                        // }
 
-                    //idが-1L以外だった時。つまり更新目的で来た時
-                } else->{
-                //realm呼び出し
-                realm.executeTransaction { db: Realm ->
-                    //すでにあるidをいれる。更新だから
-                    val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
-                    //データ日付格納
-                    val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
-                    //日付保存
-                    if(date!=null) schedule?.date=date
-                    val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
-                    if (date2 != null)
-                        schedule?.date2 = date2
-                    //タイトルを保存
-                    schedule?.title=binding.titleEdit.text.toString()
-                    //詳細を保存
-                    schedule?.detil=binding.detailEdit.text.toString()
-                }
-                //if(check==0){
+                        //idが-1L以外だった時。つまり更新目的で来た時
+                    } else->{
+                    //realm呼び出し
+                    realm.executeTransaction { db: Realm ->
+                        //すでにあるidをいれる。更新だから
+                        val schedule = db.where<Schedule>().equalTo("id", args.scheduleId).findFirst()
+                        //データ日付格納
+                        val date=("${binding.dateEdit.text}"+"${binding.timeEdit.text}").toDate()
+                        //日付保存
+                        if(date!=null) schedule?.date=date
+                        val date2=("${binding.dateEdit.text}"+"${binding.timeEdit2.text}").toDate()
+                        if (date2 != null)
+                            schedule?.date2 = date2
+                        //タイトルを保存
+                        schedule?.title=binding.titleEdit.text.toString()
+                        //詳細を保存
+                        schedule?.detil=binding.detailEdit.text.toString()
+                    }
+                    //if(check==0){
                     //画面下に黒いラベル表示
                     Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                         .setAction("戻る"){findNavController().popBackStack()}
                         .setActionTextColor(Color.YELLOW)
                         .show()
-               // }
+                    // }
 
+                    }
+                }
+
+            }else{
+                binding.textView4.setError("タイトルを入力してください")
             }
+        }else{
+            if("${binding.titleEdit.text}"==""){
+                binding.textView4.setError("タイトルを入力せてください")
+                binding.textView2.setError("日時エラー")
+                binding.textView3.setError("日時エラー")
+            }else{
+                binding.textView2.setError("日時エラー")
+                binding.textView3.setError("日時エラー")
             }
+
         }
 
     }
@@ -264,13 +280,6 @@ class ScheduleEditFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
-    }
-    private fun  differenceDays(date1:Date, date2: Date): Int {
-       var datetime1 =date1.time
-        var datetime2 =date2.time
-        var one_date_time=1000*60*60*24
-        var da=(datetime1-datetime2)/one_date_time
-        return da.toInt()
     }
     //日付取得
     private fun String.toDate(pattern: String = "yyyy/MM/ddHH:mm"): Date?{
@@ -289,20 +298,5 @@ class ScheduleEditFragment: Fragment() {
             return null
         }
     }
-    private fun String.toDate2(pattern: String = "yyyy/MM/dd"): Date?{
-        return try{
-            SimpleDateFormat(pattern).parse(this)
-        }catch (e: IllegalArgumentException){
-            return  null
-        }catch (e: ParseException){
-            //日付形式が違う場合
-            /*val builder: AlertDialog.Builder = AlertDialog.Builder(view?.context)
-            builder.setTitle("エラー")
-            builder.setMessage("日付または時間の入力形式が違います。")
-            builder.setPositiveButton("確認", null)
-            builder.create().show()
-            check=1*/
-            return null
-        }
-    }
+
 }
