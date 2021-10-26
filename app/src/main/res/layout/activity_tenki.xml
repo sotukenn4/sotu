@@ -5,7 +5,7 @@
     android:id="@+id/linearLayoutroot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkGray"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".tenki">
 
@@ -51,7 +51,6 @@
         android:text="-朝の気温-"
         android:gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/textrain"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morning"
@@ -78,7 +77,6 @@
         android:text="-昼の気温-"
         android:gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/noon"
         app:layout_constraintTop_toBottomOf="@+id/morningtxt" />
 
@@ -103,7 +101,6 @@
         android:text="-夕の気温-"
         android:gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/evening"
         app:layout_constraintTop_toBottomOf="@+id/afternoontxt" />
 
@@ -129,7 +126,6 @@
         android:text="-夜の気温-"
         android:gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/nigth"
         app:layout_constraintTop_toBottomOf="@+id/eveningtxt" />
 
