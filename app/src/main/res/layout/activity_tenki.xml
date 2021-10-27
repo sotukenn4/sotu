@@ -10,6 +10,7 @@
     tools:context=".tenki">
 
 
+
     <TextView
         android:id="@+id/tvWeatherTelop"
         android:layout_width="327dp"
