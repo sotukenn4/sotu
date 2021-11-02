@@ -1,23 +1,17 @@
 package com.example.myapplication
 
-import android.content.Context
+import android.R.attr
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.inputmethod.InputMethodManager
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.text.ParseException
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.fragment_custum.*
 import java.util.*
 
 
@@ -41,10 +35,9 @@ class MainActivity<T> : AppCompatActivity() {
         //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.))
 
         binding.fab.setOnClickListener { view ->
-            naviController.navigate(R.id.action_to_scheduleEditFragment)
+            naviController.navigate(R.id.action_FirstFragment_to_optionmenu)
         }
-
-
+       
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
     // にtenkiだけが画面変わるから違和感ある）
         /*binding.weather.setOnClickListener {
@@ -130,6 +123,8 @@ class MainActivity<T> : AppCompatActivity() {
 
 
 }
+
+
 
 
 

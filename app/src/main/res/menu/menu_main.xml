@@ -19,7 +19,7 @@
         android:icon="@drawable/twnki"
         android:title="天気確認" />
     <item
-        android:id="@+id/custum"
+        android:id="@+id/optionmenu"
         android:icon="@drawable/option"
         android:title="オプション" />
 </menu>

@@ -52,9 +52,9 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(layoutID, null);
             holder = new ViewHolder();
-            holder.img = convertView.findViewById(R.id.img_item);
+            /*holder.img = convertView.findViewById(R.id.img_item);
             holder.text = convertView.findViewById(R.id.text_view);
-            holder.email = convertView.findViewById(R.id.text_mail);
+            holder.email = convertView.findViewById(R.id.text_mail);*/
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

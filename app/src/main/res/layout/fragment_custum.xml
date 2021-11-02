@@ -23,17 +23,19 @@
 
     <EditText
         android:id="@+id/spinnertext"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
+        android:layout_width="177dp"
+        android:layout_height="53dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="追加したい行事名"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerOption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/spinnerOption"
         app:layout_constraintTop_toTopOf="@+id/spinnerOption"
-        app:layout_constraintVertical_bias="0.482" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <Button
         android:id="@+id/spinneradd"
@@ -74,14 +76,16 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="254dp"
-        android:layout_height="49dp"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerOption2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toEndOf="@+id/spinnerOption2"
         app:layout_constraintTop_toTopOf="@+id/spinnerOption2"
-        app:layout_constraintVertical_bias="0.392" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <Button
         android:id="@+id/spinnerdelete"

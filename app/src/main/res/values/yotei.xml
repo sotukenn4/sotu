@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spi">
-        <item></item>
-        <item>面接</item>
-        <item>旅行</item>
-        <item>学校</item>
-        <item>病院</item>
-        <item>バイト</item>
+        <item>一括処理行事追加　＞</item>
+        <item>一括処理行事削除　＞</item>
+        <item>背景画像・透明度変更(別画面)　＞</item>
     </string-array>
 </resources>

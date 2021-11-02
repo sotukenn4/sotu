@@ -6,17 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.provider.ContactsContract.Intents.Insert.DATA
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.myapplication.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_sample.*
-import kotlinx.android.synthetic.main.activity_tenki.*
-import java.util.*
 
 
 class SampleActivity : AppCompatActivity() {
@@ -24,31 +19,32 @@ class SampleActivity : AppCompatActivity() {
     private val RECORD_REQUEST_CODE = 1000
     private lateinit var storage_iv: ImageView
     private lateinit var storage_btn: Button
-    private lateinit var binding: ActivityMainBinding
     private var prog=10
     private var Syasin: String? =null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        val intent = intent
-        storage_iv = findViewById<ImageView>(R.id.storage_iv)
-        storage_btn = findViewById<Button>(R.id.storage_btn)
+        storage_iv = findViewById(R.id.storage_iv)
+        storage_btn = findViewById(R.id.storage_btn)
         setupPermissions()
+
         //EditTextのクリックイベントを設定
         storage_btn.setOnClickListener {
             openGalleryForImage()
         }
         button2.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("E", Syasin);
-            intent.putExtra("progress", prog);
+            intent.putExtra("E", Syasin)
+            intent.putExtra("progress", prog)
             setResult(RESULT_OK, intent)
             finish()
         }
+
         seekBar2.progress = 10
         seekBar2.max = 10
-        seekBar2.min = 0
+        //seekBar2.min = 0
+
         seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             // 値が変更された時に呼ばれる

@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEdit"
+        app:layout_constraintVertical_bias="0.069" />
 
     <View
         android:id="@+id/view6"
@@ -43,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <View
         android:id="@+id/view8"
@@ -54,70 +55,94 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeEdit2" />
+        app:layout_constraintTop_toBottomOf="@+id/timeEdit2"
+        app:layout_constraintVertical_bias="0.145" />
 
     <EditText
         android:id="@+id/titleEdit"
-        android:layout_width="295dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="229dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="タイトル１"
         android:inputType="textPersonName"
         android:shadowColor="@color/black"
+        android:textAlignment="viewStart"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/titleEdit2"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/frame_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:shadowColor="@color/black"
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/titleEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/dateEdit"
-        android:layout_width="295dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="229dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/date_text3"
         android:inputType="date"
         android:shadowColor="@color/black"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="@+id/titleEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.626"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
 
     <EditText
         android:id="@+id/timeEdit"
-        android:layout_width="295dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="229dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/time_text2"
         android:inputType="time"
         android:shadowColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/dateEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/dateEdit" />
 
     <EditText
         android:id="@+id/timeEdit2"
-        android:layout_width="295dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="229dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/endtime"
         android:inputType="time"
         android:shadowColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/timeEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toEndOf="@+id/finishText"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit" />
 
     <EditText
         android:id="@+id/detailEdit"
-        android:layout_width="379dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="297dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:gravity="start|top"
@@ -127,91 +152,53 @@
         android:minLines="2"
         android:shadowColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/view8" />
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="258dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout_box_3"
-        android:text="@string/保存"
-        android:textSize="20sp"
-        app:backgroundTint="@color/teal_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailEdit" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="38dp"
-        android:layout_height="35dp"
-        android:background="@color/DarkGray"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/spinner" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="41dp"
-        android:layout_height="39dp"
-        android:background="@drawable/founder"
-        android:entries="@array/spi"
-        android:spinnerMode="dialog"
-        app:layout_constraintBottom_toBottomOf="@+id/titleEdit"
-        app:layout_constraintEnd_toEndOf="@+id/titleEdit"
-        app:layout_constraintHorizontal_bias="0.966"
-        app:layout_constraintStart_toStartOf="@+id/titleEdit"
-        app:layout_constraintTop_toTopOf="@+id/titleEdit"
-        app:layout_constraintVertical_bias="0.636" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="16dp"
         android:text="日付"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/view6"
+        app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dateEdit"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="開始時間"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timeEdit"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
         android:id="@+id/finishText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="終了時間"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timeEdit2"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="0.47" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="タイトル"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -224,7 +211,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:text="詳細"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -251,6 +238,8 @@
         android:foreground="@drawable/time6"
         app:backgroundTint="@color/DarkGray"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
+        app:layout_constraintEnd_toEndOf="@+id/timeEdit"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/datebutton"
         app:layout_constraintTop_toTopOf="@+id/timeEdit"
         app:layout_constraintVertical_bias="1.0" />
@@ -262,9 +251,33 @@
         android:foreground="@drawable/time6"
         app:backgroundTint="@color/DarkGray"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit2"
+        app:layout_constraintEnd_toEndOf="@+id/timeEdit2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/timeButton"
         app:layout_constraintTop_toTopOf="@+id/timeEdit2"
-        app:layout_constraintVertical_bias="1.0" /><![CDATA[
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/calender1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailEdit" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="163dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/titleEdit2"
+        app:layout_constraintEnd_toEndOf="@+id/titleEdit2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/titleEdit2"
+        app:layout_constraintTop_toTopOf="@+id/titleEdit2"
+        app:layout_constraintVertical_bias="0.0" /><![CDATA[
 
 
 

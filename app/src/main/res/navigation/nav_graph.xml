@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_tamesi"
             app:destination="@id/tenki" />
+        <action
+            android:id="@+id/action_FirstFragment_to_optionmenu"
+            app:destination="@id/optionmenu" />
+        <action
+            android:id="@+id/action_FirstFragment_to_addoption"
+            app:destination="@id/addoption" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -62,7 +68,7 @@
             app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_scheduleEditFragment_to_custum"
-            app:destination="@id/custum" />
+            app:destination="@id/optionmenu" />
     </fragment>
 
     <activity
@@ -73,7 +79,7 @@
 
 
     <fragment
-        android:id="@+id/custum"
+        android:id="@+id/optionmenu"
         android:name="com.example.myapplication.Custum"
         android:label="@string/Option"
         tools:layout="@layout/fragment_custum" >
@@ -86,4 +92,28 @@
         android:name="com.example.myapplication.SampleActivity"
         android:label="activity_sample"
         tools:layout="@layout/activity_sample" />
+    <fragment
+        android:id="@+id/optionmenu"
+        android:name="com.example.myapplication.optionmenu"
+        android:label="設定">
+        <action
+            android:id="@+id/action_optionmenu_to_addoptio"
+            app:destination="@id/addoption" />
+        <action
+            android:id="@+id/action_optionmenu_to_deleteOption"
+            app:destination="@id/deleteOption" />
+        <action
+            android:id="@+id/action_optionmenu_to_sampleActivity"
+            app:destination="@id/sampleActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/addoption"
+        android:name="com.example.myapplication.addoption"
+        android:label="fragment_addoption"
+        tools:layout="@layout/fragment_addoption" />
+    <fragment
+        android:id="@+id/deleteOption"
+        android:name="com.example.myapplication.DeleteOption"
+        android:label="fragment_delete_option"
+        tools:layout="@layout/fragment_delete_option" />
 </navigation>

@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/storage_iv"
-        android:layout_width="401dp"
-        android:layout_height="458dp"
+        android:layout_width="393dp"
+        android:layout_height="362dp"
         android:background="@drawable/frame_style" />
 
     <Button
