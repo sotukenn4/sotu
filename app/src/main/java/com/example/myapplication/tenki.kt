@@ -47,7 +47,8 @@ class tenki : AppCompatActivity() {
       setContentView(R.layout.activity_tenki)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+
+
 
         _list=createList()
         val lvCityList=findViewById<ListView>(R.id.lvCityList)
@@ -96,12 +97,15 @@ class tenki : AppCompatActivity() {
         executeService.submit(backgroundReceiver)
     }
 
+    /*
     private fun receiveWeatherInfo(urlFull: String){
         val handler= HandlerCompat.createAsync(mainLooper)
         val backgroundReceiver=WeatherInfoBackgroundReceiver(handler, urlFull)
         val executeService= Executors.newSingleThreadExecutor()
         executeService.submit(backgroundReceiver)
     }
+    */
+
     //非同期とurl解析
     private inner class WeatherInfoBackgroundReceiver(handler: Handler, url: String): Runnable {
         private val  _handler=handler
