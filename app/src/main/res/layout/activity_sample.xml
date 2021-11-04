@@ -16,9 +16,8 @@
 
     <ImageView
         android:id="@+id/storage_iv"
-        android:layout_width="393dp"
-        android:layout_height="362dp"
-        android:background="@drawable/frame_style" />
+        android:layout_width="343dp"
+        android:layout_height="338dp" />
 
     <Button
         android:id="@+id/storage_btn"
@@ -32,7 +31,7 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="透明度0~10段階" />
+        android:text="透明度0...10段階(透明度5推奨)" />
 
     <SeekBar
         android:id="@+id/seekBar2"

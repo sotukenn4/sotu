@@ -38,4 +38,17 @@
     <string name="description">pictures</string>
     <string name="endtime">（任意）時間00:00</string>
     <string name="date_text3">形式 0000/00/00</string>
+    <string name="deletetitle">よく使う行事削除</string>
+    <string name="addoption">よく使う行事追加</string>
+    <string name="title1">　タイトル1</string>
+    <string name="titletext">" タイトル1"</string>
+    <string name="ti">" タイトル1"</string>
+    <string name="keisiki">　形式 ○○○○/○○/○○</string>
+    <string name="ke">" ○○○○/○○/○○"</string>
+    <string name="ki">　○○○○/○○/○○</string>
+    <string name="time2">　○○:○○</string>
+    <string name="textchange">テキストカラー変更</string>
+    <string name="deletelabel">行事削除</string>
+    <string name="addlabel">行事追加</string>
+    <string name="Baip">バイプレーションON/OFF</string>
 </resources>

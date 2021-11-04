@@ -4,5 +4,9 @@
         <item>一括処理行事追加　＞</item>
         <item>一括処理行事削除　＞</item>
         <item>背景画像・透明度変更(別画面)　＞</item>
+        <item>バイプレーションON/OFF　＞</item>
+        <item>テキストカラー変更　＞</item>
+        <item>制作協力サイト等　＞</item>
     </string-array>
+
 </resources>

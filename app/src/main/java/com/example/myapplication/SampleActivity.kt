@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +21,7 @@ class SampleActivity : AppCompatActivity() {
     private val RECORD_REQUEST_CODE = 1000
     private lateinit var storage_iv: ImageView
     private lateinit var storage_btn: Button
-    private var prog=10
+    private var prog=5
     private var Syasin: String? =null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,7 @@ class SampleActivity : AppCompatActivity() {
             finish()
         }
 
-        seekBar2.progress = 10
+        seekBar2.progress = 5
         seekBar2.max = 10
         //seekBar2.min = 0
 
@@ -72,7 +74,19 @@ class SampleActivity : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_GALLERY_TAKE)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.itembar,menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_delete ->
+                finish()
+
+        }
+        return true
+    }
     // onActivityResultにイメージ設定
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

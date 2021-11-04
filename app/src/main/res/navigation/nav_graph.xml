@@ -37,9 +37,6 @@
         <action
             android:id="@+id/action_FirstFragment_to_optionmenu"
             app:destination="@id/optionmenu" />
-        <action
-            android:id="@+id/action_FirstFragment_to_addoption"
-            app:destination="@id/addoption" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -66,9 +63,6 @@
         <action
             android:id="@+id/action_scheduleEditFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
-        <action
-            android:id="@+id/action_scheduleEditFragment_to_custum"
-            app:destination="@id/optionmenu" />
     </fragment>
 
     <activity
@@ -78,15 +72,6 @@
         tools:layout="@layout/activity_tenki" />
 
 
-    <fragment
-        android:id="@+id/optionmenu"
-        android:name="com.example.myapplication.Custum"
-        android:label="@string/Option"
-        tools:layout="@layout/fragment_custum" >
-        <action
-            android:id="@+id/action_custum_to_sampleActivity"
-            app:destination="@id/sampleActivity" />
-    </fragment>
     <activity
         android:id="@+id/sampleActivity"
         android:name="com.example.myapplication.SampleActivity"
@@ -105,15 +90,34 @@
         <action
             android:id="@+id/action_optionmenu_to_sampleActivity"
             app:destination="@id/sampleActivity" />
+        <action
+            android:id="@+id/action_optionmenu_to_textColorChange"
+            app:destination="@id/textColorChange" />
+        <action
+            android:id="@+id/action_optionmenu_to_scheduleEditFragment"
+            app:destination="@id/scheduleEditFragment" />
+        <action
+            android:id="@+id/action_optionmenu_to_baipretion"
+            app:destination="@id/baipretion" />
     </fragment>
     <fragment
         android:id="@+id/addoption"
         android:name="com.example.myapplication.addoption"
-        android:label="fragment_addoption"
+        android:label="@string/addlabel"
         tools:layout="@layout/fragment_addoption" />
     <fragment
         android:id="@+id/deleteOption"
         android:name="com.example.myapplication.DeleteOption"
-        android:label="fragment_delete_option"
+        android:label="@string/deletelabel"
         tools:layout="@layout/fragment_delete_option" />
+    <fragment
+        android:id="@+id/textColorChange"
+        android:name="com.example.myapplication.TextColorChange"
+        android:label="@string/textchange"
+        tools:layout="@layout/fragment_text_color_change" />
+    <fragment
+        android:id="@+id/baipretion"
+        android:name="com.example.myapplication.Baipretion"
+        android:label="fragment_baipretion"
+        tools:layout="@layout/fragment_baipretion" />
 </navigation>

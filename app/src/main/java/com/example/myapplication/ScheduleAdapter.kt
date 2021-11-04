@@ -1,14 +1,22 @@
 package com.example.myapplication
 
+import android.content.ContentProvider
+import android.content.Context
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
+import org.bson.json.JsonWriter
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +26,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     //現在の日付を取得する。下2行
     val date= getCurrentDateTime()
     val dateInString= date.toString("yyyy/MM/dd")
+    private var file: File? = null
+
     fun setOnItemClickListener(listener:(Long?)->Unit){
         this.listener=listener
     }
@@ -32,14 +42,28 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         val date: TextView =cell.findViewById(android.R.id.text1)
         //タイトル専用テキスト作成
         val title: TextView =cell.findViewById(android.R.id.text2)
+
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleAdapter.ViewHolder {
         val inflater= LayoutInflater.from(parent.context)
         val view=inflater.inflate(android.R.layout.simple_list_item_2,parent,false)
+
         return ViewHolder(view)
     }
+    // ファイルを読み出し
+    fun readFile(): String? {
+        var text: String? = null
 
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
+    }
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
+
         holder.date.setTextSize(20.0F)
         holder.title.setTextSize(15.0F)
         val schedule:Schedule?=getItem(position)
@@ -66,6 +90,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         holder.itemView.setOnClickListener{
             listener?.invoke(schedule?.id)
         }
+
     }
 
     override fun getItemId(position: Int): Long {
@@ -78,5 +103,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
+
+
+
 
 }

@@ -1,15 +1,19 @@
 package com.example.myapplication
+
 import android.R
 import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
 import android.text.format.DateFormat
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,6 +24,10 @@ import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_schedule_edit.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,10 +47,13 @@ class ScheduleEditFragment: Fragment() {
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentScheduleEditBinding?=null
     private val binding get()=_binding!!
+    private var file: File? = null
+    val v = null
     //realm（保存のデータベース？みたいなもの）
     private lateinit var realm: Realm
     //これはよくわからん。
     private  val args: ScheduleEditFragmentArgs by navArgs()
+
     //var check=0
     //配列定義
     var values = arrayOf(
@@ -61,9 +72,35 @@ class ScheduleEditFragment: Fragment() {
         realm = Realm.getDefaultInstance()
         //保存されている新しいデータにする
         values= getArray("StringItem")
+        setHasOptionsMenu(true)
 
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater){
+        inflater.inflate(com.example.myapplication.R.menu.save,menu)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val v = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
+        v.vibrate(100)
+        when(item.itemId){
+            com.example.myapplication.R.id.menu_save ->
+                savemethod()
 
+        }
+        return true
+    }
+    // ファイルを読み出し
+    fun readFile(): String? {
+        var text: String? = null
+
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
+    }
     //保存してあるデータの取り出しメソッド
     private fun getArray(PrefKey: String): Array<String> {
         val prefs2: SharedPreferences =  requireActivity().getSharedPreferences("Array", Context.MODE_PRIVATE)
@@ -84,13 +121,24 @@ class ScheduleEditFragment: Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        val v = requireActivity().getSystemService(VIBRATOR_SERVICE) as Vibrator
+        v.vibrate(100)
         _binding= FragmentScheduleEditBinding.inflate(inflater, container, false)
+        val fileName = "TestFile.txt"
+        file = File(requireContext().filesDir, fileName)
+        val str: String? = readFile()
+        binding.textView2.setTextColor(Color.parseColor(str))
+        binding.textView3.setTextColor(Color.parseColor(str))
+        binding.textView4.setTextColor(Color.parseColor(str))
+        binding.textView5.setTextColor(Color.parseColor(str))
+        binding.finishText.setTextColor(Color.parseColor(str))
         //保存されている新しいデータにする
         values= getArray("StringItem")
         //spinnerに配列valuesの値をいれる。3行セット
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
+
         return binding.root
     }
 
@@ -100,6 +148,7 @@ class ScheduleEditFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+
         //更新ボタンが押されてこの画面に来た時
         if(args.scheduleId !=-1L) {
             val schedule = realm.where<Schedule>()
@@ -116,23 +165,7 @@ class ScheduleEditFragment: Fragment() {
             //新規追加は特になし
         }
 //保存ボタンが押された時のメソッド
-        binding.save.setOnClickListener{val dialog=ConfirmDialog("保存しますか？(日時が正しく入力されていないと現在の日時で保存されます)",
-            "保存", {
 
-                //保存が押された時
-                saveSchedule(it)
-
-            },
-                //キャンセルが押されたとき
-            "キャンセル", {
-            //画面下に黒いラベル表示
-                Snackbar.make(it, "キャンセルしました", Snackbar.LENGTH_SHORT)
-                    .show()
-            }
-        )
-
-            dialog.show(parentFragmentManager, "save_dialog")
-        }
 
 
         //spinnerが押された時の処理
@@ -179,7 +212,21 @@ class ScheduleEditFragment: Fragment() {
         }
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun savemethod(){
+        val dialog=ConfirmDialog("保存しますか？(日時が正しく入力されていないと現在の日時で保存されます)",
+            "保存", {
+                //保存が押された時
+                view?.let { saveSchedule(it) }
+            },
+            //キャンセルが押されたとき
+            "キャンセル", {
 
+            }
+        )
+
+        dialog.show(parentFragmentManager, "save_dialog")
+    }
     //保存ボタンが押されたときの処理
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveSchedule(view:View){
@@ -269,8 +316,6 @@ class ScheduleEditFragment: Fragment() {
         }
 
     }
-   //データ削除メソッド消しました
-
     //onDestroyViewとonDestoryはセットで書いておいて。意味はわからんけど
     //10/08の時点では、これはこの画面離れた時におきる処理
     override fun onDestroyView() {

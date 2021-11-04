@@ -1,9 +1,16 @@
 package com.example.myapplication
 
 import android.R.attr
+import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.VibrationEffect.DEFAULT_AMPLITUDE
+import android.os.Vibrator
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
@@ -12,7 +19,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_custum.*
+import org.bson.json.JsonWriter
 import java.util.*
+
 
 
 //import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +31,7 @@ import java.util.*
 class MainActivity<T> : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -35,7 +45,8 @@ class MainActivity<T> : AppCompatActivity() {
         //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.))
 
         binding.fab.setOnClickListener { view ->
-            naviController.navigate(R.id.action_FirstFragment_to_optionmenu)
+            naviController.navigate(R.id.action_to_scheduleEditFragment)
+
         }
        
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時

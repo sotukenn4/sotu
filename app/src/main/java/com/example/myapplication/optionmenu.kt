@@ -1,7 +1,9 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Vibrator
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.LayoutInflater
 import android.view.View
@@ -24,29 +26,39 @@ class optionmenu : Fragment() {
     }
     private inner class ListItemClickListener : AdapterView.OnItemClickListener {
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            val item = parent?.getItemAtPosition(position) as String
-           if(item.equals("一括処理行事追加　＞")){
+           if(position==0){
                val action=
                    optionmenuDirections.actionOptionmenuToAddoptio()
                findNavController().navigate(action)
-           }else if(item.equals("一括処理行事削除　＞")){
+           }else if(position==1){
                val action=
                    optionmenuDirections.actionOptionmenuToDeleteOption()
                findNavController().navigate(action)
-           }else if(item.equals("背景画像・透明度変更(別画面)　＞")){
+           }else if(position==2){
                val intent = Intent(context, SampleActivity::class.java)
                val requestCode = 1000
                intent.putExtra(EXTRA_MESSAGE, "a");
                startActivityForResult(intent, requestCode)
+           }else if(position==3){
+               val action=
+                   optionmenuDirections.actionOptionmenuToBaipretion()
+               findNavController().navigate(action)
+           }else if(position==4){
+               val action=
+                   optionmenuDirections.actionOptionmenuToTextColorChange()
+               findNavController().navigate(action)
            }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val v = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        v.vibrate(100)
         binding.list.onItemClickListener = ListItemClickListener()
-
+        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

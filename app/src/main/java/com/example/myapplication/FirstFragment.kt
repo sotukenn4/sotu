@@ -1,8 +1,10 @@
 package com.example.myapplication
 
 import android.R
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +37,8 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
+        val v = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        v.vibrate(100)
         //ここから4行でリストにデータをセットして表示する
         binding.list.layoutManager= LinearLayoutManager(context)
         //ralm、adapterの設定
