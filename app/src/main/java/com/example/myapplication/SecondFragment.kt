@@ -16,6 +16,10 @@ import com.example.myapplication.databinding.FragmentSecondBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.where
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 import java.util.*
 
 
@@ -25,11 +29,25 @@ import java.util.*
 class SecondFragment : Fragment() {
     private  var _binding: FragmentSecondBinding?=null
     private  val binding get()=_binding!!
-
+    //バイブレーションONOFF呼び出し用ファイル
+    private var filebaibu: File? = null
+    //バイブレーションONまたはOFF格納変数
+    var BaibuOr: String? = null
     private lateinit var realm: Realm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
+    }
+    // ファイルを読み出し バイブレーションON・OFF
+    fun readBib(): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(filebaibu)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
     }
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +55,20 @@ class SecondFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding= FragmentSecondBinding.inflate(inflater, container, false)
+        val baibu = "BAIP.txt"
+        filebaibu = File(requireContext().filesDir, baibu)
+        BaibuOr = readBib()
+        //バイブレーションがONなら
+        if(BaibuOr=="ON"){
+            val baip = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            //バイブレーションの長さ　ぶぅぅーん
+            baip.vibrate(100)
+        }
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
-        val v = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        v.vibrate(100)
         binding.list.layoutManager= LinearLayoutManager(context)
         var dateTime= Calendar.getInstance().apply {
             timeInMillis=binding.calendarView.date

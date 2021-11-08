@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,59 +9,84 @@ import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentBaipretionBinding
 import com.example.myapplication.databinding.FragmentFirstBinding
+import java.io.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Baipretion.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Baipretion : Fragment() {
     private var _binding: FragmentBaipretionBinding?=null
     private  val binding get()=_binding!!
     private var swith:Int=0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var file: File? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentBaipretionBinding.inflate(inflater, container, false)
-        binding.switch1.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-               swith=0
+        binding.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+            swith = if (isChecked) {
+                0
             } else {
-               swith=1
+                1
             }
-        })
+            if(swith==0){
+                saveFile("ON")
+                binding.textView10.text="現在:ON"
+                binding.textView10.setTextColor(Color.BLACK)
+            }else{
+                saveFile("OFF")
+                binding.textView10.text="現在:OFF"
+                binding.textView10.setTextColor(Color.GRAY)
+            }
+        }
+        binding.textView10.setOnClickListener {
+            if(binding.textView10.text=="現在:OFF"){
+                binding.textView10.text="現在:"+"ON"
+                binding.textView10.setTextColor(Color.BLACK)
+                binding.switch1.isChecked=true
+            }else{
+                binding.textView10.text="現在:OFF"
+                binding.textView10.setTextColor(Color.GRAY)
+                binding.switch1.isChecked=false
+            }
+        }
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        val fileName = "BAIP.txt"
+        file = File(requireContext().filesDir, fileName)
+        val check: String? = readFile()
+        binding.textView10.text="現在:"+check.toString()
+        if(check.equals("OFF")){
+            binding.textView10.setTextColor(Color.GRAY)
+            binding.switch1.isChecked=false
+        }else{
+            binding.textView10.setTextColor(Color.BLACK)
+            binding.switch1.isChecked=true
+        }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Baipretion.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Baipretion().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    }
+    // ファイルを保存
+    fun saveFile(str: String?) {
+        // try-with-resources
+        try {
+            FileWriter(file).use { writer -> writer.write(str) }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    // ファイルを読み出し
+    fun readFile(): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
     }
 }

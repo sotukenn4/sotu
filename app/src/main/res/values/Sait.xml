@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="saito">
+        <item>いらすとや（イラスト提供）</item>
+        <item>ICOOON MONO（イラスト提供）</item>
+        <item>Icon-rainbow(イラスト提供)</item>
+        <item>developers(プログラム参考)</item>
+        <item>androidstadio教科書(プログラム参考)</item>
+        <item>ペイント3D(アイコン作成時使用)</item>
+        <item>removebg(画像透過処理)</item>
+        <item>PEKO-STEP(アイコン作成)</item>
+        <item>BANNERKOUBOU(画像処理)</item>
+    </string-array>
+</resources>

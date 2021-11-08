@@ -77,8 +77,8 @@
 
     <EditText
         android:id="@+id/titleEdit2"
-        android:layout_width="170dp"
-        android:layout_height="35dp"
+        android:layout_width="166dp"
+        android:layout_height="30dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/frame_style"
         android:ems="10"
@@ -88,9 +88,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/titleEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
 
     <EditText
         android:id="@+id/dateEdit"
@@ -218,49 +219,77 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit2" />
 
-    <Button
-        android:id="@+id/datebutton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:foreground="@drawable/calender4"
-        app:backgroundTint="@color/DarkGray"
-        app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
-        app:layout_constraintStart_toEndOf="@+id/dateEdit"
-        app:layout_constraintTop_toTopOf="@+id/dateEdit" />
-
-    <Button
-        android:id="@+id/timeButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:foreground="@android:drawable/ic_menu_close_clear_cancel"
-        app:backgroundTint="@color/DarkGray"
-        app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
-        app:layout_constraintStart_toEndOf="@+id/timeEdit"
-        app:layout_constraintTop_toTopOf="@+id/timeEdit" />
-
-    <Button
-        android:id="@+id/timeButton2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="2dp"
-        android:foreground="@drawable/time6"
-        app:backgroundTint="@color/DarkGray"
-        app:layout_constraintBottom_toBottomOf="@+id/timeEdit2"
-        app:layout_constraintStart_toEndOf="@+id/timeEdit2"
-        app:layout_constraintTop_toTopOf="@+id/timeEdit2" />
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="163dp"
         android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/titleEdit2"
         app:layout_constraintEnd_toEndOf="@+id/titleEdit2"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/titleEdit2"
         app:layout_constraintTop_toTopOf="@+id/titleEdit2"
-        app:layout_constraintVertical_bias="0.0" /><![CDATA[
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/datebuttonframe"
+        android:layout_width="54dp"
+        android:layout_height="51dp"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintBottom_toBottomOf="@+id/dateEdit"
+        app:layout_constraintStart_toEndOf="@+id/dateEdit"
+        app:layout_constraintTop_toTopOf="@+id/dateEdit"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <Button
+        android:id="@+id/datebutton"
+        android:layout_width="38dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_baseline_calendar_today_24"
+        app:backgroundTint="@color/material_on_background_disabled"
+        app:layout_constraintBottom_toBottomOf="@+id/datebuttonframe"
+        app:layout_constraintEnd_toEndOf="@+id/datebuttonframe"
+        app:layout_constraintStart_toStartOf="@+id/datebuttonframe"
+        app:layout_constraintTop_toTopOf="@+id/datebuttonframe" />
+
+    <TextView
+        android:id="@+id/datebuttonframe2"
+        android:layout_width="54dp"
+        android:layout_height="51dp"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit"
+        app:layout_constraintTop_toTopOf="@+id/timeEdit" />
+
+    <TextView
+        android:id="@+id/datebuttonframe3"
+        android:layout_width="54dp"
+        android:layout_height="51dp"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintBottom_toBottomOf="@+id/timeEdit2"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit2"
+        app:layout_constraintTop_toTopOf="@+id/timeEdit2" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/ic_baseline_access_time_24"
+        app:backgroundTint="@color/material_on_background_disabled"
+        app:layout_constraintBottom_toBottomOf="@+id/datebuttonframe2"
+        app:layout_constraintEnd_toEndOf="@+id/datebuttonframe2"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit"
+        app:layout_constraintTop_toTopOf="@+id/datebuttonframe2" />
+
+    <Button
+        android:id="@+id/timeButton2"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/ic_baseline_access_time_24"
+        app:backgroundTint="@color/material_on_background_disabled"
+        app:layout_constraintBottom_toBottomOf="@+id/datebuttonframe3"
+        app:layout_constraintEnd_toEndOf="@+id/datebuttonframe3"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit2"
+        app:layout_constraintTop_toTopOf="@+id/datebuttonframe3" /><![CDATA[
 
 
 

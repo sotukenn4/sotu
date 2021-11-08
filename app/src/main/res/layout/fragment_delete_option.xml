@@ -11,11 +11,12 @@
         android:id="@+id/deleteoptiontitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="24dp"
         android:text="@string/deletetitle"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,11 +24,11 @@
         android:id="@+id/deleteoptionbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/layout_box_3"
         android:text="@string/削除"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -50,4 +51,29 @@
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <ScrollView
+        android:layout_width="338dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteoptionbutton">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="よく使う行事の削除。保存された行事の削除ができます。上記のテキストをクリックすることで保存されているデータの一覧ダイアログが表示されます。削除したいデータをクリックするとテキストにデータ名が入ります。テキストに名前が入っていることを確認して削除ボタンを押してください。" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="@+id/deleteoptiontitle"
+        app:layout_constraintStart_toEndOf="@+id/deleteoptiontitle"
+        app:layout_constraintTop_toTopOf="@+id/deleteoptiontitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

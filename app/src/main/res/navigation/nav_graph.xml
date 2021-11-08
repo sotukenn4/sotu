@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_scheduleEditFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_scheduleEditFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <activity
@@ -99,6 +102,9 @@
         <action
             android:id="@+id/action_optionmenu_to_baipretion"
             app:destination="@id/baipretion" />
+        <action
+            android:id="@+id/action_optionmenu_to_saito"
+            app:destination="@id/saito" />
     </fragment>
     <fragment
         android:id="@+id/addoption"
@@ -118,6 +124,11 @@
     <fragment
         android:id="@+id/baipretion"
         android:name="com.example.myapplication.Baipretion"
-        android:label="fragment_baipretion"
+        android:label="@string/Bib"
         tools:layout="@layout/fragment_baipretion" />
+    <fragment
+        android:id="@+id/saito"
+        android:name="com.example.myapplication.Saito"
+        android:label="@string/Saito"
+        tools:layout="@layout/fragment_saito" />
 </navigation>

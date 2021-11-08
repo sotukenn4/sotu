@@ -28,9 +28,7 @@ class DeleteOption : Fragment() {
     private var word: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
     // ファイルを読み出し
     fun readFile(): String? {
         var text: String? = null
@@ -104,6 +102,8 @@ class DeleteOption : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //+ボタンを非表示
+        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //予備の配列。0番目に空白

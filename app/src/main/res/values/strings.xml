@@ -51,4 +51,6 @@
     <string name="deletelabel">行事削除</string>
     <string name="addlabel">行事追加</string>
     <string name="Baip">バイプレーションON/OFF</string>
+    <string name="Bib">バイブレーションON/OFF</string>
+    <string name="Saito">制作参考サイト等</string>
 </resources>

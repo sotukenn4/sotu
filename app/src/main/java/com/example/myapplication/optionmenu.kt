@@ -13,16 +13,32 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentOptionmenuBinding
 import kotlinx.android.synthetic.main.fragment_addoption.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 
 
 class optionmenu : Fragment() {
     private var _binding: FragmentOptionmenuBinding?=null
     private  val binding get()=_binding!!
-
+    //バイブレーションONOFF呼び出し用ファイル
+    private var filebaibu: File? = null
+    //バイブレーションONまたはOFF格納変数
+    var BaibuOr: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+    }
+    // ファイルを読み出し バイブレーションON・OFF
+    fun readBib(): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(filebaibu)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
     }
     private inner class ListItemClickListener : AdapterView.OnItemClickListener {
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -47,14 +63,16 @@ class optionmenu : Fragment() {
                val action=
                    optionmenuDirections.actionOptionmenuToTextColorChange()
                findNavController().navigate(action)
+           }else if(position==5){
+               val action=
+                   optionmenuDirections.actionOptionmenuToSaito()
+               findNavController().navigate(action)
            }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val v = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        v.vibrate(100)
         binding.list.onItemClickListener = ListItemClickListener()
         (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
     }
@@ -66,6 +84,15 @@ class optionmenu : Fragment() {
 
         // Inflate the layout for this fragment
         _binding= FragmentOptionmenuBinding.inflate(inflater, container, false)
+        val baibu = "BAIP.txt"
+        filebaibu = File(requireContext().filesDir, baibu)
+        BaibuOr = readBib()
+        //バイブレーションがONなら
+        if(BaibuOr=="ON"){
+            val baip = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            //バイブレーションの長さ　ぶぅぅーん
+            baip.vibrate(100)
+        }
         return binding.root
     }
 
