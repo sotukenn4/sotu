@@ -28,7 +28,7 @@
         app:backgroundTint="@color/teal_200" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/toumeido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="透明度0...10段階(透明度5推奨)" />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/kanryouButton"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:text="完了"

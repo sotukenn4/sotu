@@ -2,12 +2,12 @@ package com.example.myapplication
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ListView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +37,27 @@ class SecondFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         realm= Realm.getDefaultInstance()
+        //バーに占いのチェックボタン表示
+        setHasOptionsMenu(true)
+    }
+    //itemをバーに適用
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater){
+        inflater.inflate(com.example.myapplication.R.menu.uranaimenu,menu)
+    }
+    //占いボタンが押された時の処理
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //バイブレーションがONになっている場合
+        if(BaibuOr=="ON"){
+            val baip = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            //バイプの長さを100ミリ秒
+            baip.vibrate(100)
+        }
+        //占いボタンがおされたとき
+        when(item.itemId){
+            //com.example.myapplication.R.id.menu_uranei ->
+        }
+        return true
     }
     // ファイルを読み出し バイブレーションON・OFF
     fun readBib(): String? {

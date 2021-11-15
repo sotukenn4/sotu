@@ -83,6 +83,10 @@ class TextColorChange : Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
+        if(text==null){
+            text="#000000"
+        }
         return text
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

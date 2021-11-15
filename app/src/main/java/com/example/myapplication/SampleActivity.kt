@@ -35,18 +35,15 @@ class SampleActivity : AppCompatActivity() {
         storage_btn.setOnClickListener {
             openGalleryForImage()
         }
-        button2.setOnClickListener {
+        kanryouButton.setOnClickListener {
             val intent = Intent()
             intent.putExtra("E", Syasin)
             intent.putExtra("progress", prog)
             setResult(RESULT_OK, intent)
             finish()
         }
-
         seekBar2.progress = 5
         seekBar2.max = 10
-        //seekBar2.min = 0
-
         seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             // 値が変更された時に呼ばれる

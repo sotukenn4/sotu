@@ -39,6 +39,10 @@ class DeleteOption : Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
+        if(text==null){
+            text="#000000"
+        }
         return text
     }
     //保存してあるデータの取り出しメソッド
@@ -77,6 +81,7 @@ class DeleteOption : Fragment() {
         file = File(requireContext().filesDir, fileName)
         val str: String? = readFile()
         binding.deleteoptiontitle.setTextColor(Color.parseColor(str));
+        binding.deleteoptiondetail.setTextColor(Color.parseColor(str));
         binding.deleteoptionspinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             // 項目が選択された時に呼ばれる
             override fun onItemSelected(

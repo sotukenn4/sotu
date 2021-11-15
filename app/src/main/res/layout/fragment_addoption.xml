@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/addoptiondetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="よく使う行事の追加。予定追加時に入力する手間を省くことができる。画面上のテキストボックスに保存したい行事名（学校、カラオケなど）を入力。テキストに入力された行事名が入っていることを確認して、保存ボタンを押す。" />
@@ -65,7 +65,7 @@
     </ScrollView>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/add_image"
         android:layout_width="43dp"
         android:layout_height="43dp"
         android:layout_marginStart="2dp"

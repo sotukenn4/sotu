@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ScheduleEditFragment: Fragment() {
+
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentScheduleEditBinding?=null
     private val binding get()=_binding!!
@@ -92,6 +93,10 @@ class ScheduleEditFragment: Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
+        if(text==null){
+            text="#000000"
+        }
         return text
     }
     // ファイルを読み出し バイブレーションON・OFF
@@ -150,6 +155,7 @@ class ScheduleEditFragment: Fragment() {
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, values)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.spinner.adapter = adapter
+        binding.spinner.setPrompt("以下の項目より選択して下さい。");
         return binding.root
     }
     @RequiresApi(Build.VERSION_CODES.O)

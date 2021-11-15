@@ -10,11 +10,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentAddoptionBinding
 import com.google.android.material.snackbar.Snackbar
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 
 
 class addoption : Fragment() {
     private var _binding: FragmentAddoptionBinding? = null
     private val binding get() = _binding!!
+    private var file: File? = null
+    // ファイルを読み出し
+    fun readFile(): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
+        if(text==null){
+            text="#000000"
+        }
+        return text
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,7 +47,6 @@ class addoption : Fragment() {
             stringItem.split(",").toTypedArray()
         } else emptyArray()
     }
-
     //データの保存メソッド。すまん中身がなにしてるか、説明できるほど理解してない。
     private fun saveArray(array: Array<String>, PrefKey: String) {
         val buffer = StringBuffer()
@@ -48,6 +67,11 @@ class addoption : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddoptionBinding.inflate(inflater, container, false)
+        val fileName = "TestFile.txt"
+        file = File(requireContext().filesDir, fileName)
+        val str: String? = readFile()
+        binding.addoptiontitle.setTextColor(Color.parseColor(str));
+        binding.addoptiondetail.setTextColor(Color.parseColor(str));
         return binding.root
     }
 

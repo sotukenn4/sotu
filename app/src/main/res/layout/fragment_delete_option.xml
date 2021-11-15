@@ -30,10 +30,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/deletespinnerframe" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/deletespinnerframe"
         android:layout_width="313dp"
         android:layout_height="84dp"
         android:layout_marginTop="40dp"
@@ -47,10 +47,10 @@
         android:id="@+id/deleteoptionspinner"
         android:layout_width="280dp"
         android:layout_height="65dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintBottom_toBottomOf="@+id/deletespinnerframe"
+        app:layout_constraintEnd_toEndOf="@+id/deletespinnerframe"
+        app:layout_constraintStart_toStartOf="@+id/deletespinnerframe"
+        app:layout_constraintTop_toTopOf="@+id/deletespinnerframe" />
 
     <ScrollView
         android:layout_width="338dp"
@@ -61,14 +61,14 @@
         app:layout_constraintTop_toBottomOf="@+id/deleteoptionbutton">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/deleteoptiondetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="よく使う行事の削除。保存された行事の削除ができます。上記のテキストをクリックすることで保存されているデータの一覧ダイアログが表示されます。削除したいデータをクリックするとテキストにデータ名が入ります。テキストに名前が入っていることを確認して削除ボタンを押してください。" />
     </ScrollView>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/baketu_image"
         android:layout_width="43dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
