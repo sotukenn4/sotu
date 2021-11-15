@@ -54,7 +54,7 @@ class Baipretion : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         val fileName = "BAIP.txt"
         file = File(requireContext().filesDir, fileName)
         val check: String? = readFile()

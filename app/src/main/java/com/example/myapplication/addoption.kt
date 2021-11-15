@@ -78,7 +78,7 @@ class addoption : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //+ボタンを非表示
-        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //保存ボタンがおされたとき

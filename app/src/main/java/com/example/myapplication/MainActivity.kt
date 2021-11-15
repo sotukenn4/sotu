@@ -1,37 +1,39 @@
 package com.example.myapplication
 
-import android.R.attr
 import android.content.Context
-import android.content.Context.VIBRATOR_SERVICE
 import android.content.Intent
-import android.os.Build
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.VibrationEffect.DEFAULT_AMPLITUDE
-import android.os.Vibrator
-import android.view.View
-import androidx.annotation.RequiresApi
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_custum.*
-import org.bson.json.JsonWriter
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
-
 
 
 //import kotlinx.android.synthetic.main.activity_main.*
 //import kotlinx.android.synthetic.main.fragment_first.*
 
 
-class MainActivity<T> : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    @RequiresApi(Build.VERSION_CODES.O)
+    private lateinit var viewModel: ConstraintLayout
+    private var inputMethodManager: InputMethodManager? = null
+    private var _list: MutableList<MutableMap<String,String>> =mutableListOf()
+    //private  lateinit var realm: Realm
+    //保存データを取り出し、valuesに格納
+    var values = arrayOf(" ")
+    //予備の配列。0番目に空白
+    var value2 = arrayOf(" ")
+    var timer: Timer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -42,13 +44,9 @@ class MainActivity<T> : AppCompatActivity() {
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-        //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
 
-        binding.fab.setOnClickListener { view ->
-            naviController.navigate(R.id.action_to_scheduleEditFragment)
 
-        }
-       
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
     // にtenkiだけが画面変わるから違和感ある）
         /*binding.weather.setOnClickListener {
@@ -61,7 +59,6 @@ class MainActivity<T> : AppCompatActivity() {
 
 
     }
-
     //天気Activityから戻った時に一覧画面に戻る＊＊これをしないとtenki画面から戻ったときに下のツールバーがバグる。
     //栗本君がFragment成功できればいらない。
     //しかし、これを実行させると背景画面から戻り時に指定した背景が反映されない。対処方は指定した背景画像保存して画面
@@ -86,10 +83,10 @@ class MainActivity<T> : AppCompatActivity() {
         HaikeiChange(ImageGround)
     }
 
+
+    //これなんだったけ？わすれたで暇なときに見るわ
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
-    fun setFabVisible(visibility: Int){
-        binding.fab.visibility=visibility
-    }
+
 
     //背景画面変更メソッド
     fun HaikeiChange(imageBack: String?) {
@@ -99,7 +96,7 @@ class MainActivity<T> : AppCompatActivity() {
             }
         }
     }
-    //透明度変更メソッド もっといいかきかたあるだろうなぁ
+    //透明度変更メソッド
     fun ToumeidoChange(toumei: Int?){
         if (toumei!= null) {
             //透明度０
@@ -126,16 +123,11 @@ class MainActivity<T> : AppCompatActivity() {
                 //透明度１０
             }else  if(toumei==10) {binding.backimage.setAlpha(255)
             }
-            //書くのめんどくさかった～
         }
     }
 
 
-
-
 }
-
-
 
 
 

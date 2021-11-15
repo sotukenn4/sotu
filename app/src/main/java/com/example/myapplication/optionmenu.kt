@@ -74,7 +74,7 @@ class optionmenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.list.onItemClickListener = ListItemClickListener()
-        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
     }
 
     override fun onCreateView(

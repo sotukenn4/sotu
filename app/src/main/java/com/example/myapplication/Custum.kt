@@ -23,8 +23,8 @@ class Custum : Fragment() {
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentCustumBinding? = null
     private val binding get() = _binding!!
-    private var _binding2: MainActivity<Any?>? = null
-    private val binding2 get() = _binding2!!
+    //private var _binding2: MainActivity<Any?>? = null
+    //private val binding2 get() = _binding2!!
     private var word: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +102,7 @@ class Custum : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity<*>)?.setFabVisible(View.INVISIBLE)
+        //(activity as? MainActivity<*>)?.setFabVisible(View.INVISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //予備の配列。0番目に空白
