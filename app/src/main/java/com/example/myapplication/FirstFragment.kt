@@ -1,7 +1,7 @@
 package com.example.myapplication
 
-import android.R
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -52,7 +52,10 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         }
         //占いボタンがおされたとき
         when(item.itemId){
-            //com.example.myapplication.R.id.menu_uranei ->
+            com.example.myapplication.R.id.menu_uranei ->{
+                val intent = Intent(requireContext(), UranaiAc::class.java)
+                startActivity(intent)
+            }
         }
         return true
     }

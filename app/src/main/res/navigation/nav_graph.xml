@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_optionmenu"
             app:destination="@id/optionmenu" />
+        <action
+            android:id="@+id/action_FirstFragment_to_uranaiAc"
+            app:destination="@id/uranaiAc" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -131,4 +134,8 @@
         android:name="com.example.myapplication.Saito"
         android:label="@string/Saito"
         tools:layout="@layout/fragment_saito" />
+    <fragment
+        android:id="@+id/uranaiAc"
+        android:name="com.example.myapplication.UranaiAc"
+        android:label="UranaiAc" />
 </navigation>
