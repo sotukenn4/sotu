@@ -92,6 +92,10 @@ class ScheduleEditFragment: Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
+        if(text==null){
+            text="#000000"
+        }
         return text
     }
     // ファイルを読み出し バイブレーションON・OFF
@@ -156,7 +160,7 @@ class ScheduleEditFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //+ボタンを非表示にする。MainActivityのメソッドを呼びだしている
-        (activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //更新ボタンが押されてこの画面に来た時。更新用
         if(args.scheduleId !=-1L) {
             //idからデータを読み込む
