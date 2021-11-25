@@ -3,7 +3,8 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".MySchedulerApplication"
         android:allowBackup="true"
@@ -12,10 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".SampleActivity"
-            android:label="背景・透明度変更"/>
-        <activity android:name=".tenki"
-            android:label="天気予報"/>
+        <activity
+            android:name=".MainActivity2"
+            android:label="今日の占い"
+        />
+        <activity
+            android:name=".SampleActivity"
+            android:label="背景・透明度変更" />
+        <activity
+            android:name=".tenki"
+            android:label="天気予報" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -24,9 +31,9 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

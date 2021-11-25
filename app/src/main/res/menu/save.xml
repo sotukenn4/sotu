@@ -5,6 +5,6 @@
     <item
         android:id="@+id/menu_save"
         android:icon="@drawable/ic_baseline_done_24"
-        android:title="削除"
+        android:title="保存"
         app:showAsAction="always" />
 </menu>

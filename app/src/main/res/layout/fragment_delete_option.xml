@@ -76,4 +76,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/deleteoptiontitle"
         app:layout_constraintStart_toEndOf="@+id/deleteoptiontitle"
         app:layout_constraintTop_toTopOf="@+id/deleteoptiontitle" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="行事追加"
+        app:layout_constraintBottom_toTopOf="@+id/deletespinnerframe"
+        app:layout_constraintStart_toEndOf="@+id/baketu_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037" />
 </androidx.constraintlayout.widget.ConstraintLayout>

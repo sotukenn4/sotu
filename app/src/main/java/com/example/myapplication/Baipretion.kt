@@ -89,4 +89,12 @@ class Baipretion : Fragment() {
         }
         return text
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
 }

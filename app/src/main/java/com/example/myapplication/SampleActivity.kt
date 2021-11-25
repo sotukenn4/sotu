@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -13,24 +15,33 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import kotlinx.android.synthetic.main.activity_sample.*
+import java.io.*
 
 
 class SampleActivity : AppCompatActivity() {
+    //ファイルを作成 日付
+    private var files: File? = null
     private val REQUEST_GALLERY_TAKE = 2
     private val RECORD_REQUEST_CODE = 1000
     private lateinit var storage_iv: ImageView
     private lateinit var storage_btn: Button
     private var prog=5
     private var Syasin: String? =null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_sample)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
         storage_iv = findViewById(R.id.storage_iv)
+
+
         storage_btn = findViewById(R.id.storage_btn)
         setupPermissions()
-
         //EditTextのクリックイベントを設定
         storage_btn.setOnClickListener {
             openGalleryForImage()
@@ -50,19 +61,38 @@ class SampleActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 prog=progress
             }
-
             // つまみがタッチされた時に呼ばれる
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
 
             }
-
             // つまみが離された時に呼ばれる
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
             }
         })
+
+    }
+    // ファイルを保存
+    fun saveFile(str: String?) {
+        // try-with-resources
+        try {
+            FileWriter(files).use { writer -> writer.write(str) }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
+    // ファイルを読み出し
+    fun readFile(fileName: String): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(files)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
+    }
     //ギャラリーを開くためのメソッド
     private fun openGalleryForImage() {
         //ギャラリーに画面を遷移するためのIntent
@@ -95,6 +125,7 @@ class SampleActivity : AppCompatActivity() {
                     storage_iv.setImageURI(data?.data) // handle chosen image
                     Syasin=(data?.data).toString()
 
+
                 }
             }
         }
@@ -123,9 +154,9 @@ class SampleActivity : AppCompatActivity() {
         when(requestCode){
             RECORD_REQUEST_CODE ->{
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(applicationContext, "デバイス内の写真やメディアへのアクセスが許可されませんでした。", Toast.LENGTH_SHORT).show()
-                }else{
                     Toast.makeText(applicationContext, "デバイス内の写真やメディアへのアクセスが許可されました。", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(applicationContext, "デバイス内の写真やメディアへのアクセスが許可されませんでした。", Toast.LENGTH_SHORT).show()
                 }
                 return
             }

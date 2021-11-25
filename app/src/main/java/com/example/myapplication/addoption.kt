@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentAddoptionBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.BufferedReader
@@ -137,5 +138,18 @@ class addoption : Fragment() {
                }
            }
        }
+        binding.button3.setOnClickListener {
+            val action=
+                addoptionDirections.actionAddoptionToDeleteOption()
+            findNavController().navigate(action)
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }

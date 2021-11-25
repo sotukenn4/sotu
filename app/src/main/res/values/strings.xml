@@ -53,4 +53,5 @@
     <string name="Baip">バイプレーションON/OFF</string>
     <string name="Bib">バイブレーションON/OFF</string>
     <string name="Saito">制作参考サイト等</string>
+    <string name="今日の占い" />
 </resources>

@@ -53,8 +53,12 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         //占いボタンがおされたとき
         when(item.itemId){
             com.example.myapplication.R.id.menu_uranei ->{
-                val intent = Intent(requireContext(), UranaiAc::class.java)
+                /*val action=
+                    FirstFragmentDirections.actionFirstFragmentToMainActivity2()
+                findNavController().navigate(action)*/
+                val intent = Intent(requireContext(), MainActivity2::class.java)
                 startActivity(intent)
+
             }
         }
         return true
@@ -74,6 +78,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding= FragmentFirstBinding.inflate(inflater, container, false)
         //BAIPにON・OFF
         val baibu = "BAIP.txt"
@@ -122,7 +127,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
             }
         }
     }
-
+//画面から離れたとき
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

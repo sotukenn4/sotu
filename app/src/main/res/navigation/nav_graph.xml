@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_to_scheduleEditFragment"
             app:destination="@id/scheduleEditFragment"
@@ -40,6 +44,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_uranaiAc"
             app:destination="@id/uranaiAc" />
+        <action
+            android:id="@+id/action_FirstFragment_to_mainActivity2"
+            app:destination="@id/mainActivity2" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -89,36 +96,72 @@
         android:label="設定">
         <action
             android:id="@+id/action_optionmenu_to_addoptio"
-            app:destination="@id/addoption" />
+            app:destination="@id/addoption"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_deleteOption"
-            app:destination="@id/deleteOption" />
+            app:destination="@id/deleteOption"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_sampleActivity"
-            app:destination="@id/sampleActivity" />
+            app:destination="@id/sampleActivity"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_textColorChange"
-            app:destination="@id/textColorChange" />
+            app:destination="@id/textColorChange"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_scheduleEditFragment"
-            app:destination="@id/scheduleEditFragment" />
+            app:destination="@id/scheduleEditFragment"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_baipretion"
-            app:destination="@id/baipretion" />
+            app:destination="@id/baipretion"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
         <action
             android:id="@+id/action_optionmenu_to_saito"
-            app:destination="@id/saito" />
+            app:destination="@id/saito"
+            app:enterAnim="@anim/nav_slide_enter_anim"
+            app:exitAnim="@anim/nav_slide_exit_anim"
+            app:popEnterAnim="@anim/nav_slide_pop_enter_anim"
+            app:popExitAnim="@anim/nav_slide_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/addoption"
         android:name="com.example.myapplication.addoption"
         android:label="@string/addlabel"
-        tools:layout="@layout/fragment_addoption" />
+        tools:layout="@layout/fragment_addoption" >
+        <action
+            android:id="@+id/action_addoption_to_deleteOption"
+            app:destination="@id/deleteOption" />
+    </fragment>
     <fragment
         android:id="@+id/deleteOption"
         android:name="com.example.myapplication.DeleteOption"
         android:label="@string/deletelabel"
-        tools:layout="@layout/fragment_delete_option" />
+        tools:layout="@layout/fragment_delete_option" >
+        <action
+            android:id="@+id/action_deleteOption_to_addoption"
+            app:destination="@id/addoption" />
+    </fragment>
     <fragment
         android:id="@+id/textColorChange"
         android:name="com.example.myapplication.TextColorChange"
@@ -138,4 +181,8 @@
         android:id="@+id/uranaiAc"
         android:name="com.example.myapplication.UranaiAc"
         android:label="UranaiAc" />
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="com.example.myapplication.MainActivity2"
+        android:label="@string/今日の占い" />
 </navigation>

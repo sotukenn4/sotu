@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.animation.AnimatorSet
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationSet
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -46,6 +48,7 @@ class optionmenu : Fragment() {
                val action=
                    optionmenuDirections.actionOptionmenuToAddoptio()
                findNavController().navigate(action)
+
            }else if(position==1){
                val action=
                    optionmenuDirections.actionOptionmenuToDeleteOption()
@@ -103,5 +106,13 @@ class optionmenu : Fragment() {
             optionmenu().apply {
 
             }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }

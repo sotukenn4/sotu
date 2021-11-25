@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -14,6 +15,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_custum.*
+import java.io.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,17 +38,27 @@ class MainActivity : AppCompatActivity() {
     //予備の配列。0番目に空白
     var value2 = arrayOf(" ")
     var timer: Timer? = null
+    val fileName = "haikei.txt"
+    private var files: File? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setSupportActionBar(findViewById(R.id.toolbar))
         //ナビゲーションを使えるようにする
         val naviController=findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+
+binding.fab.setOnClickListener{
+
+}
+        //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
+
 
 
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
@@ -83,7 +97,27 @@ class MainActivity : AppCompatActivity() {
         HaikeiChange(ImageGround)
     }
 
+    // ファイルを保存
+    fun saveFile(str: String?) {
+        // try-with-resources
+        try {
+            FileWriter(files).use { writer -> writer.write(str) }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 
+    // ファイルを読み出し
+    fun readFile(fileName: String): String? {
+        var text: String? = null
+        // try-with-resources
+        try {
+            BufferedReader(FileReader(files)).use { br -> text = br.readLine() }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return text
+    }
     //これなんだったけ？わすれたで暇なときに見るわ
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 

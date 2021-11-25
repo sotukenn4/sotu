@@ -1,4 +1,4 @@
-package com.example.uranai4
+package com.example.myapplication
 
 import java.util.*
 

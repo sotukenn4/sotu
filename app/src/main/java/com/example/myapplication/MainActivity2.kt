@@ -1,24 +1,32 @@
 package com.example.myapplication
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.R
+import kotlinx.android.synthetic.main.activity_main2.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UranaiAc : AppCompatActivity() {
 
+class MainActivity2 : AppCompatActivity() {
     //日付を取得
-    val date= getCurrentDateTime()
-    val dateInString= date.toString("yyyy/MM/dd")
+    val dates= getCurrentDateTime()
+    val dateInString= dates.toString("yyyy/MM/dd")
 
-    //ファイルを作成
-    private var file: File? = null
+    //ファイルを作成 日付
+    private var files: File? = null
+    //ファイルを作成 運
+    private var fileun: File? = null
+    //ファイルを作成 運2
+    private var fileun2: File? = null
     private fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
@@ -30,8 +38,8 @@ class UranaiAc : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_main2)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
         val textView : TextView = findViewById(R.id.textView)
         val textView2 : TextView = findViewById(R.id.textView2)
         //textView.text = dateInString
@@ -39,17 +47,34 @@ class UranaiAc : AppCompatActivity() {
         val button : Button = findViewById(R.id.button)
 
         val fileName = "uranai.txt"
-        file = File(applicationContext.filesDir, fileName)
+        files = File(applicationContext.filesDir, fileName)
         //val check: String? = readFile()
-
         val str = readFiles(fileName)
+
+        val fileName2 = "uranaikekka.txt"
+        fileun = File(applicationContext.filesDir, fileName2)
+        //val check: String? = readFile()
+        val kekka = readFiles(fileName2)
+
+        val fileName3 = "uranaikekka2.txt"
+        fileun = File(applicationContext.filesDir, fileName3)
+        //val check: String? = readFile()
+        val kekka2 = readFiles(fileName3)
         //日付がテキストファイルに書かれているかどうか
         if (str != null) {
-            textView2.text = "今日の運勢は?"
-        } else {
-            textView.text = "ああああ"
-        }
+            if(str != dateInString){
+                textView2.text = "今日の運勢は?"
 
+            }else {
+                textView.text = kekka.toString()
+                textView2.text=kekka2.toString()
+                textView6.text = "今日は終わり!!また明日"
+                //ボタンを非表示にする
+                button.setVisibility(View.INVISIBLE)
+            }
+        } else {
+            textView.text = "今日の運勢は?"
+        }
         button.setOnClickListener {
             //strの中身が違うならtrue
             if (str != dateInString) {
@@ -60,21 +85,33 @@ class UranaiAc : AppCompatActivity() {
                 File(applicationContext.filesDir, fileName).writer().use {
                     it.write(dateInString)
                 }
+                File(applicationContext.filesDir, fileName2).writer().use {
+                    it.write(resResult.name)
+                }
+                File(applicationContext.filesDir, fileName3).writer().use {
+                    it.write(resResult.description)
+                }
                 //ボタンを非表示にする
                 button.setVisibility(View.INVISIBLE)
             }else{
-                textView.text = " "
+                /*textView.text = " "
                 textView2.text = "今日は終わり!!また明日"
                 //ボタンを非表示にする
-                button.setVisibility(View.INVISIBLE)
+                button.setVisibility(View.INVISIBLE)*/
             }
         }
-        //strの中身の日付が違うならボタンが表示される
-        /*if(str!=dateInString){
-        button.setVisibility(View.VISIBLE)
-    }*/
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.itembar,menu)
+        return true
+    }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_delete ->
+                finish()
+        }
+        return true
     }
     private fun readFiles(file: String): String? {
 
@@ -93,7 +130,7 @@ class UranaiAc : AppCompatActivity() {
     fun saveFile(str: String?) {
         // try-with-resources
         try {
-            FileWriter(file).use { writer -> writer.write(str) }
+            FileWriter(files).use { writer -> writer.write(str) }
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -104,7 +141,7 @@ class UranaiAc : AppCompatActivity() {
         var text: String? = null
         // try-with-resources
         try {
-            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
+            BufferedReader(FileReader(files)).use { br -> text = br.readLine() }
         } catch (e: IOException) {
             e.printStackTrace()
         }

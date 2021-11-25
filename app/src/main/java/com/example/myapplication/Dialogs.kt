@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.myapplication.databinding.FragmentFirstBinding
 import java.util.*
 private var _binding: FragmentFirstBinding?=null
-private  val binding get()=_binding!!
+val binding get()=_binding!!
 class ConfirmDialog(
 
     private val message: String,

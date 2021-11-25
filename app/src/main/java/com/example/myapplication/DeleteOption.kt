@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentDeleteOptionBinding
 import com.google.android.material.snackbar.Snackbar
 import java.io.BufferedReader
@@ -144,6 +145,19 @@ class DeleteOption : Fragment() {
             }
 
         }
+        binding.button2.setOnClickListener {
+            val action=
+                DeleteOptionDirections.actionDeleteOptionToAddoption()
+            findNavController().navigate(action)
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 
 }

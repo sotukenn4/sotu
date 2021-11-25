@@ -107,6 +107,13 @@ class TextColorChange : Fragment() {
         binding.textcolor.setTextColor(Color.parseColor(str))
         return binding.root
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+    override fun onDestroy() {
+        super.onDestroy()
 
+    }
 
 }
