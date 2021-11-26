@@ -41,37 +41,30 @@ class MainActivity : AppCompatActivity() {
     val fileName = "haikei.txt"
     private var files: File? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(findViewById(R.id.toolbar))
         //ナビゲーションを使えるようにする
         val naviController=findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(naviController)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav)
         NavigationUI.setupWithNavController(bottomNavView, naviController)
-
-binding.fab.setOnClickListener{
-
-}
+        //+ボタン押されたときに予定編集画面に移動する　　途中エラーでたで大変だった
+        binding.fab.setOnClickListener{ view->
+        naviController.navigate(R.id.action_to_scheduleEditFragment)
+        }
         //supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLUE))
-
-
-
         //tenkiがFragmentにできなかったときは右上にボタンを設定して遷移させる＊＊（理由：下のツールバーから選択時
     // にtenkiだけが画面変わるから違和感ある）
         /*binding.weather.setOnClickListener {
             val intent = Intent(applicationContext, tenki::class.java)
             startActivity(intent)
         }*/// getSharedPreferencesメソッドでSharedPreferencesオブジェクトを取得
-
-
         // getString()を呼び出して保存されている文字列を読み込む
-
-
+    }//onCreate終わり
+    fun setFabVisible(visibility: Int){
+        binding.fab.visibility = visibility
     }
     //天気Activityから戻った時に一覧画面に戻る＊＊これをしないとtenki画面から戻ったときに下のツールバーがバグる。
     //栗本君がFragment成功できればいらない。
@@ -82,7 +75,6 @@ binding.fab.setOnClickListener{
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
     }*/
-
 
 //Activityを離れて戻ってきた時に最初に行う処理
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -100,29 +92,20 @@ binding.fab.setOnClickListener{
     // ファイルを保存
     fun saveFile(str: String?) {
         // try-with-resources
-        try {
-            FileWriter(files).use { writer -> writer.write(str) }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        try { FileWriter(files).use { writer -> writer.write(str) } } catch (e: IOException) { e.printStackTrace() }
     }
 
     // ファイルを読み出し
     fun readFile(fileName: String): String? {
         var text: String? = null
         // try-with-resources
-        try {
-            BufferedReader(FileReader(files)).use { br -> text = br.readLine() }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        try { BufferedReader(FileReader(files)).use { br -> text = br.readLine() } } catch (e: IOException) { e.printStackTrace() }
         return text
     }
-    //これなんだったけ？わすれたで暇なときに見るわ
+    //これなんだったけ？わすれたで暇なときに見るわ　///////これ調べたら、戻るボタンが押されたときに一つまえに戻るようにしてるらしいｙ　11/26
     override fun onSupportNavigateUp()=findNavController(R.id.nav_host_fragment).navigateUp()
 
-
-    //背景画面変更メソッド
+    //背景画面変更メソッド　この処理考えた俺すげーって思った。
     fun HaikeiChange(imageBack: String?) {
         if (imageBack != null||imageBack!="null") {
             if (imageBack != null) {
@@ -130,7 +113,7 @@ binding.fab.setOnClickListener{
             }
         }
     }
-    //透明度変更メソッド
+    //透明度変更メソッド　これかくの大変だったわ。もう少し楽なやり方あっただろ！！くぅーん
     fun ToumeidoChange(toumei: Int?){
         if (toumei!= null) {
             //透明度０

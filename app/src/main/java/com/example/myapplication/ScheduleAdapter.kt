@@ -19,7 +19,7 @@ import java.io.FileReader
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-
+//adapterの設定
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data,true) {
     private var listener: ((Long?)->Unit)?=null

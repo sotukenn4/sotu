@@ -27,23 +27,19 @@ class DeleteOption : Fragment() {
     private var file: File? = null
     //spinnerで選択されたアイテムを格納する変数word
     private var word: String? = null
+
+    //画面開かれたときに処理
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
     // ファイルを読み出し
     fun readFile(): String? {
         var text: String? = null
-
         // try-with-resources
-        try {
-            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        try { BufferedReader(FileReader(file)).use { br -> text = br.readLine() } } catch (e: IOException) { e.printStackTrace() }
         //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
-        if(text==null){
-            text="#000000"
-        }
+        if(text==null){ text="#000000" }
         return text
     }
     //保存してあるデータの取り出しメソッド
@@ -70,14 +66,13 @@ class DeleteOption : Fragment() {
         val editor = SaveKey.edit()
         editor.putString(PrefKey, stringItem).apply()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         //binding扱うために必要。これがないと処理落ちする
         _binding = FragmentDeleteOptionBinding.inflate(inflater, container, false)
-        // OnItemSelectedListenerの実装
-        //spinnerがクリックされたときの処理メソッド
         val fileName = "TestFile.txt"
         file = File(requireContext().filesDir, fileName)
         val str: String? = readFile()
@@ -100,16 +95,17 @@ class DeleteOption : Fragment() {
         }
         return binding.root
     }
+
+    //Spinnerに値を格納
     fun spinnerset(data: Array<String>) {
         //spinnerに配列valuesの値をいれる。3行セット
         val adapter = ArrayAdapter(requireActivity(), R.layout.simple_spinner_item, data)
         adapter.setDropDownViewResource(R.layout.simple_dropdown_item_1line)
         binding.deleteoptionspinner.adapter = adapter
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //+ボタンを非表示
-        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //予備の配列。0番目に空白
@@ -143,14 +139,17 @@ class DeleteOption : Fragment() {
                 spinnerset(YobiHairetu)
 
             }
-
         }
-        binding.button2.setOnClickListener {
+
+        //作業追加画面に移動
+        binding.AddChange.setOnClickListener {
             val action=
                 DeleteOptionDirections.actionDeleteOptionToAddoption()
             findNavController().navigate(action)
         }
     }
+
+    //画面から離れたときの処理　した二つ
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

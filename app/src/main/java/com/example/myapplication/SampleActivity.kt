@@ -19,7 +19,7 @@ import androidx.core.net.toUri
 import kotlinx.android.synthetic.main.activity_sample.*
 import java.io.*
 
-
+//背景変更画面　名前がSampleActivityでごめんなさい
 class SampleActivity : AppCompatActivity() {
     //ファイルを作成 日付
     private var files: File? = null
@@ -33,13 +33,9 @@ class SampleActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_sample)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
         storage_iv = findViewById(R.id.storage_iv)
-
-
         storage_btn = findViewById(R.id.storage_btn)
         setupPermissions()
         //EditTextのクリックイベントを設定
@@ -56,18 +52,15 @@ class SampleActivity : AppCompatActivity() {
         seekBar2.progress = 5
         seekBar2.max = 10
         seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
             // 値が変更された時に呼ばれる
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 prog=progress
             }
             // つまみがタッチされた時に呼ばれる
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
             }
             // つまみが離された時に呼ばれる
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
             }
         })
 
@@ -110,7 +103,6 @@ class SampleActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.menu_delete ->
                 finish()
-
         }
         return true
     }

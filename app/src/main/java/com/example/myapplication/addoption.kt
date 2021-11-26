@@ -18,6 +18,7 @@ import java.io.IOException
 
 
 class addoption : Fragment() {
+    //binding追加。これでレイアウトのテキストボックス、ボタンをbinding.textで使える
     private var _binding: FragmentAddoptionBinding? = null
     private val binding get() = _binding!!
     private var file: File? = null
@@ -25,15 +26,9 @@ class addoption : Fragment() {
     fun readFile(): String? {
         var text: String? = null
         // try-with-resources
-        try {
-            BufferedReader(FileReader(file)).use { br -> text = br.readLine() }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        try { BufferedReader(FileReader(file)).use { br -> text = br.readLine() } } catch (e: IOException) { e.printStackTrace() }
         //テキストカラーが登録されていなけば黒色指定（これがないと新規端末でアプリが落ちる）
-        if(text==null){
-            text="#000000"
-        }
+        if(text==null){ text="#000000" }
         return text
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,10 +71,9 @@ class addoption : Fragment() {
         return binding.root
     }
 
+    //画面開かれたときに実行
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //+ボタンを非表示
-        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
         //保存データを取り出し、valuesに格納
         var data = getArray("StringItem")
         //保存ボタンがおされたとき
@@ -96,12 +90,11 @@ class addoption : Fragment() {
                        //重複しているためcheckを1にする
                        check = 1
                        //画面下に黒いラベル表示
-                       Snackbar.make(view, "すでに入力された行事はあります", Snackbar.LENGTH_SHORT)
-                           .setActionTextColor(Color.YELLOW)
+                       Snackbar.make(view, "すでに入力された行事はあります", Snackbar.LENGTH_SHORT).setActionTextColor(Color.YELLOW)
                            .show()
                    }
                }
-               //重複があったとき、警告を表示する
+               //重複があったとき、警告を表示する　　//////////////11月26日記述。重複行事は確認しないで追加しない。ここ消してもいいが、努力を残す
                if (check == 1) {
                    /*val dialog = ConfirmDialog("既に入力された項目はありますが追加しますか？",
                            "はい", {
@@ -125,9 +118,9 @@ class addoption : Fragment() {
                     */
                    //重複がないとき
                } else {
-                   //重複がなかったときはそのままデータを追加する
+                   //重複がなかったときはそのままデータを追加する  //////////////そもそも重複の判定はボツになったのでここに入る
                    data += binding.addoptiontitleText.text.toString()
-                   //テキストの文字は空白に戻す
+                   //テキストの文字は空白に戻す　クリア
                    binding.addoptiontitleText.setText("")
                    //追加されたデータを保存する
                    saveArray(data, "StringItem");
@@ -138,12 +131,14 @@ class addoption : Fragment() {
                }
            }
        }
-        binding.button3.setOnClickListener {
+        //押されたときに行事削除画面に移動
+        binding.deleteChange.setOnClickListener {
             val action=
                 addoptionDirections.actionAddoptionToDeleteOption()
             findNavController().navigate(action)
         }
     }
+    //画面から離れたときの処理　した二つ
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

@@ -36,8 +36,7 @@ class ScheduleEditFragment: Fragment() {
     //bindingの定義。これはどこでも使う。
     private var _binding: FragmentScheduleEditBinding?=null
     private val binding get()=_binding!!
-    val action=
-        ScheduleEditFragmentDirections.actionScheduleEditFragmentToFirstFragment()
+    val action= ScheduleEditFragmentDirections.actionScheduleEditFragmentToFirstFragment()
     //テキストカラー呼び出し用ファイル
     private var file: File? = null
     //バイブレーションONOFF呼び出し用ファイル
@@ -160,7 +159,7 @@ class ScheduleEditFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //+ボタンを非表示にする。MainActivityのメソッドを呼びだしている
-        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
+        (activity as? MainActivity) ?.setFabVisible(View.INVISIBLE)
         //更新ボタンが押されてこの画面に来た時。更新用
         if(args.scheduleId !=-1L) {
             //idからデータを読み込む

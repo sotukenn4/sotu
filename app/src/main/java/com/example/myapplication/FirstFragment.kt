@@ -50,35 +50,35 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
             //バイプの長さを100ミリ秒
             baip.vibrate(100)
         }
-        //占いボタンがおされたとき
+
         when(item.itemId){
-            com.example.myapplication.R.id.menu_uranei ->{
-                /*val action=
-                    FirstFragmentDirections.actionFirstFragmentToMainActivity2()
-                findNavController().navigate(action)*/
+            //占いボタンがおされたとき
+            R.id.menu_uranei ->{
                 val intent = Intent(requireContext(), MainActivity2::class.java)
+                startActivity(intent)
+            }
+            //天気ボタンが押されたとき
+            R.id.menu_wheather ->{
+                val intent = Intent(requireContext(), tenki::class.java)
                 startActivity(intent)
 
             }
         }
         return true
     }
+
     // ファイルを読み出し バイブレーションON・OFF
     fun readBib(): String? {
         var text: String? = null
         // try-with-resources
-        try {
-            BufferedReader(FileReader(filebaibu)).use { br -> text = br.readLine() }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        try { BufferedReader(FileReader(filebaibu)).use { br -> text = br.readLine() } } catch (e: IOException) { e.printStackTrace() }
         return text
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding= FragmentFirstBinding.inflate(inflater, container, false)
         //BAIPにON・OFF
         val baibu = "BAIP.txt"
@@ -92,9 +92,10 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         }
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //(activity as? MainActivity<*>) ?.setFabVisible(View.VISIBLE)
+        (activity as? MainActivity) ?.setFabVisible(View.VISIBLE)
         //ここから4行でリストにデータをセットして表示する
         binding.list.layoutManager= LinearLayoutManager(context)
         //ralm、adapterの設定
@@ -136,6 +137,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
         super.onDestroy()
         realm.close()
     }
+
     //データ削除メソッド
     private fun deleteSchedule(view: View,it:Long){
         realm.executeTransaction{
@@ -144,8 +146,7 @@ class FirstFragment : Fragment() ,View.OnCreateContextMenuListener {
             ?.deleteFromRealm()
         }
         //画面下に黒いラベル表示
-        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-            .setActionTextColor(Color.YELLOW)
+        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT).setActionTextColor(Color.YELLOW)
             .show()
     }
 

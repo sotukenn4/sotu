@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentCustumBinding
 import com.google.android.material.snackbar.Snackbar
 
-
+//これ結局ボツになったんだよね。時間かけたんだけどな。今の設定画面のほうがいいもんな
 //オプション画面のプログラム
 class Custum : Fragment() {
     val EXTRA_MESSAGE = "YourPackageName.MESSAGE"

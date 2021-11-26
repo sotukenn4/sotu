@@ -15,12 +15,11 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+//これわかりにくいけどMainActivity2こそが占い画面だからな。名前をこれにしたのは急いでたからはははははは
 class MainActivity2 : AppCompatActivity() {
     //日付を取得
     val dates= getCurrentDateTime()
     val dateInString= dates.toString("yyyy/MM/dd")
-
     //ファイルを作成 日付
     private var files: File? = null
     //ファイルを作成 運
@@ -30,7 +29,7 @@ class MainActivity2 : AppCompatActivity() {
     private fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
-
+//日付の書式だと思う。わすれた
     fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter= SimpleDateFormat(format, locale)
         return formatter.format(this)
@@ -39,33 +38,30 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        //上のバーの色をピンクにしてやったぜ
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
         val textView : TextView = findViewById(R.id.textView)
         val textView2 : TextView = findViewById(R.id.textView2)
-        //textView.text = dateInString
-
         val button : Button = findViewById(R.id.button)
-
+        //前回に占いしたときの日付が格納されている
         val fileName = "uranai.txt"
         files = File(applicationContext.filesDir, fileName)
-        //val check: String? = readFile()
         val str = readFiles(fileName)
-
+        //前回の占い結果が格納されている　　大吉、凶など
         val fileName2 = "uranaikekka.txt"
         fileun = File(applicationContext.filesDir, fileName2)
-        //val check: String? = readFile()
         val kekka = readFiles(fileName2)
-
+        //前回の占い結果の詳細が格納されている　今日は家からでないほうがいいんじゃない、、、、など
         val fileName3 = "uranaikekka2.txt"
         fileun = File(applicationContext.filesDir, fileName3)
-        //val check: String? = readFile()
         val kekka2 = readFiles(fileName3)
         //日付がテキストファイルに書かれているかどうか
         if (str != null) {
             if(str != dateInString){
+                //今日はまだ占いをしていないなら
                 textView2.text = "今日の運勢は?"
-
             }else {
+                //すでに今日は占いをしていたら。
                 textView.text = kekka.toString()
                 textView2.text=kekka2.toString()
                 textView6.text = "今日は終わり!!また明日"
@@ -73,8 +69,10 @@ class MainActivity2 : AppCompatActivity() {
                 button.setVisibility(View.INVISIBLE)
             }
         } else {
+            //新規端末の場合。なにもstrにはないので、if文にはいらないからここにいくように。書かないと多分アプリ落ちる
             textView.text = "今日の運勢は?"
         }
+        //占うボタンが押された時の処理
         button.setOnClickListener {
             //strの中身が違うならtrue
             if (str != dateInString) {
@@ -93,12 +91,7 @@ class MainActivity2 : AppCompatActivity() {
                 }
                 //ボタンを非表示にする
                 button.setVisibility(View.INVISIBLE)
-            }else{
-                /*textView.text = " "
-                textView2.text = "今日は終わり!!また明日"
-                //ボタンを非表示にする
-                button.setVisibility(View.INVISIBLE)*/
-            }
+            }else{ }
         }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -106,6 +99,7 @@ class MainActivity2 : AppCompatActivity() {
         return true
     }
 
+    //×ボタンが押されたときに画面を閉じる
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_delete ->
@@ -113,11 +107,10 @@ class MainActivity2 : AppCompatActivity() {
         }
         return true
     }
-    private fun readFiles(file: String): String? {
 
+    private fun readFiles(file: String): String? {
         // to check whether file exists or not
         val readFile = File(applicationContext.filesDir, file)
-
         if(!readFile.exists()){
             Log.d("debug","No file exists")
             return null

@@ -15,10 +15,6 @@
         android:icon="@drawable/carender2"
         android:title="カレンダー" />
     <item
-        android:id="@+id/tenki"
-        android:icon="@drawable/twnki"
-        android:title="天気確認" />
-    <item
         android:id="@+id/optionmenu"
         android:icon="@drawable/option"
         android:title="オプション" />

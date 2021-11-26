@@ -3,7 +3,7 @@ package com.example.myapplication
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
-
+//保存形式
 open class Schedule : RealmObject() {
     //保存項目
     @PrimaryKey

@@ -92,14 +92,12 @@ class TextColorChange : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.listcolor.onItemClickListener = ListItemClickListener()
-        //(activity as? MainActivity<*>) ?.setFabVisible(View.INVISIBLE)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding= FragmentTextColorChangeBinding.inflate(inflater, container, false)
         val fileName = "TestFile.txt"
         file = File(requireContext().filesDir, fileName)
@@ -107,6 +105,7 @@ class TextColorChange : Fragment() {
         binding.textcolor.setTextColor(Color.parseColor(str))
         return binding.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

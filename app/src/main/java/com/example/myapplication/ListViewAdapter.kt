@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-
+//これも結局ボツだったかな
 class ListViewAdapter internal constructor(
     context: Array<String>, itemLayoutId: Int,
     scenes: Array<String>

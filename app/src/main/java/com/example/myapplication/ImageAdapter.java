@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
 
-
+//これは使ってないと思う。そう、つまりボツだ！！
 public class ImageAdapter extends BaseAdapter {
 
     private final LayoutInflater inflater;

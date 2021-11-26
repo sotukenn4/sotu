@@ -11,7 +11,7 @@ import com.example.myapplication.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
-
+////////////////////////////////////////////いらないいらないボツ//////ここは使わない！！！！！
 class Uranai : AppCompatActivity() {
     //日付を取得
     val date= getCurrentDateTime()

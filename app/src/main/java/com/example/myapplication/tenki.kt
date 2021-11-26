@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -31,6 +33,18 @@ class tenki : AppCompatActivity() {//
         private const val WEATHERINFO_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja&units=metric"
         private const val APP_ID="83311ce95b6808b861ddd5e178b11b87"
 
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.itembar,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_delete ->
+                finish()
+        }
+        return true
     }
     private var _list: MutableList<MutableMap<String, String>> =mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +114,8 @@ class tenki : AppCompatActivity() {//
                 }
                 catch (ex: SocketTimeoutException){
                     Log.w(DEBUG_TAG, "通信タイムアウト", ex)
+                    val tvWeatherTelop=findViewById<TextView>(R.id.tvWeatherTelop)
+                    tvWeatherTelop.text = "タイム合おうと"
                 }
                 it.disconnect()
             }

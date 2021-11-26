@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import java.util.*
 
+//占いでつかってるのかな
 class Fortune {
     val fortuneList = arrayOf("大吉","中吉","吉","小吉","末吉","凶","大凶")
     val descList = arrayOf(

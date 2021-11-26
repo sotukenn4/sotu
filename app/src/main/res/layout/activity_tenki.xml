@@ -11,23 +11,22 @@
     android:animateLayoutChanges="true">
 
 
-
     <TextView
         android:id="@+id/tvWeatherTelop"
-        android:layout_width="327dp"
-        android:layout_height="51dp"
+        android:layout_width="333dp"
+        android:layout_height="42dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
         android:alpha="0.9"
         android:background="@drawable/layout_box_2"
         android:gravity="center"
         android:padding="10dp"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,13 +132,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tableRow"
-        android:layout_width="match_parent"
-        android:layout_height="135dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="314dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/layout_box_2"
+        android:layout_width="338dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="272dp"
         android:alpha="0.8"
+        android:background="@drawable/layout_box_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -160,8 +157,8 @@
 
         <TextView
             android:id="@+id/textinv"
-            android:layout_width="316dp"
-            android:layout_height="79dp"
+            android:layout_width="291dp"
+            android:layout_height="61dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
@@ -199,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="269dp"
         android:background="@drawable/layout_box_5"
         android:padding="10dp"
@@ -212,28 +209,25 @@
 
     <ListView
         android:id="@+id/lvCityList"
-        android:layout_width="210dp"
-        android:layout_height="156dp"
+        android:layout_width="263dp"
+        android:layout_height="93dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="235dp"
-        android:layout_marginBottom="34dp"
-        android:background="@drawable/layout_box_6"
         android:alpha="0.8"
+        android:background="@drawable/layout_box_6"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
     </ListView>
 
     <Space
         android:id="@+id/space13"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="5dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -244,7 +238,7 @@
         android:id="@+id/textrain"
         android:layout_width="147dp"
         android:layout_height="33dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/layout_box_4"
         android:text="降水確率"
@@ -273,16 +267,14 @@
 
     <TextView
         android:id="@+id/textList"
-        android:layout_width="260dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="462dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="257dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="368dp"
         android:gravity="center"
         android:text="リストから位置を選択してください"
         android:textAlignment="center"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.604"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
