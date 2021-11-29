@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -55,7 +56,17 @@ class SecondFragment : Fragment() {
         }
         //占いボタンがおされたとき
         when(item.itemId){
-            //com.example.myapplication.R.id.menu_uranei ->
+            //占いボタンがおされたとき
+            R.id.menu_uranei ->{
+                val intent = Intent(requireContext(), MainActivity2::class.java)
+                startActivity(intent)
+            }
+            //天気ボタンが押されたとき
+            R.id.menu_wheather ->{
+                val intent = Intent(requireContext(), tenki::class.java)
+                startActivity(intent)
+
+            }
         }
         return true
     }

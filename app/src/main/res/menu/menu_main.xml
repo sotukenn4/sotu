@@ -18,4 +18,8 @@
         android:id="@+id/optionmenu"
         android:icon="@drawable/option"
         android:title="オプション" />
+    <item
+        android:id="@+id/toiawase"
+        android:icon="@drawable/ic_baseline_mail_outline_24"
+        android:title="問い合わせ" />
 </menu>

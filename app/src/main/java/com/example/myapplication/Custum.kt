@@ -28,7 +28,6 @@ class Custum : Fragment() {
     private var word: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     //保存してあるデータの取り出しメソッド

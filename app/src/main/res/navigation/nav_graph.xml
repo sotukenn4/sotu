@@ -185,4 +185,9 @@
         android:id="@+id/mainActivity2"
         android:name="com.example.myapplication.MainActivity2"
         android:label="@string/今日の占い" />
+    <fragment
+        android:id="@+id/toiawase"
+        android:name="com.example.myapplication.Toiawase"
+        android:label="@string/toi"
+        tools:layout="@layout/fragment_toiawase" />
 </navigation>
