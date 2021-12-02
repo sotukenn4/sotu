@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/addoptiontitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="25dp"
         android:layout_marginTop="24dp"
         android:text="@string/addoption"
         android:textColor="@color/black"
@@ -24,7 +24,7 @@
         android:id="@+id/savebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/layout_box_3"
         android:text="@string/保存"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +46,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="329dp"
-        android:layout_height="91dp"
+        android:layout_width="331dp"
+        android:layout_height="101dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/savebutton">
@@ -69,7 +69,7 @@
         android:id="@+id/add_image"
         android:layout_width="43dp"
         android:layout_height="43dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="4dp"
         android:src="@drawable/ic_baseline_playlist_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/addoptiontitle"
         app:layout_constraintStart_toEndOf="@+id/addoptiontitle"

@@ -13,8 +13,8 @@
 
     <TextView
         android:id="@+id/tvWeatherTelop"
-        android:layout_width="333dp"
-        android:layout_height="42dp"
+        android:layout_width="322dp"
+        android:layout_height="57dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
@@ -132,12 +132,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tableRow"
-        android:layout_width="338dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="272dp"
+        android:layout_width="370dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="288dp"
         android:alpha="0.8"
         android:background="@drawable/layout_box_2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -157,12 +158,12 @@
 
         <TextView
             android:id="@+id/textinv"
-            android:layout_width="291dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="25dp"
+            android:layout_width="314dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:alpha="0.9"
             android:gravity="center"
             android:text="-現在の天気と気温が            表示されます-"
@@ -196,7 +197,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="432dp"
         android:layout_marginEnd="269dp"
         android:background="@drawable/layout_box_5"
         android:padding="10dp"
@@ -209,8 +210,8 @@
 
     <ListView
         android:id="@+id/lvCityList"
-        android:layout_width="263dp"
-        android:layout_height="93dp"
+        android:layout_width="292dp"
+        android:layout_height="115dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="235dp"
@@ -255,12 +256,12 @@
         android:layout_height="140dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/white"
+        android:background="@drawable/layout_box_1"
         android:gravity="center"
         android:textAlignment="center"
-        android:background="@drawable/layout_box_1"
+        android:textColor="@color/white"
 
-        android:textSize="45sp"
+        android:textSize="34sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textrain" />
@@ -270,7 +271,7 @@
         android:layout_width="257dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="440dp"
         android:gravity="center"
         android:text="リストから位置を選択してください"
         android:textAlignment="center"

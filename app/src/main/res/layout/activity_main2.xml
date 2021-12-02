@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="378dp"
-        android:layout_height="528dp"
+        android:layout_width="421dp"
+        android:layout_height="733dp"
         android:scaleType="centerCrop"
         android:src="@drawable/image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,24 +36,23 @@
         android:id="@+id/button"
         android:layout_width="150dp"
         android:layout_height="66dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="128dp"
         android:text="占う!!"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="278dp"
-        android:layout_height="152dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="364dp"
+        android:layout_height="141dp"
+        android:layout_marginBottom="140dp"
         android:gravity="center_horizontal"
         android:textColor="#ffffff"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="@+id/button" />
 
     <TextView

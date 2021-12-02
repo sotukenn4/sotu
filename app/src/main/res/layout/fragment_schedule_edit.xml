@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateEdit"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintVertical_bias="0.475" />
 
     <View
         android:id="@+id/view7"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit"
-        app:layout_constraintVertical_bias="0.254" />
+        app:layout_constraintVertical_bias="0.487" />
 
     <View
         android:id="@+id/view8"
@@ -56,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit2"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <EditText
         android:id="@+id/titleEdit"
@@ -97,7 +97,7 @@
         android:id="@+id/dateEdit"
         android:layout_width="210dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/ki"
@@ -105,7 +105,7 @@
         android:shadowColor="@color/black"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.646"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
 
@@ -113,14 +113,14 @@
         android:id="@+id/timeEdit"
         android:layout_width="210dp"
         android:layout_height="44dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/time2"
         android:inputType="time"
         android:shadowColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.646"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateEdit" />
 
@@ -128,22 +128,22 @@
         android:id="@+id/timeEdit2"
         android:layout_width="210dp"
         android:layout_height="44dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:hint="@string/time2"
         android:inputType="time"
         android:shadowColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.646"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEdit" />
 
     <EditText
         android:id="@+id/detailEdit"
-        android:layout_width="354dp"
-        android:layout_height="109dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="363dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/frame_style"
         android:ems="10"
         android:gravity="start|top"
@@ -153,13 +153,14 @@
         android:minLines="2"
         android:shadowColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view8" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="43dp"
+        android:layout_height="29dp"
         android:layout_marginStart="8dp"
         android:text="日付"
         android:textColor="@color/black"
@@ -171,8 +172,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:text="開始時間"
         android:textColor="@color/black"
@@ -184,8 +185,8 @@
 
     <TextView
         android:id="@+id/finishText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:text="終了時間"
         android:textColor="@color/black"
@@ -193,7 +194,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timeEdit2"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="0.833" />
 
     <TextView
         android:id="@+id/textView4"
@@ -209,10 +210,10 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="45dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="詳細"
         android:textColor="@color/black"
         android:textSize="20sp"
