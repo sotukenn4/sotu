@@ -16,4 +16,9 @@
     <color name="redColor">#F00</color>
     <color name="whiteColor">#FFF</color>
     <color name="blackColor">#000</color>
+    <color name="tyairo">#925303</color>
+    <color name="orenge1">#ff7f50</color>
+    <color name="orenge2">#ff7f50</color>
+    <color name="orenge3">#ffa500</color>
+
 </resources>

@@ -1,10 +1,12 @@
 package com.example.myapplication
 
-import android.animation.ObjectAnimator
+import android.app.AlarmManager
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,11 +17,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_custum.*
 import java.io.*
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -113,6 +111,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     //透明度変更メソッド　これかくの大変だったわ。もう少し楽なやり方あっただろ！！くぅーん
     fun ToumeidoChange(toumei: Int?){
         if (toumei!= null) {

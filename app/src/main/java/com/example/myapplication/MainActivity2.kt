@@ -2,6 +2,8 @@ package com.example.myapplication
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.io.*
@@ -19,7 +22,7 @@ import java.util.*
 class MainActivity2 : AppCompatActivity() {
     //日付を取得
     val dates= getCurrentDateTime()
-    val dateInString= dates.toString("yyyy/MM/dd")
+    var dateInString= dates.toString("yyyy/MM/dd")
     //ファイルを作成 日付
     private var files: File? = null
     //ファイルを作成 運
@@ -38,11 +41,15 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        val top: ImageView = findViewById(R.id.uranai_unsei)
+        top.setImageResource(R.drawable.uranai_top)
         //上のバーの色をピンクにしてやったぜ
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(R.drawable.uranai))
         val textView : TextView = findViewById(R.id.textView)
         val textView2 : TextView = findViewById(R.id.textView2)
         val button : Button = findViewById(R.id.button)
+        val image : ImageView = findViewById(R.id.imageView)
+        image.setAlpha(102)
         //前回に占いしたときの日付が格納されている
         val fileName = "uranai.txt"
         files = File(applicationContext.filesDir, fileName)
@@ -54,6 +61,10 @@ class MainActivity2 : AppCompatActivity() {
         //前回の占い結果の詳細が格納されている　今日は家からでないほうがいいんじゃない、、、、など
         val fileName3 = "uranaikekka2.txt"
         fileun = File(applicationContext.filesDir, fileName3)
+        /*dateInString = "2021/12/4"
+        File(applicationContext.filesDir, fileName).writer().use {
+            it.write(dateInString)
+        }*/
         val kekka2 = readFiles(fileName3)
         //日付がテキストファイルに書かれているかどうか
         if (str != null) {
@@ -75,9 +86,13 @@ class MainActivity2 : AppCompatActivity() {
         //占うボタンが押された時の処理
         button.setOnClickListener {
             //strの中身が違うならtrue
-            if (str != dateInString) {
+            //if (str != dateInString) {
                 //占い結果をランダムで出現させる
                 val resResult: Fortune = Fortune().getFortune()
+                val gazouArray = resources.obtainTypedArray(R.array.uranai_list)
+                val rand = resResult.index
+                val drawable : Drawable?= gazouArray.getDrawable(rand)
+                top.setImageDrawable(drawable)
                 textView.text = resResult.name
                 textView2.text = resResult.description
                 File(applicationContext.filesDir, fileName).writer().use {
@@ -91,7 +106,7 @@ class MainActivity2 : AppCompatActivity() {
                 }
                 //ボタンを非表示にする
                 button.setVisibility(View.INVISIBLE)
-            }else{ }
+            //}else{ }
         }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

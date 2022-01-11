@@ -34,7 +34,7 @@ class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.MAGENTA))
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.rgb(255,165,0)))
         storage_iv = findViewById(R.id.storage_iv)
         storage_btn = findViewById(R.id.storage_btn)
         setupPermissions()

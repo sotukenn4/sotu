@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="uranai_list">
+        <item>@drawable/daikiti</item>
+        <item>@drawable/chukiti</item>
+        <item>@drawable/kiti</item>
+        <item>@drawable/shoukiti</item>
+        <item>@drawable/suekiti</item>
+        <item>@drawable/kyou</item>
+    </array>
+</resources>

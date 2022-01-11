@@ -1,30 +1,35 @@
 package com.example.myapplication
 
-import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import io.realm.OrderedRealmCollection
+import io.realm.Realm
 import io.realm.RealmRecyclerViewAdapter
+import io.realm.kotlin.where
+import kotlinx.android.synthetic.main.fragment_text_color_change.view.*
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 //adapterの設定
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data,true) {
     private var listener: ((Long?)->Unit)?=null
+
     //現在の日付を取得する。下2行
-    private val date= getCurrentDateTime()
+    val date= getCurrentDateTime()
     private val dateInString= date.toString("yyyy/MM/dd")
     private var file: File? = null
     fun setOnItemClickListener(listener:(Long?)->Unit){
@@ -35,6 +40,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     }
     init {
         setHasStableIds(true)
+
     }
     class ViewHolder(cell: View): RecyclerView.ViewHolder(cell){
         //日付専用テキスト作成
@@ -43,6 +49,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
         val title: TextView =cell.findViewById(android.R.id.text2)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleAdapter.ViewHolder {
+
         val inflater= LayoutInflater.from(parent.context)
         val view=inflater.inflate(android.R.layout.simple_list_item_2,parent,false)
         return ViewHolder(view)
@@ -59,36 +66,53 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>):
     }
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
-        holder.date.setTextSize(20.0F)
-        holder.title.setTextSize(15.0F)
         val schedule:Schedule?=getItem(position)
-        //時間を省いたyyyy/MM/ddだけを格納
-        val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
+            holder.title.setTextColor(Color.WHITE)
+        holder.date.setTextColor(Color.WHITE)
+            holder.date.setTextSize(20.0F)
+            holder.title.setTextSize(15.0F)
 
-        //日付＋時間のデータを格納
-        if(schedule?.timeflg==0){
-            holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()+">"+(DateFormat.format("HH:mm",schedule?.date2))
-        }else{
-            holder.date.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()
-        }
-        //現在の日付と保存されているデータの比較
-        if(Hiduke==dateInString){
-            holder.title.setBackgroundResource(R.drawable.framelist)
-           holder.date.setBackgroundResource(R.drawable.framelist)
-        }
-        //過去
-        if ((DateFormat.format("yyyy/MM/dd",schedule?.date)).toString().compareTo(dateInString) < 0) {
-            holder.title.setBackgroundResource(R.drawable.framelistkako)
-            holder.date.setBackgroundResource(R.drawable.framelistkako)
-        //未来
-        }else if ((DateFormat.format("yyyy/MM/dd",schedule?.date)).toString().compareTo(dateInString) > 0) {
-            holder.title.setBackgroundResource(R.drawable.framelistmirai)
-            holder.date.setBackgroundResource(R.drawable.framelistmirai)
-        }
-        holder.title.text="タイトル："+(schedule?.title)+"     "+"詳細："+(schedule?.detil)
-        holder.itemView.setOnClickListener{
-            listener?.invoke(schedule?.id)
-        }
+            //時間を省いたyyyy/MM/ddだけを格納
+            val Hiduke=DateFormat.format("yyyy/MM/dd",schedule?.date)
+
+            //日付＋時間のデータを格納
+
+            if(schedule?.timeflg==0){
+                holder.title.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()+">"+(DateFormat.format("HH:mm",schedule?.date2))
+            }else{
+                holder.title.text=(DateFormat.format("yyyy/MM/dd HH:mm",schedule?.date)).toString()
+            }
+
+
+            //現在の日付と保存されているデータの比較
+            if(Hiduke==dateInString){
+                holder.title.setBackgroundResource(R.drawable.framelist)
+                holder.date.setBackgroundResource(R.drawable.framelist)
+            }
+            //過去
+            if ((DateFormat.format("yyyy/MM/dd",schedule?.date)).toString().compareTo(dateInString) < 0) {
+                holder.title.setBackgroundResource(R.drawable.framelistkako)
+                holder.date.setBackgroundResource(R.drawable.framelistkako)
+                holder.date.setTextColor(Color.LTGRAY)
+                holder.title.setTextColor(Color.LTGRAY)
+                //未来
+            }else if ((DateFormat.format("yyyy/MM/dd",schedule?.date)).toString().compareTo(dateInString) > 0) {
+                holder.title.setBackgroundResource(R.drawable.framelistmirai)
+                holder.date.setBackgroundResource(R.drawable.framelistmirai)
+            }
+        holder.date.text=schedule?.title.toString()
+                //holder.title.text="タイトル："+(schedule?.title)+"     "+"詳細："+(schedule?.detil)
+                holder.itemView.setOnClickListener{
+                    listener?.invoke(schedule?.id)
+                }
+
+
+
+
+
+
+
+
     }
 
     override fun getItemId(position: Int): Long {

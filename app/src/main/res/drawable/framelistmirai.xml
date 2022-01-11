@@ -13,7 +13,7 @@
                 android:right="2dp"
                 android:top="2dp" />
             <!-- 色:パープル -->
-            <solid android:color="#eee8aa" />
+            <solid android:color="#ffa500" />
         </shape>
     </item>
 
@@ -37,7 +37,7 @@
         <!-- shape:rectangle(=四角形) -->
         <shape android:shape="rectangle">
             <!-- 色:パープル -->
-            <solid android:color="#eee8aa" />
+            <solid android:color="#ffa500" />
         </shape>
     </item>
 

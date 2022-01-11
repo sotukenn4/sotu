@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/tvWeatherTelop"
         android:layout_width="322dp"
-        android:layout_height="57dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
@@ -45,13 +45,13 @@
 
     <TextView
         android:id="@+id/morningtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="-朝の気温-"
         android:gravity="center"
-        android:textSize="25sp"
+        android:text="-朝の気温-"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/textrain"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morning"
@@ -71,13 +71,13 @@
 
     <TextView
         android:id="@+id/afternoontxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="-昼の気温-"
         android:gravity="center"
-        android:textSize="25sp"
+        android:text="-昼の気温-"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/noon"
         app:layout_constraintTop_toBottomOf="@+id/morningtxt" />
 
@@ -95,13 +95,13 @@
 
     <TextView
         android:id="@+id/eveningtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:text="-夕の気温-"
         android:gravity="center"
-        android:textSize="25sp"
+        android:text="-夕の気温-"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/evening"
         app:layout_constraintTop_toBottomOf="@+id/afternoontxt" />
 
@@ -120,21 +120,21 @@
 
     <TextView
         android:id="@+id/nighttxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="22dp"
-        android:text="-夜の気温-"
         android:gravity="center"
-        android:textSize="25sp"
+        android:text="-夜の気温-"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/nigth"
         app:layout_constraintTop_toBottomOf="@+id/eveningtxt" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tableRow"
-        android:layout_width="370dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="288dp"
+        android:layout_width="348dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="268dp"
         android:alpha="0.8"
         android:background="@drawable/layout_box_2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +146,7 @@
             android:id="@+id/tvWeatherDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="28sp"
@@ -174,13 +174,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tvWeatherdegree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="33sp"
@@ -197,29 +197,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginTop="368dp"
         android:layout_marginEnd="269dp"
         android:background="@drawable/layout_box_5"
         android:padding="10dp"
         android:text="位置リスト"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/lvCityList"
-        android:layout_width="292dp"
-        android:layout_height="115dp"
+        android:layout_width="306dp"
+        android:layout_height="79dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="235dp"
         android:alpha="0.8"
         android:background="@drawable/layout_box_6"
         android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -270,8 +267,8 @@
         android:id="@+id/textList"
         android:layout_width="257dp"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="368dp"
         android:gravity="center"
         android:text="リストから位置を選択してください"
         android:textAlignment="center"

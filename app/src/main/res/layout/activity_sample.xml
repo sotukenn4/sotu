@@ -25,7 +25,7 @@
         android:layout_height="36dp"
         android:background="@drawable/layout_box_3"
         android:text="写真選択"
-        app:backgroundTint="@color/teal_200" />
+        app:backgroundTint="@color/orenge3" />
 
     <TextView
         android:id="@+id/toumeido"
@@ -44,6 +44,6 @@
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:text="完了"
-        app:backgroundTint="@color/teal_200" />
+        app:backgroundTint="@color/orenge3" />
 
 </LinearLayout>

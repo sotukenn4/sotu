@@ -47,8 +47,8 @@ class optionmenu : Fragment() {
     //メニューがクリックされたときの処理　画面移動
     private inner class ListItemClickListener : AdapterView.OnItemClickListener {
         override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            //行事追加画面
-           if(position==0){
+                //行事追加画面
+            if(position==0){
                val action=
                    optionmenuDirections.actionOptionmenuToAddoptio()
                findNavController().navigate(action)
