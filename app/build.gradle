@@ -37,6 +37,11 @@ android {
     buildFeatures{
         viewBinding=true
     }
+    kotlin {
+        experimental {
+            coroutines 'enable'
+        }
+    }
 }
 
 dependencies {

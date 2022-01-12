@@ -41,6 +41,23 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        val textView2: TextView = findViewById(R.id.textView2)
+        val top: ImageView = findViewById(R.id.uranai_unsei)
+        top.setImageResource(R.drawable.uranai_top)
+        val color: TextView = findViewById(R.id.color)
+        val item: TextView = findViewById(R.id.luckyitem)
+        val button: Button = findViewById(R.id.button)
+        button.setOnClickListener {
+            val resResult: Fortune = Fortune().getFortune()
+            val gazouArray = resources.obtainTypedArray(R.array.uranai_list)
+            val rand = resResult.index
+            val drawable : Drawable?= gazouArray.getDrawable(rand)
+            top.setImageDrawable(drawable)
+            textView2.text = resResult.description
+            color.text = resResult.color
+            item.text = resResult.lucky_item
+        }
+        /*
         val top: ImageView = findViewById(R.id.uranai_unsei)
         top.setImageResource(R.drawable.uranai_top)
         //上のバーの色をピンクにしてやったぜ
@@ -108,6 +125,8 @@ class MainActivity2 : AppCompatActivity() {
                 button.setVisibility(View.INVISIBLE)
             //}else{ }
         }
+
+         */
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.itembar,menu)

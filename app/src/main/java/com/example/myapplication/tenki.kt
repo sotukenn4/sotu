@@ -37,7 +37,8 @@ class tenki : AppCompatActivity() {
     //URL情報等の変数化
     companion object{
         private const val DEBUG_TAG="AsyncSample"
-        private const val WEATHERDAY_URL="https://api.openweathermap.org/data/2.5/onecall?lang=ja&units=metric"
+        //URLのhttpsをhttpに直したら実機でできるようになったじゃねーか。ばかやろう、うれしすぎて涙止まらねぇ。できてよかった（笑）
+        private const val WEATHERDAY_URL="http://api.openweathermap.org/data/2.5/onecall?lang=ja&units=metric"
         //private const val WEATHERDAY_URL="https://api.openweathermap.org/data/2.5/weather?lang=ja"
         private const val APP_ID="83311ce95b6808b861ddd5e178b11b87"
     }
