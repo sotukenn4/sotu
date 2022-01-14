@@ -176,7 +176,7 @@ class tenki : AppCompatActivity() {
             //val degreeJSONArray=rootsubJSON.getJSONObject("current")
             val degree=weatherJSONArray.getString("temp")
             val change = chandeg(degree)
-            val deg = "気温  ${change} 度"
+            val deg = "気温  ${change}°c"
             val tvWeatherDegree=findViewById<TextView>(R.id.tvWeatherdegree)
             tvWeatherDegree.text = deg
 
@@ -204,16 +204,16 @@ class tenki : AppCompatActivity() {
             val evechan = chandeg(eve)
             val nigchan = chandeg(nig)
 
-            val daymorn = " ${mornchan} 度"
+            val daymorn = "朝 ${mornchan}°c"
             val tvWeatherMorn=findViewById<TextView>(R.id.morningtxt)
             tvWeatherMorn.text = daymorn
-            val daynoon = " ${noochan} 度"
+            val daynoon = "昼 ${noochan}°c"
             val tvWeatherNoo=findViewById<TextView>(R.id.afternoontxt)
             tvWeatherNoo.text = daynoon
-            val dayeve = " ${evechan} 度"
+            val dayeve = "夕 ${evechan}°c"
             val tvWeatherEve=findViewById<TextView>(R.id.eveningtxt)
             tvWeatherEve.text = dayeve
-            val daynight = " ${nigchan} 度"
+            val daynight = "夜 ${nigchan}°c"
             val tvWeatherNight=findViewById<TextView>(R.id.nighttxt)
             tvWeatherNight.text = daynight
 
@@ -352,7 +352,6 @@ class tenki : AppCompatActivity() {
             val esc="exclude=minutely,hourly"
 
                 name?.let {
-
                     val urlDay = "$WEATHERDAY_URL&lat=$la&lon=$lo&$esc&appid=$APP_ID"
                     receiveWeatherDAY(urlDay)
 

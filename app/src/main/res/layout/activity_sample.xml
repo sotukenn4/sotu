@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/storage_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="36dp"
         android:background="@drawable/layout_box_3"
         android:text="写真選択"

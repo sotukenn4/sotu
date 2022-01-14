@@ -51,7 +51,10 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="-朝の気温-"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textrain"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morning"
@@ -74,10 +77,13 @@
         android:layout_width="130dp"
         android:layout_height="33dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:gravity="center"
         android:text="-昼の気温-"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/noon"
         app:layout_constraintTop_toBottomOf="@+id/morningtxt" />
 
@@ -98,10 +104,13 @@
         android:layout_width="125dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="22dp"
         android:gravity="center"
         android:text="-夕の気温-"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/evening"
         app:layout_constraintTop_toBottomOf="@+id/afternoontxt" />
 
@@ -123,10 +132,13 @@
         android:layout_width="129dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="-夜の気温-"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/nigth"
         app:layout_constraintTop_toBottomOf="@+id/eveningtxt" />
 
@@ -194,15 +206,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="368dp"
         android:layout_marginEnd="269dp"
         android:background="@drawable/layout_box_5"
-        android:padding="10dp"
         android:text="位置リスト"
+        android:textAlignment="center"
         android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
@@ -210,15 +223,18 @@
 
     <ListView
         android:id="@+id/lvCityList"
-        android:layout_width="306dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="309dp"
+        android:layout_height="114dp"
         android:layout_marginTop="8dp"
         android:alpha="0.8"
         android:background="@drawable/layout_box_6"
         android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.035">
 
     </ListView>
 
@@ -226,7 +242,7 @@
         android:id="@+id/space13"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -256,10 +272,10 @@
         android:background="@drawable/layout_box_1"
         android:gravity="center"
         android:textAlignment="center"
-        android:textColor="@color/white"
 
-        android:textSize="34sp"
-        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textrain" />
 
@@ -268,13 +284,13 @@
         android:layout_width="257dp"
         android:layout_height="30dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="368dp"
         android:gravity="center"
         android:text="リストから位置を選択してください"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
